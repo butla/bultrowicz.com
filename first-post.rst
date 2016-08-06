@@ -1,7 +1,7 @@
 
 .. YAP/D/T Blog post example, created by `ablog start` on Aug 06, 2016.
 
-.. post:: Aug 06, 2016
+.. post:: Aug 01, 2016
    :tags: Python
 
 First Post
