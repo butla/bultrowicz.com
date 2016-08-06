@@ -2,8 +2,7 @@
 .. YAP/D/T Blog post example, created by `ablog start` on Aug 06, 2016.
 
 .. post:: Aug 06, 2016
-   :tags: atag
-   :author: Michał Bultrowicz
+   :tags: Python
 
 First Post
 ==========

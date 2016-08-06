@@ -1,8 +1,11 @@
 
 .. _about:
 
-About Michał Bultrowicz
-============================
+About me
+========
 
-The world wants to know more about you.
+I'm Michał "Butla" Bultrowicz.
 
+Tu wklej mix z Europythona i z Couchsurfingu i airbnb.
+
+Wklej fotę
