@@ -1,13 +1,7 @@
+Yet Another Python / Dev Blog
+=============================
 
-.. YAP/D/T Blog index file, created by `ablog start` on Sat Aug  6 01:31:50 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to Michał Bultrowicz's Blog!
-========================================
-
-Hello World! Find more about me here: :ref:`about`
-
+There are many like it, but this one's mine! "Me" in this case is Michał Bultrowicz.
 
 Here is a list of most recent posts:
 

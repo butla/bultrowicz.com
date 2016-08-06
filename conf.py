@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# YAP/D/T Blog build configuration file, created by
-# `ablog start` on Sat Aug  6 01:31:50 2016.
-#
-# Note that not all possible configuration values are present in this file.
-# All configuration values have a default; values that are commented out
-# serve to show the default.
-
 import os
 import sys
 import ablog
@@ -19,7 +12,7 @@ import alabaster
 #blog_path = 'blog'
 
 # The “title” for the blog, used in acthive pages.  Default is ``'Blog'``.
-blog_title = u'YAP/D/T Blog Blog'
+blog_title = u"Butlablog"
 
 # Base URL for the website, required for generating feeds.
 # e.g. blog_baseurl = "http://example.com/"
@@ -35,7 +28,7 @@ blog_baseurl = u'True'
 # links. Dictionary keys are what should be used in ``post`` directive
 # to refer to the author.  Default is ``{}``.
 blog_authors = {
-    'Michał Bultrowicz': ('Michał Bultrowicz', None),
+    'Michał Bultrowicz': ('Michał "Butla" Bultrowicz', None),
 }
 
 
@@ -93,9 +86,12 @@ post_date_format = '%Y-%m-%d'
 # sidebars that link to author and location archive pages.
 html_sidebars = {
     '**': [ 'about.html',
-            'postcard.html', 'navigation.html',
-            'recentposts.html', 'tagcloud.html',
-            'categories.html',  'archives.html',
+            'postcard.html',
+            'navigation.html',
+            #'recentposts.html',
+            #'tagcloud.html',
+            'categories.html',
+            'archives.html',
             'searchbox.html',
             ],
     }
@@ -180,7 +176,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'YAP/D/T Blog'
+project = u'Butlablog'
 copyright = u'2016, Michał Bultrowicz'
 author = u'Michał Bultrowicz'
 
@@ -336,6 +332,6 @@ html_last_updated_fmt = '%Y-%m-%d'
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'YAPDTBlogdoc'
+htmlhelp_basename = 'Butlablogdoc'
 
 
