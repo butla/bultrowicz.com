@@ -1,5 +1,5 @@
-Yet Another Python / Dev Blog
-=============================
+Yet Another Python / Dev / Tech Blog
+====================================
 
 There are many like it, but this one's mine! "Me" in this case is Michał Bultrowicz.
 
@@ -7,6 +7,7 @@ Here is a list of most recent posts:
 
 .. postlist:: 5
    :excerpts:
+   :date: %Y-%m-%d
 
 
 .. `toctree` directive, below, contains list of non-post `.rst` files.
