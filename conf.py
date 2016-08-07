@@ -245,6 +245,9 @@ html_theme = 'alabaster'
 # documentation.
 html_theme_options = {
     'description': 'A blog by Michał Bultrowicz',
+    'extra_nav_links': {'my Github': 'https://github.com/butla'},
+    'logo': 'butla.jpeg',
+    'logo_name': True,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
