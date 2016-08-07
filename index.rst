@@ -1,7 +1,7 @@
 Yet Another Python / Dev / Tech Blog
 ====================================
 
-There are many like it, but this one's mine! "Me" in this case is Michał Bultrowicz.
+There are many like it, but this one's mine!
 
 Here is a list of most recent posts:
 
