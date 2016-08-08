@@ -246,7 +246,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     'description': 'A blog by Michał Bultrowicz',
     'extra_nav_links': {'my Github': 'https://github.com/butla'},
-    'logo': 'butla.jpeg',
+    'logo': 'butla.png',
     'logo_name': True,
 }
 
