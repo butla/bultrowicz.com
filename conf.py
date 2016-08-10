@@ -101,7 +101,7 @@ html_sidebars = {
 # Turn feeds by setting :confval:`blog_baseurl` configuration variable.
 # Choose to create feeds per author, location, tag, category, and year,
 # default is ``False``.
-#blog_feed_archives = False
+blog_feed_archives = True
 
 # Choose to display full text in blog feeds, default is ``False``.
 #blog_feed_fulltext = False
@@ -244,7 +244,6 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'description': 'A blog by Michał Bultrowicz',
     'extra_nav_links': {'my Github': 'https://github.com/butla'},
     'logo': 'butla.png',
     'logo_name': True,

@@ -2,6 +2,7 @@ Continuous Delivery of a Python library with AngularJS commit convention
 ========================================================================
 
 .. post::
+   :author: Michal Bultrowicz
    :tags: Python
 
 I got tired of having to manually build and upload my library

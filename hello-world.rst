@@ -3,6 +3,7 @@ Hi there!
 =========
 
 .. post:: Aug 07, 2016
+   :author: Michal Bultrowicz
    :tags: Python
 
 Yay! It's yet another blog about Python, software development in general,
