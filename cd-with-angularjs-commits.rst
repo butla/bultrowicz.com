@@ -16,7 +16,13 @@ Motivation
 ----------
 
 Let's say that you have a Python library and that you follow `semantic versioning <http://semver.org/>`_.
-If you introduce a change to the code you probably want to ship it to PyPI. You
+If you introduce a change to the code you probably want to ship it to PyPI.
+When you're introducing a fix or implementing a new feature it's quite straightforward - you bump
+the version, create new artifacts (probably a wheel and a tar.gz) and then you push to PyPI.
+But what if you only refactored a few tests? Then you don't need to do anything with PyPI.
+And when you updated the readme or docs? The version shouldn't change
+(it's still exactly the same library as before the commit) but your documentation site
+(e.g. the README page on PyPI) needs to be updated.
 Gdybys nie mial semver, to teoretycznie mozna wywalac wszystko z inną wersją, ale to brzmi słabo i wprowadza użytkowników biblioteki w błąd.
 
 change readme - just update the docs and page on pypi

@@ -1,5 +1,7 @@
-Yet Another Python / Dev / Tech Blog
-====================================
+A blog by Michał "Butla" Bultrowicz
+===================================
+
+It's yet another Python / development / technical blog.
 
 There are many like it, but this one's mine!
 

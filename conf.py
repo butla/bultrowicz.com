@@ -16,7 +16,7 @@ blog_title = u"Butlablog"
 
 # Base URL for the website, required for generating feeds.
 # e.g. blog_baseurl = "http://example.com/"
-blog_baseurl = u'https://bultrowicz.com'
+blog_baseurl = u'http://bultrowicz.com'
 
 # Choose to archive only post titles. Archiving only titles can speed
 # up project building.
@@ -255,7 +255,7 @@ html_theme_path = [alabaster.get_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = project
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
