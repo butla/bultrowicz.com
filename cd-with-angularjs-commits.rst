@@ -61,6 +61,7 @@ Also, the article about `PyPI deployments with Travis`_ inspired me to create
 the pipeline that is the subject of this article.
 
 Travis has:
+
 * Docker support, which I needed for my other project (`PyDAS`_);
 * OS X builds, which I may need for Mountepy if and when I decide to support it [#4]_.
 
@@ -84,7 +85,7 @@ Cons:
   But I've struggled to get PyDAS tests (starting some processes, some Docker containers) working
   for about 5 or 10 minutes and I gave up [#6]_. I don't know...
 
-Rumors?:
+Rumors(?):
 
 * I've heard that it supports up to 4 parallel builds on the free plan but this is not wha
   the `pricing page <https://circleci.com/pricing/>`_ says... [#6]_
@@ -92,35 +93,43 @@ Rumors?:
 Snap CI
 ^^^^^^^
 
+This is the CI I chose. It provided what I needed (Docker, debug) and is really
+straightforward to work with.
+
 Pros:
 
-* Stages, even manual ones
+* Docker support. Although it's in beta and I had to contact support to have it enabled
+  (which was done in a few hours), my builds run smoothly.
+* Build debug. Not through SSH, but with browser-based snap-shell. I think I'd prefer SSH,
+  but being able to do it in the browser is also nice.
+* Build steps defined in Bash. No custom configuration syntax to learn, just plain old scripts!
+* Ability to group biuld steps into stages; even one's that need to be triggered manually
+  (good for e.g. manual or exploratory tests).
 
 Cons:
 
-I've picked it because it had all the things I needed for my projects (Docker, build debugging)
-and had a really straightforward and clean setup (you just write BASH!)
+* No OS X builds (Travis and Circle have them).
+* Build pipeline definitions are can't be easily copied between projects.
+  With Travis you could just copy the config file,
+  here it requires a bit more clicking around the web UI.
+  Although you can still keep almost of your logic in script files
+  and just run different ones in different stages
 
-Circle miał debug po ssh normalnie, miał też docker i OS X - no super. Ale nie udało mi się przez 10 minut zrobił,
-żeby mój biuld działał. A miałem build z Dockerem (PyDAS).
+Codeship
+^^^^^^^^
 
-A no i Circle podobno ma cztery darmowe buildy jednocześnie.
+After I finished comparing Travis, Circle and Snap I've remembered that there's one more thing
+(probably way more than that, but I don't have all the time in the world) to look at - Codeship.
 
-Snap miał dockera i debug, ale bez OS X (i tak mi się nie chiało),
-a Docker był na życzenie tylko. Ale ogarnęli się w try miga.
-No i pipeline'y to po prostu polecenia, żadnej magii i czytania dokumentacji (co i tak nie pomogło mojemu toxowemu buildowi pydasa).
-Fakt, że opis buildu nie jest trzymany z kodem (co też jest fajną formą dokumentacji), ale wyglądają przejrzyście, są proste w ustawianiu
-i dają bardziej wyklarowane kroki (a nie odpalanie jednego monolitycznego skryptu dla trochę bardziej złożonego zachowania.
-Chociaż to muszę zweryfikować, bo tych stadiów odpalania trochę jest w Circlu i Travisie.
-
-After I finished anything I've stumbled upon Codeship, although I've heard about it before.
-It's supposed to be really cool, Docker and all, but I found setting the tests clunky and I didn't have the initiative to try to get to know it, since I was perfectly happy with Snap.
+It's supposed to be really cool and all, but I found setting up the tests clunky
+and I didn't have the initiative to try to get to know it, since I was perfectly happy with Snap.
 But you can find it to your liking, I don't know...
 
-* I chose Snap CI because it supports Docker, enables build debug and has powerful build pipeline setup.
+The build pipeline
+------------------
 
-Build pipeline
---------------
+Ok, we've got code on Github, Snap will serve as our build service
+and we'll be using AngularJS-style commits somehow. Let's get this thing going!
 
 Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
 W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
@@ -130,7 +139,7 @@ U mnie też nierobienie feature-branchy wywoływało strach, ale chodzą słuchy
 
 Ale jakby co, to nic się nie bójcie, w Snapie można ustawić dokładnie jak mają być sprawdzane pull requestach i branche (domyślnie nie są wcale ruszane).
 
-W ogóle poszczególne fazy można restartować, nie trzeba całego buildu.
+W ogóle poszczególne fazy buildu można restartować, nie trzeba całego buildu.
 
 Parsing AngularJS-style commits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -196,8 +205,9 @@ no i ściągać teraz trzeba przez `git clone --recursive adred`, bo tox polega 
 
 Przerób skrypty i biuld na Snapie, żeby użytkownik pypi też był dostarczany przez argument. Żeby ludzie mogli od razi używać.
 
+
 ### Podsumowanie
-Co zrobiłem? Jak wygląda teraz mój proces?
+Co zrobiłem? Jak wygląda teraz mój proces (screen shot z pipelinea)?
 
 Jak robie jakieś zmiany, to robię jakiś commit, czekam, klikam w snapie jakby co i działa.
 
