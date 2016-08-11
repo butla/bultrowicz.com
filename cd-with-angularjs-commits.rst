@@ -1,70 +1,110 @@
-Continuous Delivery of a Python library with AngularJS commit convention
+Continuous delivery of a Python library with AngularJS commit convention
 ========================================================================
 
 .. post::
    :author: Michal Bultrowicz
    :tags: Python
 
-I got tired of having to manually build and upload my library
-(`Mountepy <https://pypi.org/project/mountepy/>`_) to PyPI, so I decided to do what any sane
-programmer would do - set up automation.
+I got tired of having to manually build and upload my library (`Mountepy`_) to PyPI,
+so I decided to do what any sane programmer would do - set up automation [#1]_.
 But how would my scripts know whether they need to just update the README on PyPI and when to
 push a new version of the library?
-Thanks to the `AngularJS commit conventions <https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit>`_!
-Oh, and `Snap CI <https://snap-ci.com/>`_ will run the whole thing.
+Thanks to the `AngularJS commit conventions`_!
+Oh, and `Snap CI`_ will run the whole thing.
 
 Motivation
 ----------
 
-Let's say that you have a Python library and that you follow `semantic versioning <http://semver.org/>`_.
+Let's say that you have a Python library and that you follow `semantic versioning`_.
+Let's also assume that when your tests pass you have sufficient certainty that your software is
+ready for release (and you should have it) and you don't require any pre-releases,
+beta versions or whatever.
+I'm sure it's easier said than done for those important projects that many people depend upon,
+but it has to be doable.
+
 If you introduce a change to the code you probably want to ship it to PyPI.
 When you're introducing a fix or implementing a new feature it's quite straightforward - you bump
-the version, create new artifacts (probably a wheel and a tar.gz) and then you push to PyPI.
-But what if you only refactored a few tests? Then you don't need to do anything with PyPI.
+the version, create new artifacts (probably a wheel and a source archive) and then you push to PyPI.
+
+But what if you only refactored a few tests? Then you don't need to put anything on PyPI.
 And when you updated the readme or docs? The version shouldn't change
 (it's still exactly the same library as before the commit) but your documentation site
-(e.g. the README page on PyPI) needs to be updated.
-Gdybys nie mial semver, to teoretycznie mozna wywalac wszystko z inną wersją, ale to brzmi słabo i wprowadza użytkowników biblioteki w błąd.
+(e.g. the project's page on PyPI) needs to be updated.
+If you don't care about any sane versioning (please, care), you could just create a new version
+of the library for every commit, but otherwise you need to be able to distinguish
+between the commits that affect the production code and those that don't [#2]_. 
 
-change readme - just update the docs and page on pypi
-change tests - still the same version
-change library code - new library version
+This is where AngularJS commit convention helps out.
+It's originally for automatic changelog generation, but in essence it allows to distinguish
+between commit types of commits.
+It requires some work on the human part, of course, but I think that this work is not much more
+then the good practice of doing commits that are about a single change.
 
-Let's just say that you're not a big project that needs to go through beta, etc
-(but maybe their tests just aren't good enough? Or they deal with so many clients from different OSes and they want to be nice to them...).
-But this can be fine for uploading development versions for people to try out.
-Or even
+Chosing a CI service
+--------------------
 
-I was inspired by this article about `PyPI deployments with Travis <https://www.appneta.com/blog/pypi-deployment-with-travis-ci/>`_.
-But I had a few problems with it and with Travis (explained later).
+I host my code on Github, as probably many or you do [#3]_.
+The easiest way to get my code automatically tested and published (only if there's a need for that)
+is, of course, to use one of the integrated CI services.
+One thing to note - some take the label of "continuous integration",
+some "continuous delivery", but their capabilities are similar.
+But there's still quite a few of them we have to choose...
 
-Trochę było uciążliwe, że jak coś zmieniałem, to albo musiałem robić upload albo register. Raz jeszcze zamiast zuploadować wheela, to wziąłem output z bdist.
-Automat musi być w stanie robić to za mnie. No i robienie automatów to świetna zabawa (po co odwiedzić znajomych, których nie widziało się od dwóch miesięcy,
-skoro można siedzieć przy komputerze?).
+Travis
+^^^^^^
 
-Parsing AngularJS-style commits
--------------------------------
+I don't know if it actually is, but for me it seems that Travis is the oldest,
+most well known and most widely used from the bunch.
+Because of that and because I didn't have any fancy requirements,
+I was using it for Mountepy for some time (you'll see why this has changed).
+Also, the article about `PyPI deployments with Travis`_ inspired me to create
+the pipeline that is the subject of this article.
 
-* I decided that my commits will follow AngularJS commit conventions (https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
-* I created scripts that parse commit messages.
-* Based on the commit type I either update the documentation (which can really do nothing) or upload a new version of the library to PyPI.
+Travis has:
+* Docker support, which I needed for my other project (`PyDAS`_);
+* OS X builds, which I may need for Mountepy if and when I decide to support it [#4]_.
 
-### Chosing a CI service
-Of course I wanted something hosted and integrated with Github.
+But Travis has one big problem - you have no easy way of debugging builds.
+When I got strange test failures, it took a lot of guesswork
+and a print-heavy version of my application to find their cause.
+I knew that there had to be a better way, so it was time to look at other options [#5]_.
 
-Zaczęło się od tego, że travisowe buildy Mountepy zaczęły czasem failować
-z powodu jakiejś zwiechy między testami. Raz na jakiś czas (w końcu wziąłem się za naprawienie tego).
-No i Travis jak to Travis nie umożliwia żadnego debugu.
-No to zacząłem patrzeć na alternatywy.
+CircleCI
+^^^^^^^^
 
-Travis nie miał debugu - słabo. Ale miał Dockera. No i wsparcie dla OS X, które może bym tam użył.
+Pros:
+
+* You can SSH into the container that runs your builds/tests! (so there goes the debug problem)
+* Docker support.
+* OS X builds.
+
+Cons:
+
+* Hard to set up? Circle uses it's own build configuration YAML style (much like Travis).
+  But I've struggled to get PyDAS tests (starting some processes, some Docker containers) working
+  for about 5 or 10 minutes and I gave up [#6]_. I don't know...
+
+Rumors?:
+
+* I've heard that it supports up to 4 parallel builds on the free plan but this is not wha
+  the `pricing page <https://circleci.com/pricing/>`_ says... [#6]_
+
+Snap CI
+^^^^^^^
+
+Pros:
+
+* Stages, even manual ones
+
+Cons:
+
+I've picked it because it had all the things I needed for my projects (Docker, build debugging)
+and had a really straightforward and clean setup (you just write BASH!)
+
 Circle miał debug po ssh normalnie, miał też docker i OS X - no super. Ale nie udało mi się przez 10 minut zrobił,
 żeby mój biuld działał. A miałem build z Dockerem (PyDAS).
 
 A no i Circle podobno ma cztery darmowe buildy jednocześnie.
-
-Travis też ma dobre opcje deploymentów (https://www.appneta.com/blog/pypi-deployment-with-travis-ci/) ale nie jest to tak banalnie proste,
-jak odpalenie po prostu linijek basha w Snapie.
 
 Snap miał dockera i debug, ale bez OS X (i tak mi się nie chiało),
 a Docker był na życzenie tylko. Ale ogarnęli się w try miga.
@@ -79,7 +119,9 @@ But you can find it to your liking, I don't know...
 
 * I chose Snap CI because it supports Docker, enables build debug and has powerful build pipeline setup.
 
-  ### Build pipeline
+Build pipeline
+--------------
+
 Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
 W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
 więc dużego ruchu nie będzie. Ale nie bezpieczniej robić sobie feature branche, puszczać CI na nich i dopiero wtedy przerzucać na mastera?
@@ -89,6 +131,13 @@ U mnie też nierobienie feature-branchy wywoływało strach, ale chodzą słuchy
 Ale jakby co, to nic się nie bójcie, w Snapie można ustawić dokładnie jak mają być sprawdzane pull requestach i branche (domyślnie nie są wcale ruszane).
 
 W ogóle poszczególne fazy można restartować, nie trzeba całego buildu.
+
+Parsing AngularJS-style commits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* I decided that my commits will follow AngularJS commit conventions (https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
+* I created scripts that parse commit messages.
+* Based on the commit type I either update the documentation (which can really do nothing) or upload a new version of the library to PyPI.
 
 #### Tests
 There's no build step in most Python libraries. So our first pypeline stage runs the tests:
@@ -154,3 +203,21 @@ Jak robie jakieś zmiany, to robię jakiś commit, czekam, klikam w snapie jakby
 
 Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to komentujcie.
 
+
+.. rubric:: Footnotes
+
+.. [#] If you want to get fancy you can also call this automation a `continuous delivery`_ pipeline.
+.. [#] At least that's the granurality that worked for me, you can go more in depth if you want.
+.. [#] It's just more convenient and "social" than Bitbucket and GitLab. But I'm kind of afraid of its monopoly...
+.. [#] I think that right now Mountepy should work on OS X, but you'll have to install Mountebank yourself. If you want the feature create a Github issue.
+.. [#] And thanks to that you have the whole section about choosing a CI :)
+.. [#] If you're uinge Circle, please say how it is in the comments.
+.. [#] I didn't try that hard because by that point I've already taken a liking to Snap CI.
+
+.. _Mountepy: https://pypi.org/project/mountepy/ 
+.. _AngularJS commit conventions: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
+.. _Snap CI: https://snap-ci.com/
+.. _semantic versioning: http://semver.org/
+.. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
+.. _PyPI deployments with Travis: https://www.appneta.com/blog/pypi-deployment-with-travis-ci/_ 
+.. _PyDAS: https://github.com/butla/pydas
