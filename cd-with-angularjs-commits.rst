@@ -46,7 +46,7 @@ Chosing a CI service
 I host my code on Github, as probably many or you do [#3]_.
 The easiest way to get my code automatically tested and published (only if there's a need for that)
 is, of course, to use one of the integrated CI services.
-One thing to note - some take the label of "continuous integration",
+`One thing to note`_ - some take the label of "continuous integration",
 some "continuous delivery", but their capabilities are similar.
 But there's still quite a few of them we have to choose...
 
@@ -229,5 +229,6 @@ Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to 
 .. _Snap CI: https://snap-ci.com/
 .. _semantic versioning: http://semver.org/
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
+.. _One thing to note: https://blog.snap-ci.com/blog/2016/07/26/continuous-delivery-integration-devops-research/
 .. _PyPI deployments with Travis: https://www.appneta.com/blog/pypi-deployment-with-travis-ci/_ 
 .. _PyDAS: https://github.com/butla/pydas

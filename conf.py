@@ -247,6 +247,8 @@ html_theme_options = {
     'extra_nav_links': {'my Github': 'https://github.com/butla'},
     'logo': 'butla.png',
     'logo_name': True,
+    'font_family': 'Times New Roman, Times, Liberation Serif, serif',
+    'head_font_family': 'Times New Roman, Times, Liberation Serif, serif',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
