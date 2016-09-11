@@ -128,7 +128,25 @@ But you can find it to your liking, I don't know...
 The build pipeline
 ------------------
 
-Ok, we've got code on Github, Snap will serve as our build service
+Snap build setup
+^^^^^^^^^^^^^^^^
+
+It's straightforward to add a build configuration for any of your Github repositories in Snap,
+so I won't go into it.
+When you add it you are sent to page that looks like the one below.
+
+.. image:: /_static/cd-with-angularjs-commits/bare_build_config.png
+
+Można zmienić wersje Pythona.
+W ogóle te inne toole i języki można dodać normalnie apt-getem, co jest spoko.
+
+Mamy pipeline, gdzie są etapy.
+W stage basic info widać, że po prostu wypisujemy komendy.
+
+-----------------------
+
+TODO
+We've got code on Github, Snap will serve as our build service
 and we'll be using AngularJS-style commits somehow. Let's get this thing going!
 
 Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
