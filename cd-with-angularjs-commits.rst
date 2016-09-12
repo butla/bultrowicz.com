@@ -40,10 +40,10 @@ between commit types of commits.
 It requires some work on the human part, of course, but I think that this work is not much more
 then the good practice of doing commits that are about a single change.
 
-Chosing a CI service
+Choosing a CI service
 --------------------
 
-I host my code on Github, as probably many or you do [#3]_.
+I host my code on GitHub, as probably many or you do [#3]_.
 The easiest way to get my code automatically tested and published (only if there's a need for that)
 is, of course, to use one of the integrated CI services.
 `One thing to note`_ - some take the label of "continuous integration",
@@ -87,7 +87,7 @@ Cons:
 
 Rumors(?):
 
-* I've heard that it supports up to 4 parallel builds on the free plan but this is not wha
+* I've heard that it supports up to 4 parallel builds on the free plan but this is not what
   the `pricing page <https://circleci.com/pricing/>`_ says... [#6]_
 
 Snap CI
@@ -103,7 +103,7 @@ Pros:
 * Build debug. Not through SSH, but with browser-based snap-shell. I think I'd prefer SSH,
   but being able to do it in the browser is also nice.
 * Build steps defined in Bash. No custom configuration syntax to learn, just plain old scripts!
-* Ability to group biuld steps into stages; even one's that need to be triggered manually
+* Ability to group build steps into stages; even one's that need to be triggered manually
   (good for e.g. manual or exploratory tests).
 
 Cons:
@@ -131,7 +131,7 @@ The build pipeline
 Snap build setup
 ^^^^^^^^^^^^^^^^
 
-It's straightforward to add a build configuration for any of your Github repositories in Snap,
+It's straightforward to add a build configuration for any of your GitHub repositories in Snap,
 so I won't go into it.
 When you add it you are sent to page that looks like the one below.
 
@@ -146,7 +146,7 @@ W stage basic info widać, że po prostu wypisujemy komendy.
 -----------------------
 
 TODO
-We've got code on Github, Snap will serve as our build service
+We've got code on GitHub, Snap will serve as our build service
 and we'll be using AngularJS-style commits somehow. Let's get this thing going!
 
 Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
@@ -237,7 +237,7 @@ Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to 
 .. [#] If you want to get fancy you can also call this automation a `continuous delivery`_ pipeline.
 .. [#] At least that's the granurality that worked for me, you can go more in depth if you want.
 .. [#] It's just more convenient and "social" than Bitbucket and GitLab. But I'm kind of afraid of its monopoly...
-.. [#] I think that right now Mountepy should work on OS X, but you'll have to install Mountebank yourself. If you want the feature create a Github issue.
+.. [#] I think that right now Mountepy should work on OS X, but you'll have to install Mountebank yourself. If you want the feature create a GitHub issue.
 .. [#] And thanks to that you have the whole section about choosing a CI :)
 .. [#] If you're uinge Circle, please say how it is in the comments.
 .. [#] I didn't try that hard because by that point I've already taken a liking to Snap CI.
