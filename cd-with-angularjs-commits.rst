@@ -8,7 +8,7 @@ Continuous delivery of a Python library with AngularJS commit convention
 I got tired of having to manually build and upload my library (`Mountepy`_) to PyPI,
 so I decided to do what any sane programmer would do - set up automation [#1]_.
 But how would my scripts know whether they need to just update the README on PyPI and when to
-push a new version of the library?
+assemble and push a new version of the library?
 Thanks to the `AngularJS commit conventions`_!
 Oh, and `Snap CI`_ will run the whole thing.
 
@@ -41,7 +41,7 @@ It requires some work on the human part, of course, but I think that this work i
 then the good practice of doing commits that are about a single change.
 
 Choosing a CI service
---------------------
+---------------------
 
 I host my code on GitHub, as probably many or you do [#3]_.
 The easiest way to get my code automatically tested and published (only if there's a need for that)
@@ -88,7 +88,7 @@ Cons:
 Rumors(?):
 
 * I've heard that it supports up to 4 parallel builds on the free plan but this is not what
-  the `pricing page <https://circleci.com/pricing/>`_ says... [#6]_
+  the `pricing page <https://circleci.com/pricing/>`_ says... [#7]_
 
 Snap CI
 ^^^^^^^
@@ -128,8 +128,8 @@ But you can find it to your liking, I don't know...
 The build pipeline
 ------------------
 
-Snap build setup
-^^^^^^^^^^^^^^^^
+SnapCI build setup
+^^^^^^^^^^^^^^^^^^
 
 It's straightforward to add a build configuration for any of your GitHub repositories in Snap,
 so I won't go into it.
@@ -137,55 +137,127 @@ When you add it you are sent to page that looks like the one below.
 
 .. image:: /_static/cd-with-angularjs-commits/bare_build_config.png
 
-Można zmienić wersje Pythona.
-W ogóle te inne toole i języki można dodać normalnie apt-getem, co jest spoko.
+You can change the version of Python in "Languages and Database", you could even pick a different
+technology stack, like NodeJS.
+You may notice that you can only pick one language, but fear not if you need a mixed environment!
+Additional (language) packages can simply be installed with ``yum``
+(as mentioned in `Snap CI FAQ`_) in "Commands to be executed in this stage".
 
-Mamy pipeline, gdzie są etapy.
-W stage basic info widać, że po prostu wypisujemy komendy.
+About that section commands - it's one of the best things about Snap in my opinion.
+You simply type in shell commands that you want to run for the given stage, and that's it!
+As familiar and flexible a setup method as you can get.
 
------------------------
+Real-life tests stage
+^^^^^^^^^^^^^^^^^^^^^
 
-TODO
-We've got code on GitHub, Snap will serve as our build service
-and we'll be using AngularJS-style commits somehow. Let's get this thing going!
+What you probably want to do in every CI is to build the code and run the tests.
+Most Python libraries don't have to build anything, so just running the tests is enough,
+and this is what I did in the first stage of my build, uninspiredly named "TESTS" [#8]_
+(I've just renamed the default EDITME):
 
-Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
-W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
-więc dużego ruchu nie będzie. Ale nie bezpieczniej robić sobie feature branche, puszczać CI na nich i dopiero wtedy przerzucać na mastera?
-Co jeśli popsuję build i na githubie i pypi pojawi się ośmieszające "build failed"?? Cóż, po prostu lepiej mieć się na baczności, żebym tego nie zrobił.
-U mnie też nierobienie feature-branchy wywoływało strach, ale chodzą słuchy, że to może być "the way to go" (https://www.thoughtworks.com/insights/blog/enabling-trunk-based-development-deployment-pipelines).
+.. code-block:: bash
 
-Ale jakby co, to nic się nie bójcie, w Snapie można ustawić dokładnie jak mają być sprawdzane pull requestach i branche (domyślnie nie są wcale ruszane).
+    pip install tox # install Tox
+    tox # run it
 
-W ogóle poszczególne fazy buildu można restartować, nie trzeba całego buildu.
+Outside of running the tests and measuring test coverage my Tox setup does other things to check if
+the code is OK, and you'll see that later.
+
+The stage could end right there, but I also want to upload the coverage data gathered during
+tests to `Coveralls`_ to get that sweet 100% coverage badge on GitHub [#9]_:
+
+.. code-block:: bash
+
+    pip install tox
+    tox
+    pip install coveralls
+    coveralls
+
+For Coveralls to work, it needs to have the repo token allowing it to upload data to your profile.
+It will look for it in ``COVERALLS_REPO_TOKEN`` environment variable.
+Thankfully, Snap allows to set secure (secret) variables that will be cut out the logs.
+
+.. image:: /_static/cd-with-angularjs-commits/secure_variable.png
 
 Parsing AngularJS-style commits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* I decided that my commits will follow AngularJS commit conventions (https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit)
-* I created scripts that parse commit messages.
-* Based on the commit type I either update the documentation (which can really do nothing) or upload a new version of the library to PyPI.
+As I've mentioned at the start of this article a commit message convention can be used
+to distinguish different kinds of commits and react to them properly
+(deploy a new version? update docs? do nothing?).
+`AngularJS commit conventions`_ dictate that the messages look like this:
 
-#### Tests
-There's no build step in most Python libraries. So our first pypeline stage runs the tests:
-```
-pip install tox
-tox
-pip install coveralls
-coveralls
-```
-I like when my tests keep the developers (only me, in this case) in check, so my tox configuration not only runs my tests,
-but also checks that test coverage is at 100% and that there are no unknown Pylint issues.
+.. code-block:: bash
 
-I like to show off that my project has the mythical full coverage, so I use coveralls. BLABLABLA użyje .coverage musi już być, a powstaje w trakcie testów.
+    <type>(<scope>): <subject>
+    <BLANK LINE>
+    <body>
+    <BLANK LINE>
+    <footer>
 
-Following the instructions from https://pypi.python.org/pypi/coveralls I've set `COVERALLS_REPO_TOKEN` as a secret environment variable in coveralls step.
+So, for example (from Mountepy):
 
-A i jak mamy w toxie pythona 3 i 2, to znajduje Pythona 2 na środowisku 3.4 (według Snapa). Bo można tylko jednego Pythona na cały pipeline.
-Ale nawet, gdyby czegoś brakowało, to niby można [doinstalować youmem] (https://docs.snap-ci.com/faq/)
+.. code-block:: bash
 
-#### Pypi upload
-W sumie tym commitu dyktuje, co powinno się zrobić. Czy wrzucam nową wersję, czy nie (ale np. updatuje dokumentację przez register).
+    docs(README): Measuring coverage in mountepy tests
+
+    Also pointed to PyDAS for examples.
+
+The available commit types and their meanings:
+
+* feat - new feature (hopefully with tests)
+* fix - a bug fix (also hopefully with tests)
+* docs - documentation
+* style - formatting, missing semi colons, etc.
+* refactor - some refactoring, optimization, etc.
+* test - adding missing tests
+* chore - project maintainance like build scripts, small tools, etc.
+
+I've created a script that can identify the commit type and dictate the action that should be
+taken (by printing it):
+
+.. code-block:: bash
+
+    #!/bin/bash
+    # If some command in this script fails then the commit was probably
+    # malformed and an error code should be returned.
+    set -e
+
+    # Taking the summary (first line) of the last commit's message.
+    COMMIT_SUMMARY=$(git log -1 --format=%s)
+    # Type of the commit is located before the mandatory parens
+    # explaining location of the chanhe.
+    COMMIT_TYPE=$(echo $COMMIT_SUMMARY | cut -d "(" -f 1)
+
+    case $COMMIT_TYPE in
+        # These commits change the library code,
+        # so they must result in a new release.
+        feat|fix|refactor|perf) printf build_code;;
+        # Here, the actual library code isn't changed, so a new
+        # library version can't be released. But if we host the docs
+        # somewhere (library's README page on PyPI also counts),
+        # we should rebuild and upload them.
+        # Also, documentation updates sometimes go on the same commit
+        # with other minor tweaks, so we should (and don't risk
+        # anything by) re-release the docs just to be sure.
+        docs|style|test|chore) printf build_docs;;
+        # If the type isn't recognized,
+        # we raise an error and print to the error stream.
+        *) >&2 echo "Invalid commit format! Use AngularJS convention."; exit 2;
+    esac
+
+**
+
+Automatic deployment to PyPI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Na początku tylko do test, ale potem można dodać
+
+Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
+
+Wersję trzeba podbić ręcznie. Jak się nie podbije, to się wywali na uploadzie.
+
+W sumie typ commitu dyktuje, co powinno się zrobić. Czy wrzucam nową wersję, czy nie (ale np. updatuje dokumentację przez register).
 Jak zobaczymy coś w stylu konwencji AngularJS to można jakoś sygnalizować, co robi dany commit.
 Dzięki temu będziemy mieli informację, czy trzeba zrobić upload czy tylko register.
 
@@ -216,6 +288,27 @@ Wszystko dostępne tutaj https://snap-ci.com/butla/mountepy/branch/master
 
 Ręczne odpalanie ostatecznego uploadu też jest dobre, jeśli np. czekacie na wyniki na Windowsie z AppVeyora (ale może to też da się zautomatyzować przez jakieś API).
 
+To, że jest trunk-based development sprawia, że zawsze możemy rozpatrywać tylko pojedynczy commit.
+Jakby przyszły dwa różne i trzeba zdecydować co robić, to byłoby ciut bardziej skomplikowanie
+
+A word about branching
+^^^^^^^^^^^^^^^^^^^^^^
+
+W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
+więc dużego ruchu nie będzie. Ale nie bezpieczniej robić sobie feature branche, puszczać CI na nich i dopiero wtedy przerzucać na mastera?
+Co jeśli popsuję build i na githubie i pypi pojawi się ośmieszające "build failed"?? Cóż, po prostu lepiej mieć się na baczności, żebym tego nie zrobił.
+U mnie też nierobienie feature-branchy wywoływało strach, ale chodzą słuchy, że to może być "the way to go" (https://www.thoughtworks.com/insights/blog/enabling-trunk-based-development-deployment-pipelines).
+
+Tox sprawia, że nie powinno nic jebnąć
+
+Ale jakby co, to nic się nie bójcie, w Snapie można ustawić dokładnie jak mają być sprawdzane pull requestach i branche (domyślnie nie są wcale ruszane).
+
+Additional stuff
+^^^^^^^^^^^^^^^^
+
+I like when my tests keep the developers (only me, in this case) in check, so my tox configuration not only runs my tests,
+but also checks that test coverage is at 100% and that there are no unknown Pylint issues.
+
 ### Wydzielanie skryptów, żeby były uniwersalne
 Zrobiłem sobie repo. Wywaliłem skrypty z ci/ tam. Teraz ustawiam Gitowy submodule w mountepy i zaraz przestawię konfigurację w Snapie, bo będzie inny folder.
 `git submodule add adres`
@@ -224,12 +317,19 @@ no i ściągać teraz trzeba przez `git clone --recursive adred`, bo tox polega 
 Przerób skrypty i biuld na Snapie, żeby użytkownik pypi też był dostarczany przez argument. Żeby ludzie mogli od razi używać.
 
 
-### Podsumowanie
+Pipeline overview (conclusions)
+-------------------------------
 Co zrobiłem? Jak wygląda teraz mój proces (screen shot z pipelinea)?
 
 Jak robie jakieś zmiany, to robię jakiś commit, czekam, klikam w snapie jakby co i działa.
 
 Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to komentujcie.
+
+The overall configuration looks like this.
+
+.. image:: /_static/cd-with-angularjs-commits/full_build_config.png
+
+W ogóle poszczególne fazy buildu można restartować, nie trzeba całego buildu.
 
 
 .. rubric:: Footnotes
@@ -239,14 +339,18 @@ Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to 
 .. [#] It's just more convenient and "social" than Bitbucket and GitLab. But I'm kind of afraid of its monopoly...
 .. [#] I think that right now Mountepy should work on OS X, but you'll have to install Mountebank yourself. If you want the feature create a GitHub issue.
 .. [#] And thanks to that you have the whole section about choosing a CI :)
-.. [#] If you're uinge Circle, please say how it is in the comments.
 .. [#] I didn't try that hard because by that point I've already taken a liking to Snap CI.
+.. [#] If you're using Circle, please say how it is in the comments.
+.. [#] I've also changed Python to 3.4 from the default 2.7.
+.. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact (TODO to tak sie robi??), because different stages are not guaranteed to run in the same environment (virtual machine).
 
-.. _Mountepy: https://pypi.org/project/mountepy/ 
 .. _AngularJS commit conventions: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
-.. _Snap CI: https://snap-ci.com/
-.. _semantic versioning: http://semver.org/
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
+.. _Coveralls: https://coveralls.io
+.. _Mountepy: https://pypi.org/project/mountepy/ 
 .. _One thing to note: https://blog.snap-ci.com/blog/2016/07/26/continuous-delivery-integration-devops-research/
-.. _PyPI deployments with Travis: https://www.appneta.com/blog/pypi-deployment-with-travis-ci/_ 
 .. _PyDAS: https://github.com/butla/pydas
+.. _PyPI deployments with Travis: https://www.appneta.com/blog/pypi-deployment-with-travis-ci/_ 
+.. _semantic versioning: http://semver.org/
+.. _Snap CI: https://snap-ci.com/
+.. _Snap CI FAQ: https://docs.snap-ci.com/faq/
