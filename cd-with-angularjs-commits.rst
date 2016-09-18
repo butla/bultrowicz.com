@@ -213,8 +213,8 @@ The available commit types and their meanings:
 * test - adding missing tests
 * chore - project maintainance like build scripts, small tools, etc.
 
-I've created a script that can identify the commit type and dictate the action that should be
-taken (by printing it):
+I've created a script (``get_commit_action.sh``) that can identify the commit type and dictate
+the action that should be taken (by printing it):
 
 .. code-block:: bash
 
@@ -246,53 +246,115 @@ taken (by printing it):
         *) >&2 echo "Invalid commit format! Use AngularJS convention."; exit 2;
     esac
 
-**
-
 Automatic deployment to PyPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Na początku tylko do test, ale potem można dodać
+So let's say that I'm using AngularJS commit conventions and have the script to identify them.
+Now comes the part we've been waiting for - actually publishing (deployment of) the library to PyPI.
+The script to do that looks like this:
 
-Te automatyczne deploye będą tylko na masterze, ustawię sobie, żeby na pull requesty były tylko testy i sprawdzenie poprawności commita.
+.. code-block:: bash
 
-Wersję trzeba podbić ręcznie. Jak się nie podbije, to się wywali na uploadzie.
+    #!/bin/bash
+    set -ev
 
-W sumie typ commitu dyktuje, co powinno się zrobić. Czy wrzucam nową wersję, czy nie (ale np. updatuje dokumentację przez register).
-Jak zobaczymy coś w stylu konwencji AngularJS to można jakoś sygnalizować, co robi dany commit.
-Dzięki temu będziemy mieli informację, czy trzeba zrobić upload czy tylko register.
+    # Running the previous script to decide if we'll be uploading
+    # a new version or just updating the docs.
+    COMMIT_ACTION_SCRIPT=$(dirname $0)/get_commit_action.sh
+    COMMIT_ACTION=$($COMMIT_ACTION_SCRIPT)
 
-Jakbym miał normalną HTMLową dokumentację, to wyglądałoby to podobnie. Po prostu bym przebudowywał i wrzucał na serwer.
+    if [ $COMMIT_ACTION == build_code ]; then
+        # Building source and binary distributions to upload later on,
+        # and setting the action that will be performed by Twine (PyPI
+        # upload tool) later in the script.
+        python3 setup.py sdist bdist_wheel
+        TWINE_ACTION=upload
+    else
+        # Only building the source distribution to update the package
+        # description on PyPI.
+        # If I had documentation on readthedocs.org I would rebuild it
+        # here. Sadly, I don't have it (yet).
+        python3 setup.py sdist
+        TWINE_ACTION=register
+    fi
 
-Mam skrypt mały do parsowania commitów (pokaż). Mimo tego go wytestowałem (link do pliku), chociażby po to, żeby sobie poćwiczyć testowanie bashowych skryptów.
+    # The file that contains repositories configuration for Twine.
+    # For me, it points to the official and test PyPI
+    # This script's first argument specifies which one to use.
+    PYPIRC=$(dirname $0)/pypirc
+
+    # Depending on the commit type this will either upload the
+    # distribution files (upload) or update the package's metadata
+    # (register).
+    # PYPI_PASSWORD will be stored in a secure environment variable in
+    # Snap, like the Coveralls token.
+    twine $TWINE_ACTION -r $1 -p $PYPI_PASSWORD --config-file $PYPIRC dist/*
+       
+One thing to note about uploading a new version of the library:
+if the version number in setup.py isn't incremented, then it will fail,
+because files on PyPI can't be overwritten.
+A human is needed to change the version because we're using semantic versioning.
+And if said human forgets to do that when he should, he can fix the CI
+build with a "fix" type commit bumping the version.
+
+But you can say that, since were can automatically understand commit types, a machine
+could incerement the last version number (patch) on "fix", "refactor", and "perf"
+commits, and the second version number (minor) on "feat".
+I won't do that, because I have bad experience with automatic commits made by CI [#10]_.
+I think that the commit log starts to look ugly and gets twice as long with
+a version-bumping commit done after every normal one.
+A crazy to idea once popped into my head to make the CI just ammend the bumped
+version onto the last commit to make the log look nicer, but it would force a developer
+to ``pull --rebase`` after each push to origin, so it's... crazy.
+
+So, finally, the step that uses the above script in my Snap setup looks like this:
+
+.. code-block:: bash
+
+    pip install twine
+    # pypitest is a label in pypirc file with URL of,
+    # you've guessed it, test PyPI.
+    pypi_upload.sh pypitest
+
+Why do I interact ith test PyPI and not the real one?
+Well, to test stuff... I dunno.
+I can check if the files really get there, whether the README looks OK, etc.
+And only after that I trigger (manually) the next and last pipeline step:
+
+.. code-block:: bash
+
+    pip install twine
+    # This time uploading/registering with the real PyPI.
+    # I've also got a different $PYPI_PASSWORD, an approach I recommend.
+    # You can store the passwords in KeePass, or something.
+    pypi_upload.sh pypi
+
+Triggering a pipeline step manually can also come in handy when your code needs to go through
+some out-of-band (out-of-Snap) checks, like Windows tests on AppVeyor or some legal mumbo-jumbo
+before you can release the next iteration.
+
+A bit of a warning - if you rerun the step or the whole build that succesfully uploaded some
+artifacts, then it'll fail, due to file collision on PyPI.
+I don't see any real need to rerun them, though.
+
+When introducing all of this to Mountepy I've put the CI scripts in `another repository`_
+at attached them as a `Git submodule`_ to be able to reuse them in other projects
+and develop them independently.
+
+Trunk-based development
+^^^^^^^^^^^^^^^^^^^^^^^
+
+To dobre podejście, dzięki niemu muszę tylko rozpatrywać jeden commit na raz.
+No i continuous delivery tak jakby je zakłada.
+
 My commit parser assumes pushing one commit at a time to master, but that's actually the preferred way in trunk-based development.
-Conventional commits can be later used to generate changelogs.
 
-Step do uploadu,
-```
-pip install twine
-ci/pypi_upload.sh pypitest
-```
-Skrypt uploadowy korzysta z poprzedniego.
-
-Wrzucam z automatu na testpypi. Jak coś będzie nie tak, albo biblioteka będzie już istniała to będzie fail.
-Jak się zapomni o podbiciu wersji, to trzeba zrobić kolejnego commita z "fix()".
-
-Jako osobny krok mam wrzucanie na normalne pypi. Oznaczyłem jako krok ręczny, żeby zawsze móc jeszcze spojrzeć, czy na testowym dobrze wyświetla się README itp.
-Sam opis w snapie wygląda tak samo jak poprzedni, tylko że zamiast `ci/pypi_upload.sh pypitest` jest `ci/pypi_upload.sh pypi`.
-A no i oba przypadki używają tajnej zmiennej środowiskowej PYPI\_PASSWORD (mam różne tu i tu).
-
-Rerun buildu, który wrzuca kod (fix, refactor, etc.) skończy się failem, bo będzie chciał wrzucić jeszcze raz pliki.
-Na razie nie mam na to rozwiązania, chyba poprostu nie należy robić rerunów.
-
-Wszystko dostępne tutaj https://snap-ci.com/butla/mountepy/branch/master
-
-Ręczne odpalanie ostatecznego uploadu też jest dobre, jeśli np. czekacie na wyniki na Windowsie z AppVeyora (ale może to też da się zautomatyzować przez jakieś API).
+Żeby nie było skuchy to Tox sprawdza, czy ostatni commit jest wporzo (odpalając tamten skrypt,
+jeśli on się nie wywali to jest spoko).
+Dobrze puścić zatem Toxa po commicie. No i od razu wyjdzie w buildzie CI.
 
 To, że jest trunk-based development sprawia, że zawsze możemy rozpatrywać tylko pojedynczy commit.
 Jakby przyszły dwa różne i trzeba zdecydować co robić, to byłoby ciut bardziej skomplikowanie
-
-A word about branching
-^^^^^^^^^^^^^^^^^^^^^^
 
 W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
 więc dużego ruchu nie będzie. Ale nie bezpieczniej robić sobie feature branche, puszczać CI na nich i dopiero wtedy przerzucać na mastera?
@@ -316,9 +378,12 @@ no i ściągać teraz trzeba przez `git clone --recursive adred`, bo tox polega 
 
 Przerób skrypty i biuld na Snapie, żeby użytkownik pypi też był dostarczany przez argument. Żeby ludzie mogli od razi używać.
 
+Conventional commits can be later used to generate changelogs.
 
 Pipeline overview (conclusions)
 -------------------------------
+Co chcę ogólnie powiedzieć? Że CD jest fajne? Że powinno się robić małe testowalne zmiany
+i mieć z głowy uploady i deploymenty?
 Co zrobiłem? Jak wygląda teraz mój proces (screen shot z pipelinea)?
 
 Jak robie jakieś zmiany, to robię jakiś commit, czekam, klikam w snapie jakby co i działa.
@@ -330,6 +395,8 @@ The overall configuration looks like this.
 .. image:: /_static/cd-with-angularjs-commits/full_build_config.png
 
 W ogóle poszczególne fazy buildu można restartować, nie trzeba całego buildu.
+
+Konfiguracja buildowa ze wszystkim dostępna tu https://snap-ci.com/butla/mountepy/branch/master
 
 
 .. rubric:: Footnotes
@@ -343,10 +410,13 @@ W ogóle poszczególne fazy buildu można restartować, nie trzeba całego build
 .. [#] If you're using Circle, please say how it is in the comments.
 .. [#] I've also changed Python to 3.4 from the default 2.7.
 .. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact (TODO to tak sie robi??), because different stages are not guaranteed to run in the same environment (virtual machine).
+.. [#] I'm mainly looking at you, ``mvn release``...
 
+.. _another repository: https://github.com/butla/ci-helpers
 .. _AngularJS commit conventions: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
 .. _Coveralls: https://coveralls.io
+.. _Git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules 
 .. _Mountepy: https://pypi.org/project/mountepy/ 
 .. _One thing to note: https://blog.snap-ci.com/blog/2016/07/26/continuous-delivery-integration-devops-research/
 .. _PyDAS: https://github.com/butla/pydas
