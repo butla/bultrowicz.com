@@ -9,8 +9,9 @@ I got tired of having to manually build and upload my library (`Mountepy`_) to P
 so I decided to do what any sane programmer would do - set up automation [#1]_.
 But how would my scripts know whether they need to just update the README on PyPI and when to
 assemble and push a new version of the library?
-Thanks to the `AngularJS commit conventions`_!
+Thanks to the `AngularJS commit convention`_!
 Oh, and `Snap CI`_ will run the whole thing.
+Why Snap, you ask? See my previous article - :ref:`choosing-a-ci`.
 
 Motivation
 ----------
@@ -40,90 +41,6 @@ between commit types of commits.
 It requires some work on the human part, of course, but I think that this work is not much more
 then the good practice of doing commits that are about a single change.
 
-Choosing a CI service
----------------------
-
-I host my code on GitHub, as probably many or you do [#3]_.
-The easiest way to get my code automatically tested and published (only if there's a need for that)
-is, of course, to use one of the integrated CI services.
-`One thing to note`_ - some take the label of "continuous integration",
-some "continuous delivery", but their capabilities are similar.
-But there's still quite a few of them we have to choose...
-
-Travis
-^^^^^^
-
-I don't know if it actually is, but for me it seems that Travis is the oldest,
-most well known and most widely used from the bunch.
-Because of that and because I didn't have any fancy requirements,
-I was using it for Mountepy for some time (you'll see why this has changed).
-Also, the article about `PyPI deployments with Travis`_ inspired me to create
-the pipeline that is the subject of this article.
-
-Travis has:
-
-* Docker support, which I needed for my other project (`PyDAS`_);
-* OS X builds, which I may need for Mountepy if and when I decide to support it [#4]_.
-
-But Travis has one big problem - you have no easy way of debugging builds.
-When I got strange test failures, it took a lot of guesswork
-and a print-heavy version of my application to find their cause.
-I knew that there had to be a better way, so it was time to look at other options [#5]_.
-
-CircleCI
-^^^^^^^^
-
-Pros:
-
-* You can SSH into the container that runs your builds/tests! (so there goes the debug problem)
-* Docker support.
-* OS X builds.
-
-Cons:
-
-* Hard to set up? Circle uses it's own build configuration YAML style (much like Travis).
-  But I've struggled to get PyDAS tests (starting some processes, some Docker containers) working
-  for about 5 or 10 minutes and I gave up [#6]_. I don't know...
-
-Rumors(?):
-
-* I've heard that it supports up to 4 parallel builds on the free plan but this is not what
-  the `pricing page <https://circleci.com/pricing/>`_ says... [#7]_
-
-Snap CI
-^^^^^^^
-
-This is the CI I chose. It provided what I needed (Docker, debug) and is really
-straightforward to work with.
-
-Pros:
-
-* Docker support. Although it's in beta and I had to contact support to have it enabled
-  (which was done in a few hours), my builds run smoothly.
-* Build debug. Not through SSH, but with browser-based snap-shell. I think I'd prefer SSH,
-  but being able to do it in the browser is also nice.
-* Build steps defined in Bash. No custom configuration syntax to learn, just plain old scripts!
-* Ability to group build steps into stages; even one's that need to be triggered manually
-  (good for e.g. manual or exploratory tests).
-
-Cons:
-
-* No OS X builds (Travis and Circle have them).
-* Build pipeline definitions are can't be easily copied between projects.
-  With Travis you could just copy the config file,
-  here it requires a bit more clicking around the web UI.
-  Although you can still keep almost of your logic in script files
-  and just run different ones in different stages
-
-Codeship
-^^^^^^^^
-
-After I finished comparing Travis, Circle and Snap I've remembered that there's one more thing
-(probably way more than that, but I don't have all the time in the world) to look at - Codeship.
-
-It's supposed to be really cool and all, but I found setting up the tests clunky
-and I didn't have the initiative to try to get to know it, since I was perfectly happy with Snap.
-But you can find it to your liking, I don't know...
 
 The build pipeline
 ------------------
@@ -152,7 +69,7 @@ Real-life tests stage
 
 What you probably want to do in every CI is to build the code and run the tests.
 Most Python libraries don't have to build anything, so just running the tests is enough,
-and this is what I did in the first stage of my build, uninspiredly named "TESTS" [#8]_
+and this is what I did in the first stage of my build, uninspiredly named "TESTS" [#3]_
 (I've just renamed the default EDITME):
 
 .. code-block:: bash
@@ -164,7 +81,7 @@ Outside of running the tests and measuring test coverage my Tox setup does other
 the code is OK, and you'll see that later.
 
 The stage could end right there, but I also want to upload the coverage data gathered during
-tests to `Coveralls`_ to get that sweet 100% coverage badge on GitHub [#9]_:
+tests to `Coveralls`_ to get that sweet 100% coverage badge on GitHub [#4]_:
 
 .. code-block:: bash
 
@@ -185,7 +102,7 @@ Parsing AngularJS-style commits
 As I've mentioned at the start of this article a commit message convention can be used
 to distinguish different kinds of commits and react to them properly
 (deploy a new version? update docs? do nothing?).
-`AngularJS commit conventions`_ dictate that the messages look like this:
+`AngularJS commit convention`_ dictate that the messages look like this:
 
 .. code-block:: bash
 
@@ -249,7 +166,7 @@ the action that should be taken (by printing it):
 Automatic deployment to PyPI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-So let's say that I'm using AngularJS commit conventions and have the script to identify them.
+So let's say that I'm using AngularJS commit convention and have the script to identify them.
 Now comes the part we've been waiting for - actually publishing (deployment of) the library to PyPI.
 The script to do that looks like this:
 
@@ -300,7 +217,7 @@ build with a "fix" type commit bumping the version.
 But you can say that, since were can automatically understand commit types, a machine
 could incerement the last version number (patch) on "fix", "refactor", and "perf"
 commits, and the second version number (minor) on "feat".
-I won't do that, because I have bad experience with automatic commits made by CI [#10]_.
+I won't do that, because I have bad experience with automatic commits made by CI [#5]_.
 I think that the commit log starts to look ugly and gets twice as long with
 a version-bumping commit done after every normal one.
 A crazy to idea once popped into my head to make the CI just ammend the bumped
@@ -403,24 +320,16 @@ Konfiguracja buildowa ze wszystkim dostępna tu https://snap-ci.com/butla/mounte
 
 .. [#] If you want to get fancy you can also call this automation a `continuous delivery`_ pipeline.
 .. [#] At least that's the granurality that worked for me, you can go more in depth if you want.
-.. [#] It's just more convenient and "social" than Bitbucket and GitLab. But I'm kind of afraid of its monopoly...
-.. [#] I think that right now Mountepy should work on OS X, but you'll have to install Mountebank yourself. If you want the feature create a GitHub issue.
-.. [#] And thanks to that you have the whole section about choosing a CI :)
-.. [#] I didn't try that hard because by that point I've already taken a liking to Snap CI.
-.. [#] If you're using Circle, please say how it is in the comments.
 .. [#] I've also changed Python to 3.4 from the default 2.7.
 .. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact (TODO to tak sie robi??), because different stages are not guaranteed to run in the same environment (virtual machine).
 .. [#] I'm mainly looking at you, ``mvn release``...
 
 .. _another repository: https://github.com/butla/ci-helpers
-.. _AngularJS commit conventions: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
+.. _AngularJS commit convention: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
 .. _Coveralls: https://coveralls.io
 .. _Git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules 
 .. _Mountepy: https://pypi.org/project/mountepy/ 
-.. _One thing to note: https://blog.snap-ci.com/blog/2016/07/26/continuous-delivery-integration-devops-research/
-.. _PyDAS: https://github.com/butla/pydas
-.. _PyPI deployments with Travis: https://www.appneta.com/blog/pypi-deployment-with-travis-ci/_ 
 .. _semantic versioning: http://semver.org/
 .. _Snap CI: https://snap-ci.com/
 .. _Snap CI FAQ: https://docs.snap-ci.com/faq/
