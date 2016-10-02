@@ -8,6 +8,10 @@
     virtualenv_dir: "{{ ansible_env.HOME }}/blog_venv"
 
   tasks:
+  - name: update the server
+    apt: update_cache=yes upgrade=safe
+    become: true
+
   - name: clone the blog
     git: repo=https://github.com/butla/{{ repo_name }}
          dest={{ repo_dir }}
