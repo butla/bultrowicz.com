@@ -128,7 +128,7 @@ The available commit types and their meanings:
 * style - formatting, missing semi colons, etc.
 * refactor - some refactoring, optimization, etc.
 * test - adding missing tests
-* chore - project maintainance like build scripts, small tools, etc.
+* chore - project maintenance like build scripts, small tools, etc.
 
 I've created a script (``get_commit_action.sh``) that can identify the commit type and dictate
 the action that should be taken (by printing it):
@@ -143,7 +143,7 @@ the action that should be taken (by printing it):
     # Taking the summary (first line) of the last commit's message.
     COMMIT_SUMMARY=$(git log -1 --format=%s)
     # Type of the commit is located before the mandatory parens
-    # explaining location of the chanhe.
+    # explaining location of the change.
     COMMIT_TYPE=$(echo $COMMIT_SUMMARY | cut -d "(" -f 1)
 
     case $COMMIT_TYPE in
@@ -215,16 +215,16 @@ And if said human forgets to do that when he should, he can fix the CI
 build with a "fix" type commit bumping the version.
 
 But you can say that, since were can automatically understand commit types, a machine
-could incerement the last version number (patch) on "fix", "refactor", and "perf"
+could increment the last version number (patch) on "fix", "refactor", and "perf"
 commits, and the second version number (minor) on "feat".
 I won't do that, because I have bad experience with automatic commits made by CI [#5]_.
 I think that the commit log starts to look ugly and gets twice as long with
 a version-bumping commit done after every normal one.
-A crazy to idea once popped into my head to make the CI just ammend the bumped
+A crazy idea once popped into my head to make the CI just amend the bumped
 version onto the last commit to make the log look nicer, but it would force a developer
 to ``pull --rebase`` after each push to origin, so it's... crazy.
 
-So, finally, the step that uses the above script in my Snap setup looks like this:
+And finally, the step that uses the above script in my Snap setup looks like this:
 
 .. code-block:: bash
 
@@ -233,7 +233,7 @@ So, finally, the step that uses the above script in my Snap setup looks like thi
     # you've guessed it, test PyPI.
     pypi_upload.sh pypitest
 
-Why do I interact ith test PyPI and not the real one?
+Why do I interact with test PyPI and not the real one?
 Well, to test stuff... I dunno.
 I can check if the files really get there, whether the README looks OK, etc.
 And only after that I trigger (manually) the next and last pipeline step:
@@ -250,7 +250,7 @@ Triggering a pipeline step manually can also come in handy when your code needs 
 some out-of-band (out-of-Snap) checks, like Windows tests on AppVeyor or some legal mumbo-jumbo
 before you can release the next iteration.
 
-A bit of a warning - if you rerun the step or the whole build that succesfully uploaded some
+A bit of a warning - if you rerun the step or the whole build that successfully uploaded some
 artifacts, then it'll fail, due to file collision on PyPI.
 I don't see any real need to rerun them, though.
 
@@ -259,77 +259,78 @@ at attached them as a `Git submodule`_ to be able to reuse them in other project
 and develop them independently.
 
 Trunk-based development
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
-To dobre podejście, dzięki niemu muszę tylko rozpatrywać jeden commit na raz.
-No i continuous delivery tak jakby je zakłada.
+You could have spotted a potential problem in my commit identification scripts:
+they only look at the last commit.
+But it's normal to push more than one commit at once when you finish a bigger feature, right?
+Well, not according to `trunk-based development`_, an approach suggested when
+trying to do continuous delivery or deployment.
 
-My commit parser assumes pushing one commit at a time to master, but that's actually the preferred way in trunk-based development.
+I do recommend following the link, but if you don't want to, the gist of trunk-based development
+is to cut the work up in self-contained commits and constantly synchronizing with master.
+The commit doesn't need to provide a full fix or feature, but it can be a step towards
+doing those. The important thing is that the commit doesn't break anything and improves something.
+It could be a small refactor of one class on the road for implementing something.
 
-Żeby nie było skuchy to Tox sprawdza, czy ostatni commit jest wporzo (odpalając tamten skrypt,
-jeśli on się nie wywali to jest spoko).
-Dobrze puścić zatem Toxa po commicie. No i od razu wyjdzie w buildzie CI.
+I do think that this is the right way and it so happens that it's also convenient for my automation.
 
-To, że jest trunk-based development sprawia, że zawsze możemy rozpatrywać tylko pojedynczy commit.
-Jakby przyszły dwa różne i trzeba zdecydować co robić, to byłoby ciut bardziej skomplikowanie
+But isn't it too easy to break stuff when pumping everything into master?
+Especially if there are many contributors involved [#6]_?
+Well, not if you have good tests (and do other things mentioned in the Thought Works article).
 
-W ogóle będę developował na masterze. Fakt, że na razie tylko ja tam commituje (ale wiecie, może znajdziecie coś do poprawy, obczajcie na githubie, dajcie gwiazdkę, czy coś),
-więc dużego ruchu nie będzie. Ale nie bezpieczniej robić sobie feature branche, puszczać CI na nich i dopiero wtedy przerzucać na mastera?
-Co jeśli popsuję build i na githubie i pypi pojawi się ośmieszające "build failed"?? Cóż, po prostu lepiej mieć się na baczności, żebym tego nie zrobił.
-U mnie też nierobienie feature-branchy wywoływało strach, ale chodzą słuchy, że to może być "the way to go" (https://www.thoughtworks.com/insights/blog/enabling-trunk-based-development-deployment-pipelines).
+`My Tox config`_ checks if the tests pass, if the last commit is well formed
+(so it requires my CI scripts), and if the last commit has version bumped appropriately.
+(TODO version bump check, może wcześniej w artykule o tym wspomnieć))
+With that, running Tox after creating a commit and before push should ensure [#7]_ that we didn't
+break anything and that a new version will be released if it's needed.
+Of course, a human can even forget to run Tox before pushing...
+Well, git hooks or a development process requiring creating pull requests
+(Snap can run pipelines on them) can help with that.
 
-Tox sprawia, że nie powinno nic jebnąć
+Conclusions
+-----------
 
-Ale jakby co, to nic się nie bójcie, w Snapie można ustawić dokładnie jak mają być sprawdzane pull requestach i branche (domyślnie nie są wcale ruszane).
+I hope that you'll find something inspiring in this article.
+I know that it would be very helpful for me a year (or more) ago.
 
-Additional stuff
-^^^^^^^^^^^^^^^^
+For me, continuous delivery (and deployment, where applicable) seems to be the way to go
+for software development on projects of every size.
+It allows to focus more on creative work (writing code) and less on things that are quite joyless
+(packaging, deploying, synchronizing releases, resolving merge conflicts, etc.)
 
-I like when my tests keep the developers (only me, in this case) in check, so my tox configuration not only runs my tests,
-but also checks that test coverage is at 100% and that there are no unknown Pylint issues.
+Feel free to leave a comment if you see some issues with my setup or have improvements in mind.
 
-### Wydzielanie skryptów, żeby były uniwersalne
-Zrobiłem sobie repo. Wywaliłem skrypty z ci/ tam. Teraz ustawiam Gitowy submodule w mountepy i zaraz przestawię konfigurację w Snapie, bo będzie inny folder.
-`git submodule add adres`
-no i ściągać teraz trzeba przez `git clone --recursive adred`, bo tox polega na jednym, z tych skryptów.
+Oh, and you can see my pipeline at https://snap-ci.com/butla/mountepy/branch/master
+
+
+TODO
+----
 
 Przerób skrypty i biuld na Snapie, żeby użytkownik pypi też był dostarczany przez argument. Żeby ludzie mogli od razi używać.
 
-Conventional commits can be later used to generate changelogs.
+Kolejna rzecz, jako edit do tego artykułu: sprawdzanie czy zrobiono dobry version bump na przestrzeni commitu. Albo nawet przed wrzuceniem tego teraz!
 
-Pipeline overview (conclusions)
--------------------------------
-Co chcę ogólnie powiedzieć? Że CD jest fajne? Że powinno się robić małe testowalne zmiany
-i mieć z głowy uploady i deploymenty?
-Co zrobiłem? Jak wygląda teraz mój proces (screen shot z pipelinea)?
-
-Jak robie jakieś zmiany, to robię jakiś commit, czekam, klikam w snapie jakby co i działa.
-
-Jak macie jakieś pomysły na usprawnienia albo widzicie tu jakieś problemy to komentujcie.
-
-The overall configuration looks like this.
-
-.. image:: /_static/cd-with-angularjs-commits/full_build_config.png
-
-W ogóle poszczególne fazy buildu można restartować, nie trzeba całego buildu.
-
-Konfiguracja buildowa ze wszystkim dostępna tu https://snap-ci.com/butla/mountepy/branch/master
-
+Przekazywanie artefaktów między stepami buildu.
 
 .. rubric:: Footnotes
 
 .. [#] If you want to get fancy you can also call this automation a `continuous delivery`_ pipeline.
-.. [#] At least that's the granurality that worked for me, you can go more in depth if you want.
+.. [#] At least that's the granularity that worked for me, you can go more in depth if you want.
 .. [#] I've also changed Python to 3.4 from the default 2.7.
 .. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact (TODO to tak sie robi??), because different stages are not guaranteed to run in the same environment (virtual machine).
 .. [#] I'm mainly looking at you, ``mvn release``...
+.. [#] To be fair, this is not the case with my current projects. But I think that with more effort put into good, isolated testing (I created Mountepy for that) it would solve a lot of my last corporate project's development problems. 
+.. [#] Though we can never be 100% sure. If the project we're working on is part of something bigger then some end-to-end tests need to later run on the whole system. But even they can't give 100%.
 
 .. _another repository: https://github.com/butla/ci-helpers
 .. _AngularJS commit convention: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
 .. _Coveralls: https://coveralls.io
 .. _Git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules 
-.. _Mountepy: https://pypi.org/project/mountepy/ 
+.. _Mountepy: https://pypi.org/project/mountepy/
+.. _My Tox config: http://example.com BLABLABLA tododod
 .. _semantic versioning: http://semver.org/
 .. _Snap CI: https://snap-ci.com/
 .. _Snap CI FAQ: https://docs.snap-ci.com/faq/
+.. _trunk-based development: https://www.thoughtworks.com/insights/blog/enabling-trunk-based-development-deployment-pipelines
