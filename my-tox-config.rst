@@ -13,3 +13,6 @@ Może kolejny post o moim setupie w Toxie i rzeczach, które sprawdzam?
 I like when my tests keep the developers (only me, in this case) in check, so my tox configuration not only runs my tests,
 but also checks that test coverage is at 100% and that there are no unknown Pylint issues.
 
+I'll probably be expanding my configuration with even more quality checks as the time progresses,
+I'll try to edit them in in this article.
+

@@ -1,7 +1,7 @@
 Continuous delivery of a Python library with AngularJS commit convention
 ========================================================================
 
-.. post::
+.. post:: 2016-10-10
    :author: Michal Bultrowicz
    :tags: Python
 
@@ -36,7 +36,7 @@ of the library for every commit, but otherwise you need to be able to distinguis
 between the commits that affect the production code and those that don't [#2]_. 
 
 This is where AngularJS commit convention helps out.
-It's originally for automatic changelog generation, but in essence it allows to distinguish
+It's originally meant for automatic changelog generation, but in essence it allows to distinguish
 between commit types of commits.
 It requires some work on the human part, of course, but I think that this work is not much more
 then the good practice of doing commits that are about a single change.
@@ -50,7 +50,7 @@ SnapCI build setup
 
 It's straightforward to add a build configuration for any of your GitHub repositories in Snap,
 so I won't go into it.
-When you add it you are sent to page that looks like the one below.
+When you add it you are sent to a page that looks like the one below.
 
 .. image:: /_static/cd-with-angularjs-commits/bare_build_config.png
 
@@ -60,7 +60,7 @@ You may notice that you can only pick one language, but fear not if you need a m
 Additional (language) packages can simply be installed with ``yum``
 (as mentioned in `Snap CI FAQ`_) in "Commands to be executed in this stage".
 
-About that section commands - it's one of the best things about Snap in my opinion.
+About that commands section - it's one of the best things about Snap in my opinion.
 You simply type in shell commands that you want to run for the given stage, and that's it!
 As familiar and flexible a setup method as you can get.
 
@@ -92,7 +92,7 @@ tests to `Coveralls`_ to get that sweet 100% coverage badge on GitHub [#4]_:
 
 For Coveralls to work, it needs to have the repo token allowing it to upload data to your profile.
 It will look for it in ``COVERALLS_REPO_TOKEN`` environment variable.
-Thankfully, Snap allows to set secure (secret) variables that will be cut out the logs.
+Thankfully, Snap allows to set secure (secret) variables that will be cut out of the logs.
 
 .. image:: /_static/cd-with-angularjs-commits/secure_variable.png
 
@@ -195,7 +195,7 @@ The script to do that looks like this:
         TWINE_ACTION=register
     fi
 
-    # The file that contains repositories configuration for Twine.
+    # The file that contains repositories' configuration for Twine.
     # For me, it points to the official and test PyPI
     # This script's first argument specifies which one to use.
     PYPIRC=$(dirname $0)/pypirc
@@ -211,10 +211,11 @@ One thing to note about uploading a new version of the library:
 if the version number in setup.py isn't incremented, then it will fail,
 because files on PyPI can't be overwritten.
 A human is needed to change the version because we're using semantic versioning.
-And if said human forgets to do that when he should, he can fix the CI
-build with a "fix" type commit bumping the version.
+And if said human forgets to do that when he should
+(though I've created `a script to help him remember`_),
+he can fix the CI build with a "fix" type commit bumping the version.
 
-But you can say that, since were can automatically understand commit types, a machine
+But you can say that, since we can automatically understand commit types, a machine
 could increment the last version number (patch) on "fix", "refactor", and "perf"
 commits, and the second version number (minor) on "feat".
 I won't do that, because I have bad experience with automatic commits made by CI [#5]_.
@@ -224,7 +225,7 @@ A crazy idea once popped into my head to make the CI just amend the bumped
 version onto the last commit to make the log look nicer, but it would force a developer
 to ``pull --rebase`` after each push to origin, so it's... crazy.
 
-And finally, the step that uses the above script in my Snap setup looks like this:
+Finally, the step that uses the above script in my Snap setup looks like this:
 
 .. code-block:: bash
 
@@ -268,8 +269,8 @@ Well, not according to `trunk-based development`_, an approach suggested when
 trying to do continuous delivery or deployment.
 
 I do recommend following the link, but if you don't want to, the gist of trunk-based development
-is to cut the work up in self-contained commits and constantly synchronizing with master.
-The commit doesn't need to provide a full fix or feature, but it can be a step towards
+is cutting the work up in self-contained commits and constantly synchronizing with master.
+The commit doesn't need to provide a full fix or a feature, but it can be a step towards
 doing those. The important thing is that the commit doesn't break anything and improves something.
 It could be a small refactor of one class on the road for implementing something.
 
@@ -279,9 +280,8 @@ But isn't it too easy to break stuff when pumping everything into master?
 Especially if there are many contributors involved [#6]_?
 Well, not if you have good tests (and do other things mentioned in the Thought Works article).
 
-`My Tox config`_ checks if the tests pass, if the last commit is well formed
-(so it requires my CI scripts), and if the last commit has version bumped appropriately.
-(TODO version bump check, może wcześniej w artykule o tym wspomnieć))
+In addition to running tests, `my Tox config`_ checks if the last commit is well formed
+and if the library's version was bumped when it should be.
 With that, running Tox after creating a commit and before push should ensure [#7]_ that we didn't
 break anything and that a new version will be released if it's needed.
 Of course, a human can even forget to run Tox before pushing...
@@ -292,44 +292,37 @@ Conclusions
 -----------
 
 I hope that you'll find something inspiring in this article.
-I know that it would be very helpful for me a year (or more) ago.
 
 For me, continuous delivery (and deployment, where applicable) seems to be the way to go
 for software development on projects of every size.
 It allows to focus more on creative work (writing code) and less on things that are quite joyless
-(packaging, deploying, synchronizing releases, resolving merge conflicts, etc.)
+(packaging, deploying, synchronizing releases, resolving merge conflicts, etc.).
+I should probably get around to reading the `continuous delivery book`_...
 
 Feel free to leave a comment if you see some issues with my setup or have improvements in mind.
 
 Oh, and you can see my pipeline at https://snap-ci.com/butla/mountepy/branch/master
 
 
-TODO
-----
-
-Przerób skrypty i biuld na Snapie, żeby użytkownik pypi też był dostarczany przez argument. Żeby ludzie mogli od razi używać.
-
-Kolejna rzecz, jako edit do tego artykułu: sprawdzanie czy zrobiono dobry version bump na przestrzeni commitu. Albo nawet przed wrzuceniem tego teraz!
-
-Przekazywanie artefaktów między stepami buildu.
-
 .. rubric:: Footnotes
 
 .. [#] If you want to get fancy you can also call this automation a `continuous delivery`_ pipeline.
 .. [#] At least that's the granularity that worked for me, you can go more in depth if you want.
 .. [#] I've also changed Python to 3.4 from the default 2.7.
-.. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact (TODO to tak sie robi??), because different stages are not guaranteed to run in the same environment (virtual machine).
+.. [#] I could put Coveralls invocation in another stage, but then I would need to pass ``.coverage`` file as an artifact, because different stages are not guaranteed to run in the same environment (virtual machine).
 .. [#] I'm mainly looking at you, ``mvn release``...
 .. [#] To be fair, this is not the case with my current projects. But I think that with more effort put into good, isolated testing (I created Mountepy for that) it would solve a lot of my last corporate project's development problems. 
-.. [#] Though we can never be 100% sure. If the project we're working on is part of something bigger then some end-to-end tests need to later run on the whole system. But even they can't give 100%.
+.. [#] We can never be 100% sure. If the project we're working on is part of something bigger then some end-to-end tests need to run later on the whole system, but even they can't give 100%.
 
+.. _a script to help him remember: https://github.com/butla/ci-helpers/blob/07edd5fd1d47234de64662020fc4957ed2e9632c/check_version_changed_accordingly.sh
 .. _another repository: https://github.com/butla/ci-helpers
 .. _AngularJS commit convention: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit
 .. _continuous delivery: https://www.thoughtworks.com/continuous-delivery
+.. _continuous delivery book: http://amzn.to/1QBJM7k
 .. _Coveralls: https://coveralls.io
 .. _Git submodule: https://git-scm.com/book/en/v2/Git-Tools-Submodules 
 .. _Mountepy: https://pypi.org/project/mountepy/
-.. _My Tox config: http://example.com BLABLABLA tododod
+.. _my Tox config: https://github.com/butla/mountepy/blob/b67391bc860bd3c7c96c693ec96d2f386e11cf29/tox.ini
 .. _semantic versioning: http://semver.org/
 .. _Snap CI: https://snap-ci.com/
 .. _Snap CI FAQ: https://docs.snap-ci.com/faq/
