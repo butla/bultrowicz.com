@@ -37,7 +37,7 @@ between the commits that affect the production code and those that don't [#2]_.
 
 This is where AngularJS commit convention helps out.
 It's originally meant for automatic changelog generation, but in essence it allows to distinguish
-between commit types of commits.
+between types of commits.
 It requires some work on the human part, of course, but I think that this work is not much more
 then the good practice of doing commits that are about a single change.
 
