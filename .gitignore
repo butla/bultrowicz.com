@@ -2,3 +2,6 @@ __pycache__
 _website
 .doctrees
 *.swp
+
+# Ansible retry files
+*.retry
