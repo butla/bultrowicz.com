@@ -1,4 +1,4 @@
 bultrowicz.com
 ==============
 
-The code for my blog. **Work in progress...**
+The code for my blog.
