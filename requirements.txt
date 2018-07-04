@@ -2,7 +2,7 @@ ablog==0.9.2
 alabaster==0.7.11
 Babel==2.6.0
 docutils==0.14
-imagesize==0.7.1
+imagesize==1.0.0
 invoke==0.14.0
 Jinja2==2.8
 MarkupSafe==0.23
