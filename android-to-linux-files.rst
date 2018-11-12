@@ -228,6 +228,29 @@ TODO końcówka irlandzka I want my tears back jako piosenka sukcesu.
 TODO link do fragmentu utworu Rhapsody (albo Lotr?) z YouTube jako soundtracku do przygody?
 TODO gdzieś link do soundtracku z diuny
 
+And now KDE connect remote filesystem stopped working. I just can't open no phone storage
+in Dolphin...
+
+
+Syncthing, maybe?
+-----------------
+
+It's supposed to sync arbitrary files automatically. Let's check that.
+
+But does it phone as a one-way sync? I want my photos to be uploaded to a place on the PC, but when
+I move the files on the PC to a proper place I don't want them deleted from the phone.
+
+Seems a bit flimsy, I never new when stuff will sync, how to get a new shared folder from the
+phone to start syncing. Turns out I needed to restart the service. Well that's crappy.
+I can't set pull only on a folder, and I can't set where will the files be saved... fuck.
+There's no way to change the target of the folders on the PC... Ridiculous.
+https://github.com/syncthing/syncthing/issues/4309
+
+Install syncthing (apt install)
+and enable it start for the user:
+systemctl --user enable syncthing.service
+systemctl --user start syncthing.service
+
 
 Magic wormhole on Termux and why it can't work right now
 --------------------------------------------------------
