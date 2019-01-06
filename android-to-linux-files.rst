@@ -246,6 +246,19 @@ I can't set pull only on a folder, and I can't set where will the files be saved
 There's no way to change the target of the folders on the PC... Ridiculous.
 https://github.com/syncthing/syncthing/issues/4309
 
+Ok, but I could set up the folder to be in the place I want if I did that when adding it.
+But adding new folders is also sluggish. I add them on the phone, then wait until the PC
+picks it up at some point.
+
+No, fuck it. Pause and resume during the big upload just broke it. A bazillion of full size
+tmp files left behind. Remote device is disconnected now for some reason...
+Maybe it's the Samsung phone, but still, this is too annoying for me to carry on.
+Ok, then it fixed itself again and started syncing. But it's just taking too long...
+And I can't tell it to sync the files newer than something.
+
+If I could just have a simple shell script running periodically on Android...
+
+
 Install syncthing (apt install)
 and enable it start for the user:
 systemctl --user enable syncthing.service
