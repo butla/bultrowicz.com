@@ -104,9 +104,6 @@ Metasploit, all the python fast security checking tools (from podcasts).
 --------
 
 
-
-------
-
 What did the continuous delivery book advise about project-defining documents?
 
 ------
