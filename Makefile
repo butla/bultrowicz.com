@@ -3,3 +3,6 @@ keep_building:
 
 run:
 	ablog serve
+
+deploy:
+	cd deployment; bash deploy.sh
