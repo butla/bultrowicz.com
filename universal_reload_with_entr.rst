@@ -3,7 +3,7 @@ Universal app reload with entr
 
 .. post:: 2020-02-18
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, Linux, CLI
 
 A useful feature many web frameworks have is auto-reload.
 Your app is running in the background, you change the code,
