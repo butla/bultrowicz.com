@@ -20,7 +20,7 @@
     pip:
       requirements: "{{ repo_dir }}/requirements.txt"
       virtualenv: "{{ virtualenv_dir }}"
-      virtualenv_python: "python3.5"
+      virtualenv_python: "python3.6"
 
   - name: build the blog
     command: "{{ virtualenv_dir }}/bin/ablog build"
@@ -28,7 +28,7 @@
       chdir: "{{ repo_dir }}"
     register: build_result
     changed_when: build_result.stdout.find("no targets are out of date") == -1 
-  
+
   - name: copy blog to Nginx
     synchronize:
       src: "{{ repo_dir }}/_website/"
