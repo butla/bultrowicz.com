@@ -3,47 +3,40 @@
 ## Contact
 michal.bultrowicz@gmail.com
 (+48) 790 467 660
-https://bultrowicz.com/
-https://github.com/butla
 
-## Summary (TODO)
+## Summary
 
-I'm a passionate developer with a drive for constant improvement and learning.
-I love Python and working with complex distributed systems.
-I have a strong belief in testing and gradual change.
-I (strive to) excel at writing readable and maintainable code and I try to encourage that in others by giving attention to code reviews.
+I'm a passionate senior software engineer with a drive for constant improvement
+and a curiosity about inner workings of technologies.
+I love Python, Linux, and creating robust distributed systems.
+I have a strong belief in continuous testing and gradual change.
 
 You can check out my blog at https://bultrowicz.com/ and my GitHub account at https://github.com/butla.
 
 ## Computer skills
-\cvitem{--}{Writing advanced but self-explanatory Python code.}
-\cvitem{--}{Secondary languages: Bash, Java, C\#, C++.}
-\cvitem{--}{Working with FastAPI, AioHTTP, Falcon, Flask, and Django frameworks
-\cvitem{--}{Use of SQL (PostgresSQL, CitusDB) and NoSQL (Redis, ElasticSearch) data stores.}
-\cvitem{--}{Creating heterogeneous distributed applications using REST, Web Services and messaging systems.}
-\cvitem{--}{Managing infrastructure with Terraform on AWS, less often on GCP.}
-\cvitem{--}{Development and testing of microservice-based solutions.}
-\cvitem{--}{Building data pipelines and ETL systems.}
-\cvitem{--}{Focus on Test Driven Development.}
-\cvitem{--}{Implementing system security (X.509, mTLS, JWT, OAuth2), and a workable knowledge of cryptography.}
-\cvitem{--}{Implementing Continuous Delivery (with the help of Gitlab CD (Jenkins in the past)).}
-\cvitem{--}{Using Docker, Vagrant, and Packer.} (Vagrant bardziej z żydami, Packer w Iterio)
-\cvitem{--}{Proficiency in GIT.}
-\cvitem{--}{Setting up distributed systems' logs, metrics, and alerts.}
-\cvitem{--}{Basic Pandas usage.}
-\cvitem{--}{Documenting APIs with OpenAPI(Swagger).}
-\cvitem{--}{Configuration management with Ansible.}
-\cvitem{--}{Tracking work and defects with Jira or, for smaller teams, Trello.}
-\cvitem{--}{Working with Linux (preferred) and Windows operating systems.}
-\cvitem{--}{Use of VIM and Pycharm as IDEs.}
-- in-depth debugging skills
-- exposure to building frontend with ReactJS
-- building highly available web applications
-- automated infrastructure management (Terraform, Ansible)
-- Kubernetes, Helm
 
-## Soft skills
+- expert in Python programming
+- secondary programming languages: Bash, Java, C++, C#
+- writing understandable and testable code
+- web development with AioHTTP, Falcon, Flask, and Django
+- advanced web application testing (including microservices)
+- ensuring high availability (HA)
+- good knowledge of optimizing SQL for PostgreSQL (and scaling it out with CitusDB)
+- working with various data stores: Redis, Kafka (and AWS Kinesis), ElasticSearch, S3/MinIO, Amazon Redshift
+- using containers for deployments and testing (Docker, Kubernetes, Helm)
+- implementing web security (X.509, mTLS, JWT, OAuth2)
+- automated infrastructure management with Terraform and Ansible
+- data engineering (building data pipelines and ETL systems)
+- working with AWS, GCP, and DigitalOcean clouds
+- implementing Continuous Delivery with the help of Gitlab CD (Jenkins in the past)
+- proficiency in GIT
+- in-depth debugging
+- exposure to building front-end with ReactJS
+- Linux system administration
 
+## Soft skills (TODO)
+
+- teaching developers through thorough code reviews
 - non-threatening communication???
 - analysing incentive structures in the teams and seeing pathologies there?
 - Working in and coordinating a Scrum or Kanban team.
@@ -168,9 +161,46 @@ I maintained and developed a heterogeneous (Windows, Linux, Android) distributed
 My main focus was designing and implementing a versatile RPC-style communication between applications on different platforms (used WCF, JAX-WS and my own protocol for Android). There was a tight collaboration with our client - the validation teams.
 Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system (e.g. discrepancies in implementations of TCP sockets on both programming platforms).
 
+## notki
+
+CV
+====
+
+CV musi zawierać przy pracach te rzeczy, których się nauczyłem lub które badałem.
+
+Soft skillsy - non-threatening communication (mimo, że pracuje z wieloma osobami o różnym poziomie trzeba przedstawiać ludziom wszystko pozytywnie dla nich, aby ich nie odciąć).
+
+W BT nauczyłem się też pracy z internal politics, gdzie są grupy o różnych interesach.
+
+U webstera AWS i GCP. Logowanie centralne do stackdrivera, metryki wyciągane z niego dzięki structlogowi. Szybki async python. Bez ORM. Optymalizacja query pod rozproszonego postgresa, w ogóle poznanie dobrze optymalizacji postgresa. Wygodny cacheing z aiocache.
+
+Zrobiłem agenta androidowego. Ponieważ WCF był używany jako mechanizm remote calli stworzyłem most do javoeym soap serwisów oraz prostszy mechanizm dla Androida (nie było kodu dla serwerów soap).
+
+U webstera używałem soapa też, ale już z pythonem, do enterpriseoeych web serviceów od rozmów konsultantów.
+
+pomagać też w rekrutacji programistów różnych szczeblów do utrzymania danego systemu. Oferować ziomkom, że jak podejmą się linuxa, to ich płaca będzie wyglądała tak, po roku tak, potem tak. Sprawdzać regularnie jak im idzie.
+
+Jak syf z mikroserwisami doprowadził mnie do poważnego zastanowienia się nad testami.
+
+Lista przeczytanych książek, kursów (crypto) i publikacje (w książce z konferencji), ważniejsze prezentacje (youtuby konferencyjne) i link do bloga (może dodaj te kilka artykułów).
+
+Summary tego, kim teraz jestem i jakie usługi oferuję na początku. Consultation, setting up and improving software and data delivery pipelines.
+Znajdowanie złych struktur.
+
+Dostaję kasę za wdrożenie konkretnych rzeczy, za podszkolenie pracowników. Potem za support tego wszystkiego, jeśli chcecie. Jak nie, to wszystko zostaje w waszych rękach, możecie robić z tym co chcecie i możecie też płacić komuś innemu za utrzymanie.
+
+CV po angielsku i po polsku.
+
+Kontrakt dla Żydów.
+
+Kontrakt dla siledu.
+
+Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
+
 ## Education
 
-\section{Education}
+DODAĆ ten kurs z coursery/stanforda - Cryptography I
+Kiedy on był?
 
 \cventry{2012--2015}{Master of Science in Computer Science}{Gdańsk University of Technology}{}{\textit{Overall score -- good plus}}{Specialized in Intelligent Interactive Systems}  % Arguments not required can be left empty
 Napisz, że pracą było uczenie i rozpoznawanie twarzy metodą eigenvectors przy pomocy OpenCV
@@ -182,6 +212,7 @@ TODO wsadź to do magisterki
 \cvitem{Title}{\emph{Calling remote Java methods in Android system from .NET platform}}
 \cvitem{Supervisor}{Jacek Lebiedź, PhD MEng}
 \cvitem{Description}{The goal of this work was to create a set of libraries that would enable convenient remote code execution in Android system from .NET platform. The work was successful and had the side-effect of an upstream patch on \texttt{jsonrpc4j} library, enabling it to work on Android.}
+
 
 ## Languages
 
