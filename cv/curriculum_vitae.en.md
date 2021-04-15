@@ -30,27 +30,16 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 - working with AWS, GCP, and DigitalOcean clouds
 - implementing Continuous Delivery with the help of Gitlab CD (Jenkins in the past)
 - proficiency in GIT
-- in-depth debugging
 - exposure to building front-end with ReactJS
+- able to work within just the terminal, without a graphical environment
 - Linux system administration
 
-## Soft skills (TODO)
+## Soft skills
 
+- working in and coordinating a Scrum or Kanban team
 - teaching developers through thorough code reviews
-- non-threatening communication???
-- analysing incentive structures in the teams and seeing pathologies there?
-- Working in and coordinating a Scrum or Kanban team.
-\cvitem{--}{Knowledge of software legal compliance and licensing issues.} (to się pojawiało w intelu)
-
-My communication style: direct, open, striving for ego-less.
-If we are to make amazing things happen together, we need to be aware of many things.
-We need lots of accurate data to make good predictions and chart a course.
-So I'm all for being truthful.
-
-## Noteable conference talks
-
-\cventry{July 2016}{TDD of Python microservices}{\textsc{EuroPython 2016}}{}{}{Presentation of tools (some implemented by me) and solutions that enable Test-Driven Development of Python microservices. Told from the perspective of a maintainer of a single service. Available on YouTube.}
-\cventry{July 2015}{Python microservices on PaaS done right}{\textsc{EuroPython 2015}}{}{}{A a collection of tips and practices that allow to have a successful microservices-based project. Concerns development, testing and work organization. There's a slight focus on Python. Available on YouTube.}
+- knowledge of software legal compliance and licensing issues
+- analyzing tensions between teams within a project (do the teams have incentive to really cooperate?)
 
 ## Experience
 
@@ -150,6 +139,8 @@ I was a part of a team developing secure distributed applications. I dealt with 
 
 During the latter period of this job I was leading a team of developers responsible for integration and delivery of a microservices-based cloud platform (Trusted Analytics Platform).
 
+Tutaj też się musiałem jebać z tymi licencjami wszystkimi, patrzeć, czy nie mamy jakiś copy leftów, gadać z prawnikiem o intepretacjach dynamicznego linkowania dla LGPL czy tam GPL.
+
 %------------------------------------------------
 
 \cventry{May 2011 -- February 2014}{Test Engineer Intern}{\textsc{Intel Technology Poland}}{Gdańsk}{}{
@@ -196,6 +187,11 @@ Kontrakt dla Żydów.
 Kontrakt dla siledu.
 
 Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
+
+## Noteable conference talks
+
+\cventry{July 2016}{TDD of Python microservices}{\textsc{EuroPython 2016}}{}{}{Presentation of tools (some implemented by me) and solutions that enable Test-Driven Development of Python microservices. Told from the perspective of a maintainer of a single service. Available on YouTube.}
+\cventry{July 2015}{Python microservices on PaaS done right}{\textsc{EuroPython 2015}}{}{}{A a collection of tips and practices that allow to have a successful microservices-based project. Concerns development, testing and work organization. There's a slight focus on Python. Available on YouTube.}
 
 ## Education
 
