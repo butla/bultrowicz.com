@@ -6,17 +6,26 @@ michal.bultrowicz@gmail.com
 
 ## Summary
 
-I'm a passionate senior software engineer with a drive for constant improvement
+I'm a software developer with a drive for constant improvement
 and a curiosity about inner workings of technologies.
-I love Python, Linux, and creating robust distributed systems.
+I love Python, Linux, and creating resilient distributed systems.
 I have a strong belief in continuous testing and gradual change.
+
+I can design, implement, and consult the creation of IT solutions, especially:
+- business process automation and measurement (dashboards, statistics, alerting)
+- data pipelines
+- web applications
+- automated test suites (back-end, front-end, load, chaos)
+- Python-based software
+
+I also offer training in these areas.
 
 You can check out my blog at https://bultrowicz.com/ and my GitHub account at https://github.com/butla.
 
 ## Computer skills
 
 - expert in Python programming
-- secondary programming languages: Bash, Java, C++, C#
+- secondary programming languages: Bash, Java, C++, JavaScript, C#
 - writing understandable and testable code
 - web development with AioHTTP, Falcon, Flask, and Django
 - advanced web application testing (including microservices)
@@ -29,10 +38,9 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 - data engineering (building data pipelines and ETL systems)
 - working with AWS, GCP, and DigitalOcean clouds
 - implementing Continuous Delivery with the help of Gitlab CD (Jenkins in the past)
-- proficiency in GIT
 - exposure to building front-end with ReactJS
-- able to work within just the terminal, without a graphical environment
-- Linux system administration
+- proficiency in GIT
+- able to work with just the terminal, without a graphical environment
 
 ## Soft skills
 
@@ -41,12 +49,32 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 - knowledge of software legal compliance and licensing issues
 - analyzing tensions between teams within a project (do the teams have incentive to really cooperate?)
 
-## Experience
 
-November 2019 - January 2021
-Senior DevOps Engineer at British Telecom (BT) (remote, meetings in London and Ipswich)
+## Experience (TODO)
 
-pełniłem funkcje starszego inżyniera trochę od wszystkiego. Najwięcej udzielałem się przy projektowaniu aplikacji i tworzeniu dla niej testów.
+### November 2019 - January 2021
+Senior DevOps Engineer at British Telecom (BT)
+Remote, with occasional physical meetings in UK
+
+Everybody in our DevOps team was doing bits of everything.
+My main nieches were architecture (arguing over designs, defending simplicity and open source solutions
+over some enterprise products that in my judgement weren't necessary and would make it harder to maintain
+the platform, e.g. Postgres vs Couchbase), automated tests, code reviews and debugging issues
+in live systems.
+Main technical challenge of the project was in automatic configuration of routers (Juniper and Cisco).
+Had to go in to ones that are fresh out of the box, so netconf doesn't work yet. We had to go in over serial
+console.
+
+Maintaining a Django app with Celery with canvas to run DAGs of tasks.
+Tasks were the thing that was interacting with the routers with JunosEZ (badly written)
+Celery was quite buggy there with the backends we've chosen
+
+My team had to self-organize to please many non-technical project's stakeholders and keep them impressed.
+
+I've learned that companies working with hardware don't write the best code.
+Also, routers would benefit a lot from just adopting Linux.
+Their OSes are bad.
+
 Uczyłem innych członków zespołu pisać bardziej czytelny i testowalny kod (dużo cierpliwych i skrupulatnych code review)
 Ustawiałem nasze CI i lokalne testy.
 Współtworzyłem nasze deploymenty do Kubernetesa przy użyciu Helm chartów.
@@ -54,21 +82,24 @@ Zadbałem, żebyśmy mogli developować (uruchamiać i testować) nasz kod bez d
 Czasem trochę pisałem templateów Djangowych w HTML i JS. Też pracowałem przy apce w Reactcie
 Przedstawiałem pomysły na design i broniłem ich przed szerszą publiką z różnych stron managementu.
 
-\cventry{May 2017 -- September 2018}{Python back-end developer}{\textsc{Iterio Data}}{Remote}{}{
+
+### May 2017 -- September 2018
+Python back-end developer at Iterio Data
+Remote
+
 My main project was a data pipeline for advertisement campaign and site traffic analysis.
 I worked as the main developer and the de facto architect of the system.
 Later on I also took over the maintenance and design of our cloud infrastructure.
 Other than that I did some ETL and occasional simple data analysis.
 My duties included:
-\begin{itemize}
-    \item creating back-end APIs with Python and stuffing them in Docker containers;
-    \item designing our systems on AWS (ECS, Lambda, Kinesis, S3, SSM);
-    \item encoding our infrastructure and doing deployments with Terraform;
-    \item creating test strategies and tools for our cloud applications;
-    \item helping in the design of our CitusDB (distributed PostgreSQL) schema;
-    \item setting up logging, metrics, and alerts;
-    \item working out our development practices (trunk-based development, zero down-time deployments, etc.);
-\end{itemize}}
+
+- creating back-end APIs with Python and stuffing them in Docker containers;
+- designing our systems on AWS (ECS, Lambda, Kinesis, S3, SSM);
+- encoding our infrastructure and doing deployments with Terraform;
+- creating test strategies and tools for our cloud applications;
+- helping in the design of our CitusDB (distributed PostgreSQL) schema;
+- setting up logging, metrics, and alerts;
+- working out our development practices (trunk-based development, zero down-time deployments, etc.);
 
 My duties included:
 - creating back-end APIs with Python and stuffing them in Docker containers;
@@ -105,35 +136,35 @@ Iterio:
 - learned the value of good services and tools - being able to run this whole huge thing with just 3 people.
 - Zeep, SOAP,
 
-%------------------------------------------------
+### March 2017 - September 2017
+Freelance projects
+Remote
 
-\cventry{March 2017 -- September 2017}{Freelance projects}{}{}{}{
-\begin{itemize}
-\item Python 3.6 Windows GUI application for reporting of manufacturing faults in PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
-\item Developing Ansible scripts for the deployment of ScyllaDB.
-\end{itemize}}
+- ScyllaDB - Developing Ansible scripts for the deployment of ScyllaDB.
+- Siled - Python 3.6 Windows GUI application for reporting of manufacturing faults in PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
 
-%------------------------------------------------
+### March 2014 -- April 2016
+Software Applications Developer at Intel Technology Poland
+Gdańsk
 
-\cventry{March 2014 -- April 2016}{Software Applications Developer}{\textsc{Intel Technology Poland}}{Gdańsk}{}{
 Examples of assignments on this position, from the latest:
-\begin{itemize}
-\item \emph{Leading a development team} I lead one of the teams that worked on Trusted Analytics Platform (TAP) project. TAP is a PaaS platform with main focus on data analytics.
+
+- **Leading a development team** I lead one of the teams that worked on Trusted Analytics Platform (TAP) project. TAP is a PaaS platform with main focus on data analytics.
 My team mainly did the integration of other teams' work, we overseen builds, deployments, releases and utility tools, but we also developed some back-end microservices.
 I was responsible for planning, estimating and coordinating work, also teaching and mentoring of other team members.
 Furthermore I:
-\begin{itemize}
-    \item acted as Python expert for all project teams;
-    \item created \texttt{mountepy} Python library to aid isolated microservice tests and increase our quality;
-    \item influenced development procedures for all teams;
-    \item enforced software legal compliance and communicated with lawyers.
-\end{itemize}
-\item \emph{Back-end microservices' development for TAP} I developed a few Spring Boot (Java) microservices and created one in Python. It was a data set indexing and search service backed by ElasticSearch. We used Cloud Foundry PaaS as a base for our applications. Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
-\item \emph{Maintenance of a secure back-end for remote firmware updates} We had a quite mature distributed system, encompassing C\# back-end services, ASP.NET front-end, a C++ server and a C++ client.
+  - acted as Python expert for all project teams;
+  - created \texttt{mountepy} Python library to aid isolated microservice tests and increase our quality;
+  - influenced development procedures for all teams;
+  - enforced software legal compliance and communicated with lawyers.
+
+- **Back-end microservices' development for TAP** I developed a few Spring Boot (Java) microservices and created one in Python. It was a data set indexing and search service backed by ElasticSearch. We used Cloud Foundry PaaS as a base for our applications. Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
+- **Maintenance of a secure back-end for remote firmware updates** We had a quite mature distributed system, encompassing C\# back-end services, ASP.NET front-end, a C++ server and a C++ client.
 The whole system was based on EPID digital signature scheme.
 I had to deliver patches to almost all of the application-layer components and do deployments to a large infrastructure spread out geographically. I also needed to run tests that touched everything from firmware on a client machine, through its drivers and application level software up to multi-tier back-end services and ending at server HSMs (Hardware Security Modules).
-\item \emph{Implementing hardware-backed secure tunnels for certificate exchange} I needed to create a C++11 application for embedded Linux that could create, manage and transfer X.509 certificates. The certificates' private keys and the keys used to secure the connection to transfer them were created and stored in a hardware cryptography module (TPM). OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
-\end{itemize}}
+- **Implementing hardware-backed secure tunnels for certificate exchange** I needed to create a C++11 application for embedded Linux that could create, manage and transfer X.509 certificates. The certificates' private keys and the keys used to secure the connection to transfer them were created and stored in a hardware cryptography module (TPM). OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
+- **Researching using SIM cards as secure elements** Did that alone.
+Had to look into JavaMicro (TODO to jest nazwa?)Not feasible
 
 I was a part of a team developing secure distributed applications. I dealt with a broad spectrum of system components, like client middleware (C++ 11), server applications (Java), hardware security modules (using OpenSSL with plugins) and embedded platforms.
 
@@ -141,9 +172,10 @@ During the latter period of this job I was leading a team of developers responsi
 
 Tutaj też się musiałem jebać z tymi licencjami wszystkimi, patrzeć, czy nie mamy jakiś copy leftów, gadać z prawnikiem o intepretacjach dynamicznego linkowania dla LGPL czy tam GPL.
 
-%------------------------------------------------
+### May 2011 -- February 2014
+Test Engineer Intern at Intel Technology Poland
+Gdańsk
 
-\cventry{May 2011 -- February 2014}{Test Engineer Intern}{\textsc{Intel Technology Poland}}{Gdańsk}{}{
 I maintained and developed a heterogeneous (Windows, Linux, Android) distributed framework for automated software, firmware and hardware testing. I've coded mainly in C\# and Java (SE and Android versions), but I've helped myself with Python scripting.
 My main focus was designing and implementing a versatile RPC-style communication between applications on different platforms (used WCF, JAX-WS and my own protocol for Android). There was a tight collaboration with our client - the validation teams.
 Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system (e.g. discrepancies in implementations of TCP sockets on both programming platforms).}
