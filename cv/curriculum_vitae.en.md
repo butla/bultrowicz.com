@@ -14,11 +14,12 @@ I have a strong belief in continuous testing and gradual change.
 I can design, implement, and consult the creation of IT solutions, especially:
 - business process automation and measurement (dashboards, statistics, alerting)
 - data pipelines
-- web applications
+- highly available web applications
 - automated test suites (back-end, front-end, load, chaos)
 - Python-based software
 
-I also offer training in these areas.
+I can also train your IT staff in maintenance and further development of the systems I create,
+so that you aren't dependent on me forever.
 
 You can check out my blog at https://bultrowicz.com/ and my GitHub account at https://github.com/butla.
 
@@ -52,9 +53,37 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 
 ## Experience (TODO)
 
+Ogólny schemat (podzielić je tak? Czy będzie domyślnie)
+1. WPROWADZENIE DO PROJEKTU I MOJEJ ROLI
+2. wyzwania/technologie
+3. trochę rozkmin nad ciekawszymi problemami
+
+Wydzielić różne projekty w tej samej pracy?
+
 ### November 2019 - January 2021
 Senior DevOps Engineer at British Telecom (BT)
 Remote, with occasional physical meetings in UK
+
+Main project here was a Django application for designing telecom infrastructure
+and the initial configuration of Cisco and Juniper routers.
+
+Django REST Framework, Celery, Sentry
+
+netmiko for cisco, pyez for Juniper
+
+Factory Boy for test data setups.
+
+We didn't use transactional isolation for tests, we wanted to test against the real DB.
+I also tried to make as much of the code as possible not use the DB at all (separation of concerns),
+so we can have nice fast tests.
+
+Technical challenges:
+- Maintaining a Django app with Celery with canvas to run DAGs of tasks.
+
+What I was doing:
+
+I introduced Faust for parsing Kafka.
+It was able to use Django's synchronous ORM with the help of threadpool executors.
 
 Everybody in our DevOps team was doing bits of everything.
 My main nieches were architecture (arguing over designs, defending simplicity and open source solutions
@@ -65,11 +94,12 @@ Main technical challenge of the project was in automatic configuration of router
 Had to go in to ones that are fresh out of the box, so netconf doesn't work yet. We had to go in over serial
 console.
 
-Maintaining a Django app with Celery with canvas to run DAGs of tasks.
 Tasks were the thing that was interacting with the routers with JunosEZ (badly written)
 Celery was quite buggy there with the backends we've chosen
 
 My team had to self-organize to please many non-technical project's stakeholders and keep them impressed.
+
+Sentry, failure with it.
 
 I've learned that companies working with hardware don't write the best code.
 Also, routers would benefit a lot from just adopting Linux.
@@ -91,24 +121,16 @@ My main project was a data pipeline for advertisement campaign and site traffic 
 I worked as the main developer and the de facto architect of the system.
 Later on I also took over the maintenance and design of our cloud infrastructure.
 Other than that I did some ETL and occasional simple data analysis.
-My duties included:
-
-- creating back-end APIs with Python and stuffing them in Docker containers;
-- designing our systems on AWS (ECS, Lambda, Kinesis, S3, SSM);
-- encoding our infrastructure and doing deployments with Terraform;
-- creating test strategies and tools for our cloud applications;
-- helping in the design of our CitusDB (distributed PostgreSQL) schema;
-- setting up logging, metrics, and alerts;
-- working out our development practices (trunk-based development, zero down-time deployments, etc.);
 
 My duties included:
-- creating back-end APIs with Python and stuffing them in Docker containers;
-- encoding our infrastructure and doing deployments with Terraform;
-- designing our systems on AWS (ECS, Lambda, Kinesis, S3);
-- helping in the design of our CitusDB (distributed PostgreSQL) schema;
-- setting up centralised logging (Google Stackdriver, AWS CloudWatch), metrics, and alerts (PagerDuty);
-- trying not to create glaring security risks;
-- setting up our development practices (trunk-based development, zero down-time deployments, etc.);
+
+- creating back-end APIs with Python (AioHTTP) and stuffing them in Docker containers
+- designing our systems on AWS (ECS, Lambda, Kinesis, S3, CloudWatch)
+- encoding our infrastructure and doing deployments with Terraform
+- creating test strategies and tools for our cloud applications
+- helping in the design of our CitusDB (distributed PostgreSQL) schema
+- setting up logging (CloudWatch, Google Stackdriver), metrics, and alerts (Sentry, PagerDuty)
+- working out our development practices (trunk-based development, zero down-time deployments, etc.)
 
 We worked like start-ups do, so we were context-switching and were always time-starved.
 Because of that the code I wrote had to be immediately understandable for me and my boss,
@@ -140,8 +162,10 @@ Iterio:
 Freelance projects
 Remote
 
-- ScyllaDB - Developing Ansible scripts for the deployment of ScyllaDB.
-- Siled - Python 3.6 Windows GUI application for reporting of manufacturing faults in PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
+- ScyllaDB - Developing Ansible scripts for the deployment of ScyllaDB. Got some way through,
+had opposition with bash scripts that weren't idempotent and always changed machine state.
+- Siled - Python 3.6 Windows GUI application for reporting of manufacturing faults in
+PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
 
 ### March 2014 -- April 2016
 Software Applications Developer at Intel Technology Poland
@@ -171,6 +195,12 @@ I was a part of a team developing secure distributed applications. I dealt with 
 During the latter period of this job I was leading a team of developers responsible for integration and delivery of a microservices-based cloud platform (Trusted Analytics Platform).
 
 Tutaj też się musiałem jebać z tymi licencjami wszystkimi, patrzeć, czy nie mamy jakiś copy leftów, gadać z prawnikiem o intepretacjach dynamicznego linkowania dla LGPL czy tam GPL.
+
+Flaska używałem jako konkurencji dla Spring Boota (gdzie aplikacje w nim też utrzymywałem).
+Jedną aplikację przepisałem na Falcona w swoim własnym czasie,
+stała się dużo krótsza, szybsza, prostsza i jeszcze zyskała testy.
+Niestety, ponieważ było to kilka miesięcy przed moim odejściem management nie odważył się na nią przejść
+i zastąpić nią istniejący element.
 
 ### May 2011 -- February 2014
 Test Engineer Intern at Intel Technology Poland
