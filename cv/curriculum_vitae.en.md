@@ -62,16 +62,51 @@ Wydzielić różne projekty w tej samej pracy?
 
 ### November 2019 - January 2021
 Senior DevOps Engineer at British Telecom (BT)
-Remote, with occasional physical meetings in UK
+Remote, with occasional meetings in London, Ipswich, and Brentwood
 
-Main project here was a Django application for designing telecom infrastructure
-and the initial configuration of Cisco and Juniper routers.
+My team was developing a web application for designing telecom infrastructure
+and the automated initial configuration of Cisco and Juniper routers.
+We were all supposed to be universal developers, writing code, preparing its deployments
+and interacting with any hardware necessary.
+The team had 4 to 8 persons (it was growing), and it was part of a bigger project, which was around 80 people.
 
-Django REST Framework, Celery, Sentry
+Technologies used:
+- Django and Django REST Framework - most of our back-end and front-end
+- PostgreSQL - our main database
+- Nginx - reverse proxy
+- Minio - serving our web app's static assets, and storing media files
+- Django REST Framework, Celery, Sentry
+- ReactJS - a few more dynamic front-end pages
+- Faust - reading streams of events from other systems from Kafka
+- Redis
+- TODO?
 
 netmiko for cisco, pyez for Juniper
 
 Factory Boy for test data setups.
+- Gitlab pipelines
+
+My niches in the team were:
+- code and infrastructure design for new features
+- setting up automated tests
+- meticulous code reviews
+- teaching advanced Python and testable design to other team-members
+- advocating for simple and tried OpenSource solutions over heavier enterprise ones
+  defending simple and robust open source solutions from management that was set in their enterprise way
+  , defending simplicity and open source solutions
+  over some enterprise products that in my judgement weren't necessary and would make it harder to maintain
+  the platform, e.g. Postgres vs Couchbase
+
+Things I introduced to the team:
+- I introduced Faust for parsing Kafka.
+  It was able to use Django's synchronous ORM with the help of threadpool executors.
+- Makefiles automating the local development and testing, making local workflow the same as on CI
+
+
+Main technical challenge of the project was in automatic configuration of routers (Juniper and Cisco).
+Had to go in to ones that are fresh out of the box, so netconf doesn't work yet. We had to go in over serial
+console.
+
 
 We didn't use transactional isolation for tests, we wanted to test against the real DB.
 I also tried to make as much of the code as possible not use the DB at all (separation of concerns),
@@ -80,19 +115,7 @@ so we can have nice fast tests.
 Technical challenges:
 - Maintaining a Django app with Celery with canvas to run DAGs of tasks.
 
-What I was doing:
 
-I introduced Faust for parsing Kafka.
-It was able to use Django's synchronous ORM with the help of threadpool executors.
-
-Everybody in our DevOps team was doing bits of everything.
-My main nieches were architecture (arguing over designs, defending simplicity and open source solutions
-over some enterprise products that in my judgement weren't necessary and would make it harder to maintain
-the platform, e.g. Postgres vs Couchbase), automated tests, code reviews and debugging issues
-in live systems.
-Main technical challenge of the project was in automatic configuration of routers (Juniper and Cisco).
-Had to go in to ones that are fresh out of the box, so netconf doesn't work yet. We had to go in over serial
-console.
 
 Tasks were the thing that was interacting with the routers with JunosEZ (badly written)
 Celery was quite buggy there with the backends we've chosen
@@ -132,7 +155,7 @@ My duties included:
 - setting up logging (CloudWatch, Google Stackdriver), metrics, and alerts (Sentry, PagerDuty)
 - working out our development practices (trunk-based development, zero down-time deployments, etc.)
 
-We worked like start-ups do, so we were context-switching and were always time-starved.
+We worked like start-ups do, so there was context-switching and were always time-starved.
 Because of that the code I wrote had to be immediately understandable for me and my boss,
 who isn't a senior Python developer and was even more time-starved than me.
 He wanted to jump in real quick and tweak a few things from time to time,
