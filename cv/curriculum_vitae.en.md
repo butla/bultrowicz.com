@@ -111,24 +111,27 @@ Examples of things I introduced to the team:
 
 
 ### May 2017 -- September 2018
-Python back-end developer at Iterio Data
+Python back-end developer at Iterio Data (https://iteriodata.com/)
 Remote
 
 My main project was a data pipeline for advertisement campaign and site traffic analysis.
 I worked as the main developer and the de facto architect of the system.
 Later on I also took over the maintenance and design of our cloud infrastructure.
-Other than that I did some ETL, the occasional simple data analysis.
+Other than that I did some ETL, the occasional simple data analysis, and polished up some old automations.
+
+An important thing I learned here is that with the right tools and the right engineers, a small team
+(4, in this case) can create a web application processing the data of tens of millions of people.
 
 My duties included:
 
-- creating back-end APIs with Python (AioHTTP) and stuffing them in Docker containers
+- creating back-end APIs with asynchronous Python (AioHTTP) and stuffing them in Docker containers
 - designing our systems on AWS (ECS, Lambda, Kinesis, S3, CloudWatch)
 - encoding our infrastructure and doing deployments with Terraform
 - creating test strategies and tools for our cloud applications
 - helping in the design of our CitusDB (distributed PostgreSQL) schema
 - setting up logging (CloudWatch, Google Stackdriver), metrics, and alerts (Sentry, PagerDuty)
 - working out our development practices (trunk-based development, zero down-time deployments, etc.)
-- TODO Zeep, SOAP, and maintaining an app comunicating with an old-shool enterprise API
+- maintaining old scripts that used enterprise SOAP web services (introduced Zeep to make that easier)
 
 We worked like start-ups do, so there was context-switching and were always time-starved.
 Because of that the code I wrote had to be immediately understandable for me and my boss,
@@ -147,28 +150,26 @@ and putting them offline for a couple of minutes wasn't an issue (since we had q
 payload backups, etc.). So if anything went wrong, we'd be notified by our alerting system,
 and immediately implement fixes.
 
-TODOOOOO Iterio:
-
-- was the main python guy.
- First made some scripts more maintainable, 
- rewrote them with proper python restructured for testability and added the tests.
-- I learned a lot about silicon valley-type tech startup business (and what the "data" companies make money on)
-- learned the value of good services and tools - being able to run this whole huge thing with just 3 people.
-
-w 4 ludzi z dobrymi narzędziami byliśmy w stanie utrzymać system przetwarzający dane od dziesiątek milionów klientów
-
-TODO rozdziel to?
-### March 2017 - September 2017
-Freelance projects
+### May 2017 - October 2017 (TODO)
+Ansible contractor at ScyllaDB (https://www.scylladb.com/)
 Remote
 
-- ScyllaDB (maj - october)- Developing Ansible scripts for the deployment of ScyllaDB. Got some way through,
+Developing Ansible scripts for installation of ScyllaDB database.the deployment of ScyllaDB. Got some way through,
 had opposition with bash scripts that weren't idempotent and always changed machine state.
-- Siled (styczeń-czerwiec)- Python 3.6 Windows GUI application for reporting of manufacturing faults in
+
+### January 2017 - June 2017 (TODO)
+Software contractor at Techno Service SA (https://tspcb.pl/)
+Remote
+
+Python 3.6 Windows GUI application for reporting of manufacturing faults in
 PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
 Extracting data from old Microsoft SQL server databases (95?)
 
-### March 2014 -- April 2016
+used Tkinter for a minimal GUI (had to be easy to install), tested with PyAutoGUI
+
+zwirtualizowałem sobie jakiegoś windowsa i odpalałem jakiś stary SQL server, żeby udawać to, co stało na tej maszynie
+
+### March 2014 -- April 2016 TODO
 Software Applications Developer at Intel Technology Poland
 Gdańsk
 
@@ -179,7 +180,7 @@ My team mainly did the integration of other teams' work, we overseen builds, dep
 I was responsible for planning, estimating and coordinating work, also teaching and mentoring of other team members.
 Furthermore I:
   - acted as Python expert for all project teams;
-  - created \texttt{mountepy} Python library to aid isolated microservice tests and increase our quality;
+  - created \texttt{mountepy} Python library to aid isolated microservice tests and increase our code quality;
   - influenced development procedures for all teams;
   - enforced software legal compliance and communicated with lawyers.
 
@@ -190,6 +191,7 @@ I had to deliver patches to almost all of the application-layer components and d
 - **Implementing hardware-backed secure tunnels for certificate exchange** I needed to create a C++11 application for embedded Linux that could create, manage and transfer X.509 certificates. The certificates' private keys and the keys used to secure the connection to transfer them were created and stored in a hardware cryptography module (TPM). OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
 - **Researching using SIM cards as secure elements** Did that alone.
 Had to look into JavaMicro (TODO to jest nazwa?)Not feasible
+Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
 
 I was a part of a team developing secure distributed applications. I dealt with a broad spectrum of system components, like client middleware (C++ 11), server applications (Java), hardware security modules (using OpenSSL with plugins) and embedded platforms.
 
@@ -213,7 +215,7 @@ oparty o grafy deployer (apployer) dla cloudfoundry
 mountepy (pod koniec pracy)
 
 
-### May 2011 -- February 2014
+### May 2011 -- February 2014 (TODO)
 Test Engineer Intern at Intel Technology Poland
 Gdańsk
 
@@ -221,39 +223,8 @@ I maintained and developed a heterogeneous (Windows, Linux, Android) distributed
 My main focus was designing and implementing a versatile RPC-style communication between applications on different platforms (used WCF, JAX-WS and my own protocol for Android). There was a tight collaboration with our client - the validation teams.
 Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system (e.g. discrepancies in implementations of TCP sockets on both programming platforms).}
 
-I maintained and developed a heterogeneous (Windows, Linux, Android) distributed framework for automated software, firmware and hardware testing. I've coded mainly in C# and Java (SE and Android versions), but I've helped myself with Python scripting.
-My main focus was designing and implementing a versatile RPC-style communication between applications on different platforms (used WCF, JAX-WS and my own protocol for Android). There was a tight collaboration with our client - the validation teams.
-Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system (e.g. discrepancies in implementations of TCP sockets on both programming platforms).
-
-## notki
-
-CV
-====
-
-CV musi zawierać przy pracach te rzeczy, których się nauczyłem lub które badałem.
-
-
-U webstera AWS i GCP. Logowanie centralne do stackdrivera, metryki wyciągane z niego dzięki structlogowi. Szybki async python. Bez ORM. Optymalizacja query pod rozproszonego postgresa, w ogóle poznanie dobrze optymalizacji postgresa. Wygodny cacheing z aiocache.
-
 Zrobiłem agenta androidowego. Ponieważ WCF był używany jako mechanizm remote calli stworzyłem most do javoeym soap serwisów oraz prostszy mechanizm dla Androida (nie było kodu dla serwerów soap).
 
-U webstera używałem soapa też, ale już z pythonem, do enterpriseoeych web serviceów od rozmów konsultantów.
-
-pomagać też w rekrutacji programistów różnych szczeblów do utrzymania danego systemu. Oferować ziomkom, że jak podejmą się linuxa, to ich płaca będzie wyglądała tak, po roku tak, potem tak. Sprawdzać regularnie jak im idzie.
-
-Jak syf z mikroserwisami doprowadził mnie do poważnego zastanowienia się nad testami.
-
-Lista przeczytanych książek, kursów (crypto) i publikacje (w książce z konferencji), ważniejsze prezentacje (youtuby konferencyjne) i link do bloga (może dodaj te kilka artykułów).
-
-Summary tego, kim teraz jestem i jakie usługi oferuję na początku. Consultation, setting up and improving software and data delivery pipelines.
-Znajdowanie złych struktur.
-
-Dostaję kasę za wdrożenie konkretnych rzeczy, za podszkolenie pracowników. Potem za support tego wszystkiego, jeśli chcecie. Jak nie, to wszystko zostaje w waszych rękach, możecie robić z tym co chcecie i możecie też płacić komuś innemu za utrzymanie.
-
-CV po angielsku i po polsku.
-
-
-Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
 
 ## Noteable conference talks
 
@@ -284,8 +255,8 @@ TODO wsadź to do magisterki
 
 ## Interests
 
-- Technology
+- Technology and engineering in general
 - Evolutionary Psychology
-- History
 - Mythology (mainly Slavic, Nordic and Greek)
+- History
 - Martial arts
