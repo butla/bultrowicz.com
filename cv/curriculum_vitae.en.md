@@ -45,95 +45,69 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 
 ## Soft skills
 
-- working in and coordinating a Scrum or Kanban team
+- coordinating a Scrum or Kanban team
 - teaching developers through thorough code reviews
 - knowledge of software legal compliance and licensing issues
 - analyzing tensions between teams within a project (do the teams have incentive to really cooperate?)
 
 
-## Experience (TODO)
+## Experience
 
-Ogólny schemat (podzielić je tak? Czy będzie domyślnie)
-1. WPROWADZENIE DO PROJEKTU I MOJEJ ROLI
-2. wyzwania/technologie
-3. trochę rozkmin nad ciekawszymi problemami
-
-Wydzielić różne projekty w tej samej pracy?
-
-### November 2019 - January 2021
+### November 2018 - January 2021
 Senior DevOps Engineer at British Telecom (BT)
 Remote, with occasional meetings in London, Ipswich, and Brentwood
 
-My team was developing a web application for designing telecom infrastructure
-and the automated initial configuration of Cisco and Juniper routers.
+I worked on a team of external contractors,
+tasked with developing a web application for designing telecom infrastructure
+and an automated initial configuration of Cisco and Juniper routers.
+To do that we had to work intensely with BT engineers from various teams,
+piecing together the knowledge about about company's current processes,
+and helping design the requested solution, that was supposed to fit into a grander project.
+
 We were all supposed to be universal developers, writing code, preparing its deployments
 and interacting with any hardware necessary.
-The team had 4 to 8 persons (it was growing), and it was part of a bigger project, which was around 80 people.
+We didn't have a traditional team leader, which was an interesting exercise in self-organization.
+My application team had 4 to 8 persons (it was growing), and the entire project team was around 80 people.
 
-Technologies used:
+The whole project was also part of the organization's agile transformation, with our contractor team leading the way.
+
+Prominent technologies used:
 - Django and Django REST Framework - most of our back-end and front-end
 - PostgreSQL - our main database
+- Kubernetes and Helm - deployments
 - Nginx - reverse proxy
+- Docker Compose - running a local, development instance of the app with its dependencies
 - Minio - serving our web app's static assets, and storing media files
-- Django REST Framework, Celery, Sentry
+- Celery - running asynchronous graphs of tasks (with the "canvas" feature)
 - ReactJS - a few more dynamic front-end pages
 - Faust - reading streams of events from other systems from Kafka
-- Redis
-- TODO?
-
-netmiko for cisco, pyez for Juniper
-
-Factory Boy for test data setups.
-- Gitlab pipelines
+- Redis - caching, Celery broker
+- Sentry - error tracking
+- Prometheus - metrics
+- Junos PyEZ - managing Juniper routers
+- netmiko - managing Cisco routers
+- GitLab - code repository / continuous delivery pipelines
+- Factory Boy - easy creation of ORM objects for tests
+- terminal servers - logging in over SSH and getting a serial port terminal to the routers
 
 My niches in the team were:
 - code and infrastructure design for new features
-- setting up automated tests
+- setting up automated tests and speeding them up
+- refactoring for testability
 - meticulous code reviews
 - teaching advanced Python and testable design to other team-members
-- advocating for simple and tried OpenSource solutions over heavier enterprise ones
-  defending simple and robust open source solutions from management that was set in their enterprise way
-  , defending simplicity and open source solutions
-  over some enterprise products that in my judgement weren't necessary and would make it harder to maintain
-  the platform, e.g. Postgres vs Couchbase
+- advocating for simple and tried OpenSource solutions we could control
+  over heavier enterprise ones there wasn't enough team expertise in
+- taking care of deployments and infrastructure (along with one other team member)
 
-Things I introduced to the team:
-- I introduced Faust for parsing Kafka.
-  It was able to use Django's synchronous ORM with the help of threadpool executors.
-- Makefiles automating the local development and testing, making local workflow the same as on CI
-
-
-Main technical challenge of the project was in automatic configuration of routers (Juniper and Cisco).
-Had to go in to ones that are fresh out of the box, so netconf doesn't work yet. We had to go in over serial
-console.
-
-
-We didn't use transactional isolation for tests, we wanted to test against the real DB.
-I also tried to make as much of the code as possible not use the DB at all (separation of concerns),
-so we can have nice fast tests.
-
-Technical challenges:
-- Maintaining a Django app with Celery with canvas to run DAGs of tasks.
-
-
-
-Tasks were the thing that was interacting with the routers with JunosEZ (badly written)
-Celery was quite buggy there with the backends we've chosen
-
-My team had to self-organize to please many non-technical project's stakeholders and keep them impressed.
-
-Sentry, failure with it.
-
-I've learned that companies working with hardware don't write the best code.
-Also, routers would benefit a lot from just adopting Linux.
-Their OSes are bad.
-
-Uczyłem innych członków zespołu pisać bardziej czytelny i testowalny kod (dużo cierpliwych i skrupulatnych code review)
-Ustawiałem nasze CI i lokalne testy.
-Współtworzyłem nasze deploymenty do Kubernetesa przy użyciu Helm chartów.
-Zadbałem, żebyśmy mogli developować (uruchamiać i testować) nasz kod bez dostępu do korporacyjnej sieci, co zwiększało naszą produktywność.
-Czasem trochę pisałem templateów Djangowych w HTML i JS. Też pracowałem przy apce w Reactcie
-Przedstawiałem pomysły na design i broniłem ich przed szerszą publiką z różnych stron managementu.
+Examples of things I introduced to the team:
+- Faust workers for parsing Kafka event streams;
+  they were able to write to our database by wrapping Django's synchronous ORM code with asyncio's executors
+- Makefiles automating local development and testing;
+  they were also used in GitLab, so we had high probability that tests passing locally would pass in CI
+- enabling local development and testing (even without network connectivity)
+  by ensuring copies or mocks of all services required by our app run in its Docker Compose
+- testing without DB isolation - it was getting in the way of many useful and realistic testing scenarios
 
 
 ### May 2017 -- September 2018
@@ -143,7 +117,7 @@ Remote
 My main project was a data pipeline for advertisement campaign and site traffic analysis.
 I worked as the main developer and the de facto architect of the system.
 Later on I also took over the maintenance and design of our cloud infrastructure.
-Other than that I did some ETL and occasional simple data analysis.
+Other than that I did some ETL, the occasional simple data analysis.
 
 My duties included:
 
@@ -154,6 +128,7 @@ My duties included:
 - helping in the design of our CitusDB (distributed PostgreSQL) schema
 - setting up logging (CloudWatch, Google Stackdriver), metrics, and alerts (Sentry, PagerDuty)
 - working out our development practices (trunk-based development, zero down-time deployments, etc.)
+- TODO Zeep, SOAP, and maintaining an app comunicating with an old-shool enterprise API
 
 We worked like start-ups do, so there was context-switching and were always time-starved.
 Because of that the code I wrote had to be immediately understandable for me and my boss,
@@ -172,23 +147,26 @@ and putting them offline for a couple of minutes wasn't an issue (since we had q
 payload backups, etc.). So if anything went wrong, we'd be notified by our alerting system,
 and immediately implement fixes.
 
-Iterio:
+TODOOOOO Iterio:
 
 - was the main python guy.
  First made some scripts more maintainable, 
  rewrote them with proper python restructured for testability and added the tests.
 - I learned a lot about silicon valley-type tech startup business (and what the "data" companies make money on)
 - learned the value of good services and tools - being able to run this whole huge thing with just 3 people.
-- Zeep, SOAP,
 
+w 4 ludzi z dobrymi narzędziami byliśmy w stanie utrzymać system przetwarzający dane od dziesiątek milionów klientów
+
+TODO rozdziel to?
 ### March 2017 - September 2017
 Freelance projects
 Remote
 
-- ScyllaDB - Developing Ansible scripts for the deployment of ScyllaDB. Got some way through,
+- ScyllaDB (maj - october)- Developing Ansible scripts for the deployment of ScyllaDB. Got some way through,
 had opposition with bash scripts that weren't idempotent and always changed machine state.
-- Siled - Python 3.6 Windows GUI application for reporting of manufacturing faults in
+- Siled (styczeń-czerwiec)- Python 3.6 Windows GUI application for reporting of manufacturing faults in
 PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
+Extracting data from old Microsoft SQL server databases (95?)
 
 ### March 2014 -- April 2016
 Software Applications Developer at Intel Technology Poland
@@ -225,6 +203,16 @@ stała się dużo krótsza, szybsza, prostsza i jeszcze zyskała testy.
 Niestety, ponieważ było to kilka miesięcy przed moim odejściem management nie odważył się na nią przejść
 i zastąpić nią istniejący element.
 
+Robienie deploymentów na windowsie przez kilka poziomów remote desktopa.
+
+Używanie OpenSSL z silnikiem do obsługi TPM i robienia operacji kryptograficznych na nim.
+
+WPROWADZIŁEM
+wprowadziłem flaskowo/pythonową apkę. Opsi wolęli ją od Spring Bootowej
+oparty o grafy deployer (apployer) dla cloudfoundry
+mountepy (pod koniec pracy)
+
+
 ### May 2011 -- February 2014
 Test Engineer Intern at Intel Technology Poland
 Gdańsk
@@ -244,9 +232,6 @@ CV
 
 CV musi zawierać przy pracach te rzeczy, których się nauczyłem lub które badałem.
 
-Soft skillsy - non-threatening communication (mimo, że pracuje z wieloma osobami o różnym poziomie trzeba przedstawiać ludziom wszystko pozytywnie dla nich, aby ich nie odciąć).
-
-W BT nauczyłem się też pracy z internal politics, gdzie są grupy o różnych interesach.
 
 U webstera AWS i GCP. Logowanie centralne do stackdrivera, metryki wyciągane z niego dzięki structlogowi. Szybki async python. Bez ORM. Optymalizacja query pod rozproszonego postgresa, w ogóle poznanie dobrze optymalizacji postgresa. Wygodny cacheing z aiocache.
 
@@ -267,9 +252,6 @@ Dostaję kasę za wdrożenie konkretnych rzeczy, za podszkolenie pracowników. P
 
 CV po angielsku i po polsku.
 
-Kontrakt dla Żydów.
-
-Kontrakt dla siledu.
 
 Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
 
