@@ -46,9 +46,9 @@ You can check out my blog at https://bultrowicz.com/ and my GitHub account at ht
 ## Soft skills
 
 - coordinating a Scrum or Kanban team
-- teaching developers through thorough code reviews
+- teaching developers through meticulous code reviews
 - knowledge of software legal compliance and licensing issues
-- analyzing tensions between teams within a project (do the teams have incentive to really cooperate?)
+- analyzing tensions between teams within a project (are the incentives set up correctly?)
 
 
 ## Experience
@@ -94,7 +94,7 @@ My niches in the team were:
 - code and infrastructure design for new features
 - setting up automated tests and speeding them up
 - refactoring for testability
-- meticulous code reviews
+- thorough code reviews
 - teaching advanced Python and testable design to other team-members
 - advocating for simple and tried OpenSource solutions we could control
   over heavier enterprise ones there wasn't enough team expertise in
@@ -164,96 +164,146 @@ They did things like modifying the kernel settings for maximized performance.
 The problem was that they were usually non-idempotent, and they were prone to modifying the machine's state.
 So I had to propose changes to them and recombine their parts into the Ansible scripts.
 
-### January 2017 - June 2017 (TODO)
-Software contractor at Techno Service SA (https://tspcb.pl/)
+### January 2017 - June 2017
+Software contractor at Techno Service SA (https://tspcb.pl/) / Siled (http://siled.pl/)
 Remote
 
-Python 3.6 Windows GUI application for reporting of manufacturing faults in
-PCB boards. It merged data from Excel spreadsheets and Microsoft Access databases.
-Extracting data from old Microsoft SQL server databases (95?)
+The company had a multi-step manual process for creating solder joint quality reports from specialized machines.
+I was hired to automate the process.
 
-used Tkinter for a minimal GUI (had to be easy to install), tested with PyAutoGUI
+The old process looked like this:
+- a person goes to the machine with a pendrive
+- they run a software tool on the machine to download a set of testing results
+- they copy the data to their computer
+- they run a script that transforms the data into an Excel spreadsheet
+- they send that spreadsheet to a person preparing a final report
+- that last person manually copies fields from the sent spreadsheet into the final report
 
-zwirtualizowałem sobie jakiegoś windowsa i odpalałem jakiś stary SQL server, żeby udawać to, co stało na tej maszynie
+I created a desktop application through which you could specify batches of PCBs you were interested in,
+fill out some info, and immediately get the final report spreadsheet.
+That's was possible because the PCB testing machine was connected to the network,
+and was running an MS SQL Server instance with all the data.
 
-### March 2014 -- April 2016 TODO
+Technologies used:
+- Python 3.6
+- Tkinter, chosen because the GUI was very minimal and the application had to be very easy to install on Windows
+- openpyxl for reading and writing Excel files
+- PyAutoGUI for testing the GUI
+- VirtualBox running Windows XP and Microsoft SQL Server 2005 - used that to test data extraction from the PCB
+  testing machine (it was running that version of SQL Server)
+
+### March 2014 -- April 2016
 Software Applications Developer at Intel Technology Poland
 Gdańsk
 
 Examples of assignments on this position, from the latest:
 
-- **Leading a development team** I lead one of the teams that worked on Trusted Analytics Platform (TAP) project. TAP is a PaaS platform with main focus on data analytics.
-My team mainly did the integration of other teams' work, we overseen builds, deployments, releases and utility tools, but we also developed some back-end microservices.
+#### Leading a development team
+I lead one of the teams that worked on Trusted Analytics Platform (TAP) project.
+TAP is a PaaS platform with main focus on data analytics.
+My team mainly did the integration of other teams' work, we overseen builds, deployments,
+releases and utility tools, but we also developed some back-end microservices.
 I was responsible for planning, estimating and coordinating work, also teaching and mentoring of other team members.
 Furthermore I:
-  - acted as Python expert for all project teams;
-  - created \texttt{mountepy} Python library to aid isolated microservice tests and increase our code quality;
-  - influenced development procedures for all teams;
-  - enforced software legal compliance and communicated with lawyers.
+  - acted as Python expert for all project teams
+  - created **mountepy** - a Python library to aid isolated microservice tests and increase our code quality
+  - influenced development procedures for all teams
+  - enforced software legal compliance and communicated with lawyers
 
-- **Back-end microservices' development for TAP** I developed a few Spring Boot (Java) microservices and created one in Python. It was a data set indexing and search service backed by ElasticSearch. We used Cloud Foundry PaaS as a base for our applications. Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
-- **Maintenance of a secure back-end for remote firmware updates** We had a quite mature distributed system, encompassing C\# back-end services, ASP.NET front-end, a C++ server and a C++ client.
+#### Back-end microservices' development for TAP
+I developed a few Spring Boot (Java) microservices and created one in Python.
+It was a data set indexing and search service backed by ElasticSearch.
+We used Cloud Foundry PaaS as a base for our applications.
+Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
+
+#### Maintenance of a secure back-end for remote firmware updates (Intel Upgrade Service)
+We had a quite mature distributed system, encompassing C# back-end services,
+ASP.NET front-end, a C++ server and a C++ client.
 The whole system was based on EPID digital signature scheme.
-I had to deliver patches to almost all of the application-layer components and do deployments to a large infrastructure spread out geographically. I also needed to run tests that touched everything from firmware on a client machine, through its drivers and application level software up to multi-tier back-end services and ending at server HSMs (Hardware Security Modules).
-- **Implementing hardware-backed secure tunnels for certificate exchange** I needed to create a C++11 application for embedded Linux that could create, manage and transfer X.509 certificates. The certificates' private keys and the keys used to secure the connection to transfer them were created and stored in a hardware cryptography module (TPM). OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
-- **Researching using SIM cards as secure elements** Did that alone.
-Had to look into JavaMicro (TODO to jest nazwa?)Not feasible
-Opisać, że Secure Element dało by się zrobić na urządzeniach typu karta SIM (a tym bardziej chipach z kart kredytowych, które mają możliwość robienia kryptografii asynchronicznej), ale jest bardzo mało informacji online, jest to raczej hermetyczny rynek, no i trzeba być zarejestrowanym operatorem kart SIM, żeby móc coś do nich dodawać przez OTA upgrades. Ale pewnie możnaby zamówić chipy od producenta, ale to już większa zabawa.
+I had to deliver patches to almost all of the application-layer components
+and do deployments to a large Windows-based infrastructure spread out geographically.
 
-I was a part of a team developing secure distributed applications. I dealt with a broad spectrum of system components, like client middleware (C++ 11), server applications (Java), hardware security modules (using OpenSSL with plugins) and embedded platforms.
+I also needed to run tests that touched everything from firmware on a client machine,
+through its drivers and application level software up to multi-tier back-end services
+and ending at server HSMs (Hardware Security Modules).
 
-During the latter period of this job I was leading a team of developers responsible for integration and delivery of a microservices-based cloud platform (Trusted Analytics Platform).
+#### Implementing hardware-backed secure tunnels for certificate exchange
+I needed to create a C++11 application for embedded Linux that could create,
+manage and transfer X.509 certificates.
+The certificates' private keys and the keys used to secure the connection to transfer them
+were created and stored in a hardware cryptography module (TPM).
+OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
 
-Tutaj też się musiałem jebać z tymi licencjami wszystkimi, patrzeć, czy nie mamy jakiś copy leftów, gadać z prawnikiem o intepretacjach dynamicznego linkowania dla LGPL czy tam GPL.
+#### Researching using SIM cards as secure elements (SE)
+Did that alone as my first task on the team.
+Had to look into JavaMicro edition and smart cards.
 
-Flaska używałem jako konkurencji dla Spring Boota (gdzie aplikacje w nim też utrzymywałem).
-Jedną aplikację przepisałem na Falcona w swoim własnym czasie,
-stała się dużo krótsza, szybsza, prostsza i jeszcze zyskała testy.
-Niestety, ponieważ było to kilka miesięcy przed moim odejściem management nie odważył się na nią przejść
-i zastąpić nią istniejący element.
-
-Robienie deploymentów na windowsie przez kilka poziomów remote desktopa.
-
-Używanie OpenSSL z silnikiem do obsługi TPM i robienia operacji kryptograficznych na nim.
-
-WPROWADZIŁEM
-wprowadziłem flaskowo/pythonową apkę. Opsi wolęli ją od Spring Bootowej
-oparty o grafy deployer (apployer) dla cloudfoundry
-mountepy (pod koniec pracy)
+It turns out that some SIM cards (or smart cards with SIM card's for factor) are capable of asymmetric cryptography,
+but we couldn't use them easily.
+We would either need to get SIM operator rights to be able to push our code onto the cards with OTA,
+or we would need to get fresh custom cards from a smart card manufacturer.
+Both options weren't feasible for us.
 
 
-### May 2011 -- February 2014 (TODO)
+### May 2011 -- February 2014
 Test Engineer Intern at Intel Technology Poland
 Gdańsk
 
-I maintained and developed a heterogeneous (Windows, Linux, Android) distributed framework for automated software, firmware and hardware testing. I've coded mainly in C\# and Java (SE and Android versions), but I've helped myself with Python scripting.
-My main focus was designing and implementing a versatile RPC-style communication between applications on different platforms (used WCF, JAX-WS and my own protocol for Android). There was a tight collaboration with our client - the validation teams.
-Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system (e.g. discrepancies in implementations of TCP sockets on both programming platforms).}
+I maintained and developed a heterogeneous (Windows, Linux, Android) distributed framework
+for automated software, firmware and hardware testing.
+I've coded mainly in C# and Java (SE and Android versions), but I've helped myself with Python scripting.
 
-Zrobiłem agenta androidowego. Ponieważ WCF był używany jako mechanizm remote calli stworzyłem most do javoeym soap serwisów oraz prostszy mechanizm dla Androida (nie było kodu dla serwerów soap).
+My main focus was designing and implementing a versatile RPC-style communication between applications
+on different platforms (used WCF on Windows, JAX-WS on Linux, and my own protocol for Android).
+There was a tight collaboration with our client - the validation teams.
+
+Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system
+(e.g. discrepancies in implementations of TCP sockets on both programming platforms).
 
 
 ## Noteable conference talks
 
-\cventry{July 2016}{TDD of Python microservices}{\textsc{EuroPython 2016}}{}{}{Presentation of tools (some implemented by me) and solutions that enable Test-Driven Development of Python microservices. Told from the perspective of a maintainer of a single service. Available on YouTube.}
-\cventry{July 2015}{Python microservices on PaaS done right}{\textsc{EuroPython 2015}}{}{}{A a collection of tips and practices that allow to have a successful microservices-based project. Concerns development, testing and work organization. There's a slight focus on Python. Available on YouTube.}
+### TDD of Python microservices
+EuroPython 2016 talk. https://youtu.be/d-ka10jngQQ
+
+Presentation of tools (some implemented by me) and solutions that enable Test-Driven Development
+of Python microservices.
+Told from the perspective of a maintainer of a single service.
+
+### Python microservices on PaaS done right
+EuroPython 2015 talk. https://youtu.be/WYXkpiaGBms
+
+A a collection of tips and practices that allow to have a successful microservices-based project.
+Concerns development, testing and work organization. There's a slight focus on Python.
 
 ## Education
 
-DODAĆ ten kurs z coursery/stanforda - Cryptography I
-Kiedy on był?
+### March 2016 - May 2016
+Cryptography I course from Stanford (on Coursera)
 
-\cventry{2012--2015}{Master of Science in Computer Science}{Gdańsk University of Technology}{}{\textit{Overall score -- good plus}}{Specialized in Intelligent Interactive Systems}  % Arguments not required can be left empty
-Napisz, że pracą było uczenie i rozpoznawanie twarzy metodą eigenvectors przy pomocy OpenCV
-\cventry{2008--2012}{Bachelor of Science in Computer Science}{Gdańsk University of Technology}{}{\textit{Overall score -- good plus}}{}
+### 2012--2015
+Master of Science in Computer Science
+Gdańsk University of Technology
 
-TODO wsadź to do magisterki
-\section{Masters Thesis}
+Overall score -- good plus
+Specialized in Intelligent Interactive Systems
 
-\cvitem{Title}{\emph{Calling remote Java methods in Android system from .NET platform}}
-\cvitem{Supervisor}{Jacek Lebiedź, PhD MEng}
-\cvitem{Description}{The goal of this work was to create a set of libraries that would enable convenient remote code execution in Android system from .NET platform. The work was successful and had the side-effect of an upstream patch on \texttt{jsonrpc4j} library, enabling it to work on Android.}
+#### Master thesis
+*Calling remote Java methods in Android system from .NET platform*
+Supervisor: Jacek Lebiedź, PhD MEng
 
+The goal of this work was to create a set of libraries that would enable convenient remote code execution
+in Android system from .NET platform.
+The work was successful and had the side-effect of an upstream patch on `jsonrpc4j` library,
+enabling it to work on Android.
+
+### 2008--2012
+Bachelor of Science in Computer Science
+Gdańsk University of Technology
+
+Overall score -- good plus
+
+The end project was a C++ application using OpenCV that could learn and recognize faces using the eigenvectors method.
 
 ## Languages
 
