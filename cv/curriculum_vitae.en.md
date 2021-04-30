@@ -150,12 +150,19 @@ and putting them offline for a couple of minutes wasn't an issue (since we had q
 payload backups, etc.). So if anything went wrong, we'd be notified by our alerting system,
 and immediately implement fixes.
 
-### May 2017 - October 2017 (TODO)
+### May 2017 - October 2017
 Ansible contractor at ScyllaDB (https://www.scylladb.com/)
 Remote
 
-Developing Ansible scripts for installation of ScyllaDB database.the deployment of ScyllaDB. Got some way through,
-had opposition with bash scripts that weren't idempotent and always changed machine state.
+I was contracted to develop Ansible scripts for installation of ScyllaDB database.
+I managed to create automation for single instance installation.
+Later I started working on scripts for set up of an entire cluster, but I didn't finish them.
+I was too overworked with this contract and Iterio, so I canceled this one.
+
+The challenge here was mainly about having to base my work on existing complex shell scripts.
+They did things like modifying the kernel settings for maximized performance.
+The problem was that they were usually non-idempotent, and they were prone to modifying the machine's state.
+So I had to propose changes to them and recombine their parts into the Ansible scripts.
 
 ### January 2017 - June 2017 (TODO)
 Software contractor at Techno Service SA (https://tspcb.pl/)
