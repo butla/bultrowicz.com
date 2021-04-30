@@ -1,7 +1,9 @@
-# Curriculum Vitae
+# Michał Bultrowicz
+**Curriculum Vitae**
 
 ## Contact
 michal.bultrowicz@gmail.com
+
 (+48) 790 467 660
 
 ## Summary
@@ -72,6 +74,7 @@ My application team had 4 to 8 persons (it was growing), and the entire project 
 The whole project was also part of the organization's agile transformation, with our contractor team leading the way.
 
 Prominent technologies used:
+
 - Django and Django REST Framework - most of our back-end and front-end
 - PostgreSQL - our main database
 - Kubernetes and Helm - deployments
@@ -91,6 +94,7 @@ Prominent technologies used:
 - terminal servers - logging in over SSH and getting a serial port terminal to the routers
 
 My niches in the team were:
+
 - code and infrastructure design for new features
 - setting up automated tests and speeding them up
 - refactoring for testability
@@ -101,6 +105,7 @@ My niches in the team were:
 - taking care of deployments and infrastructure (along with one other team member)
 
 Examples of things I introduced to the team:
+
 - Faust workers for parsing Kafka event streams;
   they were able to write to our database by wrapping Django's synchronous ORM code with asyncio's executors
 - Makefiles automating local development and testing;
@@ -172,6 +177,7 @@ The company had a multi-step manual process for creating solder joint quality re
 I was hired to automate the process.
 
 The old process looked like this:
+
 - a person goes to the machine with a pendrive
 - they run a software tool on the machine to download a set of testing results
 - they copy the data to their computer
@@ -185,6 +191,7 @@ That's was possible because the PCB testing machine was connected to the network
 and was running an MS SQL Server instance with all the data.
 
 Technologies used:
+
 - Python 3.6
 - Tkinter, chosen because the GUI was very minimal and the application had to be very easy to install on Windows
 - openpyxl for reading and writing Excel files
@@ -205,10 +212,11 @@ My team mainly did the integration of other teams' work, we overseen builds, dep
 releases and utility tools, but we also developed some back-end microservices.
 I was responsible for planning, estimating and coordinating work, also teaching and mentoring of other team members.
 Furthermore I:
-  - acted as Python expert for all project teams
-  - created **mountepy** - a Python library to aid isolated microservice tests and increase our code quality
-  - influenced development procedures for all teams
-  - enforced software legal compliance and communicated with lawyers
+
+- acted as Python expert for all project teams
+- created **mountepy** - a Python library to aid isolated microservice tests and increase our code quality
+- influenced development procedures for all teams
+- enforced software legal compliance and communicated with lawyers
 
 #### Back-end microservices' development for TAP
 I developed a few Spring Boot (Java) microservices and created one in Python.
