@@ -313,7 +313,8 @@ Gdańsk University of Technology
 
 Overall score -- good plus
 
-The end project was a C++ application using OpenCV that could learn and recognize faces using the eigenvectors method.
+#### Final project
+A C++ application using OpenCV that could learn and recognize faces using the eigenvectors method.
 
 ## Languages
 
