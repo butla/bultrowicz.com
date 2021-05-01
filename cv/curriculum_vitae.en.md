@@ -6,6 +6,10 @@ michal.bultrowicz@gmail.com
 
 (+48) 790 467 660
 
+https://bultrowicz.com/
+
+https://github.com/butla
+
 ## Summary
 
 I'm a software developer with a drive for constant improvement
@@ -22,8 +26,6 @@ I can design, implement, and consult the creation of IT solutions, especially:
 
 I can also train your IT staff in maintenance and further development of the systems I create,
 so that you aren't dependent on me forever.
-
-You can check out my blog at https://bultrowicz.com/ and my GitHub account at https://github.com/butla.
 
 ## Computer skills
 
