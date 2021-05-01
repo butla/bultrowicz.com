@@ -57,7 +57,7 @@ so that you aren't dependent on me forever.
 
 ## Experience
 
-### November 2018 - January 2021
+### 2018.11 -- 2021.01
 Senior DevOps Engineer at British Telecom (BT)
 Remote, with occasional meetings in London, Ipswich, and Brentwood
 
@@ -117,7 +117,7 @@ Examples of things I introduced to the team:
 - testing without DB isolation - it was getting in the way of many useful and realistic testing scenarios
 
 
-### May 2017 -- September 2018
+### 2017.05 -- 2018.09
 Python back-end developer at Iterio Data (https://iteriodata.com/)
 Remote
 
@@ -157,7 +157,7 @@ and putting them offline for a couple of minutes wasn't an issue (since we had q
 payload backups, etc.). So if anything went wrong, we'd be notified by our alerting system,
 and immediately implement fixes.
 
-### May 2017 - October 2017
+### 2017.05 -- 2017.10
 Ansible contractor at ScyllaDB (https://www.scylladb.com/)
 Remote
 
@@ -171,7 +171,7 @@ They did things like modifying the kernel settings for maximized performance.
 The problem was that they were usually non-idempotent, and they were prone to modifying the machine's state.
 So I had to propose changes to them and recombine their parts into the Ansible scripts.
 
-### January 2017 - June 2017
+### 2017.01 -- 2017.06
 Software contractor at Techno Service SA (https://tspcb.pl/) / Siled (http://siled.pl/)
 Remote
 
@@ -201,7 +201,7 @@ Technologies used:
 - VirtualBox running Windows XP and Microsoft SQL Server 2005 - used that to test data extraction from the PCB
   testing machine (it was running that version of SQL Server)
 
-### March 2014 -- April 2016
+### 2014.03 -- 2016.04
 Software Applications Developer at Intel Technology Poland
 Gdańsk
 
@@ -255,7 +255,7 @@ or we would need to get fresh custom cards from a smart card manufacturer.
 Both options weren't feasible for us.
 
 
-### May 2011 -- February 2014
+### 2011.05 -- 2014.02
 Test Engineer Intern at Intel Technology Poland
 Gdańsk
 
@@ -288,10 +288,10 @@ Concerns development, testing and work organization. There's a slight focus on P
 
 ## Education
 
-### March 2016 - May 2016
+### 2016.03 -- 2016.05
 Cryptography I course from Stanford (on Coursera)
 
-### 2012--2015
+### 2012 -- 2015
 Master of Science in Computer Science
 Gdańsk University of Technology
 
@@ -307,7 +307,7 @@ in Android system from .NET platform.
 The work was successful and had the side-effect of an upstream patch on `jsonrpc4j` library,
 enabling it to work on Android.
 
-### 2008--2012
+### 2008 -- 2012
 Bachelor of Science in Computer Science
 Gdańsk University of Technology
 
