@@ -65,7 +65,7 @@ I worked on a team of external contractors,
 tasked with developing a web application for designing telecom infrastructure
 and an automated initial configuration of Cisco and Juniper routers.
 To do that we had to work intensely with BT engineers from various teams,
-piecing together the knowledge about about company's current processes,
+piecing together the knowledge about company's current processes,
 and helping design the requested solution, that was supposed to fit into a grander project.
 
 We were all supposed to be universal developers, writing code, preparing its deployments
