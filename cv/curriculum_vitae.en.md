@@ -106,16 +106,6 @@ My niches in the team were:
   over heavier enterprise ones there wasn't enough team expertise in
 - taking care of deployments and infrastructure (along with one other team member)
 
-Examples of things I introduced to the team:
-
-- Faust workers for parsing Kafka event streams;
-  they were able to write to our database by wrapping Django's synchronous ORM code with asyncio's executors
-- Makefiles automating local development and testing;
-  they were also used in GitLab, so we had high probability that tests passing locally would pass in CI
-- enabling local development and testing (even without network connectivity)
-  by ensuring copies or mocks of all services required by our app run in its Docker Compose
-- testing without DB isolation - it was getting in the way of many useful and realistic testing scenarios
-
 
 ### 2017.05 -- 2018.09
 Python back-end developer at Iterio Data (https://iteriodata.com/)
@@ -154,8 +144,9 @@ AWS Lambda and microservices, because there doesn't seem to be enough literature
 But sometimes there was just not enough time to test everything.
 Luckily, some parts of the system weren't user-facing,
 and putting them offline for a couple of minutes wasn't an issue (since we had queues,
-payload backups, etc.). So if anything went wrong, we'd be notified by our alerting system,
-and immediately implement fixes.
+payload backups, etc.).
+So if anything went wrong while introducing changes to them, we'd be notified by our alerting system,
+and immediately implement fixes, without the users noticing any problems.
 
 ### 2017.05 -- 2017.10
 Ansible contractor at ScyllaDB (https://www.scylladb.com/)
@@ -163,8 +154,8 @@ Remote
 
 I was contracted to develop Ansible scripts for installation of ScyllaDB database.
 I managed to create automation for single instance installation.
-Later I started working on scripts for set up of an entire cluster, but I didn't finish them.
-I was too overworked with this contract and Iterio, so I canceled this one.
+Later I started working on scripts for the set up of an entire cluster, but I didn't finish them.
+I was too overworked with this contract and a full-time job at Iterio, so I canceled the former.
 
 The challenge here was mainly about having to base my work on existing complex shell scripts.
 They did things like modifying the kernel settings for maximized performance.
@@ -173,9 +164,10 @@ So I had to propose changes to them and recombine their parts into the Ansible s
 
 ### 2017.01 -- 2017.06
 Software contractor at Techno Service SA (https://tspcb.pl/) / Siled (http://siled.pl/)
-Remote
+Remote, with a few factory visits in Gdańsk
 
-The company had a multi-step manual process for creating solder joint quality reports from specialized machines.
+The company had a multi-step manual process for creating PCB solder joint quality reports.
+The initial board analysis was performed by specialized industrial machines.
 I was hired to automate the process.
 
 The old process looked like this:
@@ -189,8 +181,8 @@ The old process looked like this:
 
 I created a desktop application through which you could specify batches of PCBs you were interested in,
 fill out some info, and immediately get the final report spreadsheet.
-That's was possible because the PCB testing machine was connected to the network,
-and was running an MS SQL Server instance with all the data.
+That was possible because the PCB testing machine was connected to the network,
+and was running an MS SQL Server instance with all the board test data.
 
 Technologies used:
 
@@ -212,6 +204,7 @@ I lead one of the teams that worked on Trusted Analytics Platform (TAP) project.
 TAP is a PaaS platform with main focus on data analytics.
 My team mainly did the integration of other teams' work, we overseen builds, deployments,
 releases and utility tools, but we also developed some back-end microservices.
+
 I was responsible for planning, estimating and coordinating work, also teaching and mentoring of other team members.
 Furthermore I:
 
@@ -221,13 +214,13 @@ Furthermore I:
 - enforced software legal compliance and communicated with lawyers
 
 #### Back-end microservices' development for TAP
-I developed a few Spring Boot (Java) microservices and created one in Python.
+I developed a few Spring Boot (Java) microservices and created one in Flask (Python).
 It was a data set indexing and search service backed by ElasticSearch.
 We used Cloud Foundry PaaS as a base for our applications.
 Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
 
 #### Maintenance of a secure back-end for remote firmware updates (Intel Upgrade Service)
-We had a quite mature distributed system, encompassing C# back-end services,
+We had a mature distributed system, encompassing C# back-end services,
 ASP.NET front-end, a C++ server and a C++ client.
 The whole system was based on EPID digital signature scheme.
 I had to deliver patches to almost all of the application-layer components
