@@ -117,7 +117,7 @@ Later on I also took over the maintenance and design of our cloud infrastructure
 Other than that I did some ETL, the occasional simple data analysis, and polished up some old automations.
 
 An important thing I learned here is that with the right tools and the right engineers, a small team
-(4, in this case) can create a web application processing the data of tens of millions of people.
+(4, in this case) can create a web application processing the data of millions of people.
 
 My duties included:
 
@@ -239,7 +239,7 @@ OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of bot
 
 #### Researching using SIM cards as secure elements (SE)
 Did that alone as my first task on the team.
-Had to look into JavaMicro edition and smart cards.
+Had to look into Java Micro Edition and smart cards.
 
 It turns out that some SIM cards (or smart cards with SIM card's for factor) are capable of asymmetric cryptography,
 but we couldn't use them easily.
@@ -258,7 +258,7 @@ I've coded mainly in C# and Java (SE and Android versions), but I've helped myse
 
 My main focus was designing and implementing a versatile RPC-style communication between applications
 on different platforms (used WCF on Windows, JAX-WS on Linux, and my own protocol for Android).
-There was a tight collaboration with our client - the validation teams.
+There was a tight collaboration with our clients - the validation teams.
 
 Solving some problems required knowledge of obscure inner workings of .NET, Java and Windows system
 (e.g. discrepancies in implementations of TCP sockets on both programming platforms).
@@ -277,7 +277,7 @@ Told from the perspective of a maintainer of a single service.
 EuroPython 2015 talk. https://youtu.be/WYXkpiaGBms
 
 A a collection of tips and practices that allow to have a successful microservices-based project.
-Concerns development, testing and work organization. There's a slight focus on Python.
+Concerns development, testing and work organization.
 
 ## Education
 
@@ -289,7 +289,7 @@ Master of Science in Computer Science
 Gdańsk University of Technology
 
 Overall score -- good plus
-Specialized in Intelligent Interactive Systems
+Specialized in Intelligent Interactive Systems (AI, computer vision, graphics)
 
 #### Master thesis
 *Calling remote Java methods in Android system from .NET platform*
@@ -316,8 +316,8 @@ A C++ application using OpenCV that could learn and recognize faces using the ei
 
 ## Interests
 
-- Technology and engineering in general
-- Evolutionary Psychology
-- Mythology (mainly Slavic, Nordic and Greek)
-- History
-- Martial arts
+- technology and engineering in general
+- evolutionary psychology
+- mythology (mainly Slavic, Nordic and Greek)
+- history
+- martial arts
