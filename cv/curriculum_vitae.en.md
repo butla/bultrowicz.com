@@ -10,12 +10,15 @@ https://bultrowicz.com/
 
 https://github.com/butla
 
+
 ## Summary
 
-I'm a software developer with a drive for constant improvement
-and a curiosity about inner workings of technologies.
-I love Python, Linux, and creating resilient distributed systems.
-I have a strong belief in continuous testing and gradual change.
+I'm a passionate software developer who's used to creating business-critical applications
+and handling the challenges and pressure that come with that.
+I love Python, Linux, and all software that's both elegant and resilient.
+I have a strong belief in gradual change and continuous testing.
+I like staying close to the state of the art in my areas of expertise,
+but I've noticed that inspiration can come from pretty much anywhere.
 
 I can design, implement, and consult the creation of IT solutions, especially:
 - business process automation and measurement (dashboards, statistics, alerting)
@@ -27,10 +30,11 @@ I can design, implement, and consult the creation of IT solutions, especially:
 I can also train your IT staff in maintenance and further development of the systems I create,
 so that you aren't dependent on me forever.
 
+
 ## Computer skills
 
 - expert in Python programming
-- secondary programming languages: Bash, Java, C++, JavaScript, C#
+- secondary programming languages: Bash, JavaScript, Java, C++, C#
 - writing understandable and testable code
 - web development with AioHTTP, Falcon, Flask, and Django
 - advanced web application testing (including microservices)
@@ -61,6 +65,8 @@ so that you aren't dependent on me forever.
 Senior DevOps Engineer at British Telecom (BT)
 Remote, with occasional meetings in London, Ipswich, and Brentwood
 
+Main project: Vena (https://www.mediaandbroadcast.bt.com/vena.html)
+
 I worked on a team of external contractors,
 tasked with developing a web application for designing telecom infrastructure
 and an automated initial configuration of Cisco and Juniper routers.
@@ -71,9 +77,10 @@ and helping design the requested solution, that was supposed to fit into a grand
 We were all supposed to be universal developers, writing code, preparing its deployments
 and interacting with any hardware necessary.
 We didn't have a traditional team leader, which was an interesting exercise in self-organization.
-My application team had 4 to 8 persons (it was growing), and the entire project team was around 80 people.
+My application team had 4 to 8 persons (it was growing), but the entire project had many teams.
 
-The whole project was also part of the organization's agile transformation, with our contractor team leading the way.
+The whole project was also part of the organization's agile transformation,
+with our contractor team leading the way.
 
 Prominent technologies used:
 
@@ -108,7 +115,7 @@ My niches in the team were:
 
 
 ### 2017.05 -- 2018.09
-Python back-end developer at Iterio Data (https://iteriodata.com/)
+Python Back-end Developer at Iterio Data (https://iteriodata.com/)
 Remote
 
 My main project was a data pipeline for advertisement campaign and site traffic analysis.
