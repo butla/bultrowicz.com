@@ -29,17 +29,16 @@
       register: build_result
       changed_when: build_result.stdout.find("no targets are out of date") == -1
 
+    - name: copy my terms to the built website pages
+      synchronize:
+        src: "{{ repo_dir }}/additional_pages/terms_of_working_with_me"
+        dest: "{{ repo_dir }}/_website/"
+      delegate_to: "{{ inventory_hostname }}"
+
     - name: copy blog to Nginx folder
       synchronize:
         src: "{{ repo_dir }}/_website/"
         dest: /var/www/html
         delete: yes
-      delegate_to: "{{ inventory_hostname }}"
-      become: true
-
-    - name: copy additional pages to Nginx folder
-      copy:
-        src: "{{ repo_dir }}/additional_pages/terms_of_working_with_me"
-        dest: /var/www/html
       delegate_to: "{{ inventory_hostname }}"
       become: true
