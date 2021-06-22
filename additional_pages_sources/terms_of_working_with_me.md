@@ -6,7 +6,8 @@ Just be aware I have some terms:
 2. Possible modes of working together:
     1. A monthly fee of 4000 GBP + VAT, or the equivalent in EUR, USD, or PLN (you should add " + VAT, or the equivalent in EUR, USD, or PLN" to all the prices below).
     2. Consultations paid by the hour (100 GBP/h).
-    3. Milestone-based.
+    3. 600 GBP/day, max two days a week.
+    4. Milestone-based.
         - We set up milestones for the project together
             - This meeting is free if it's online and doesn't take more than 2 hours. Every hour above 2 costs 100 GBP.
             - This can be a face-to-face meeting, but the terms from paragraph 5 apply.
