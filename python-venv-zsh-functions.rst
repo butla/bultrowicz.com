@@ -30,7 +30,9 @@ Small incremental improvements compound over time, after all.
     # Enters a virtualenv for the current project.
     # Assumes that the virtualenv is created by virtualenvwrapper
     # and is called the same as the current directory/project.
-    function venventer()
+    # EDIT from 2021-07-06: changing the function name from venventer to workonc.
+    # That's easier to remember, because I already go for "workon" to enter a virtualenv.
+    function workonc()
     {
         workon $(current_directory)
     }
