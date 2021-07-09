@@ -8,16 +8,18 @@ Evaluation: using modern Python GUI libraries for multi-platform app development
 To check
 --------
 
-- reakcja GUI na jakieś asynchroniczne zdarzenie
-  - z innego wątku/event loopa
-  - z innego elementu GUI
 - zadanie:
   - muszę coś kliknąć albo otworzyć plik
   - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
   - mogę je otworzyć znowu ze wszystkim zaznaczonym
   - drugi ekran z listą pacjentów
-- ile zajmuje apka na windowsie? Czy da się spakować?
+- polskie znaki
 - przeskakiwanie tabem lub strzałkami po elementach gui?
+- wpinanie się debuggerem
+- reakcja GUI na jakieś asynchroniczne zdarzenie
+  - z innego wątku/event loopa
+  - z innego elementu GUI
+- ile zajmuje apka na windowsie? Czy da się spakować?
 
 
 DearPyGui
@@ -38,6 +40,11 @@ Positives
 
 - beautiful simplicity
 
+App size
+~~~~~~~~
+
+- dear_py_gui/lib/python3.8/site-packages/dearpygui -- 152M
+
 
 NanoGui
 -------
@@ -57,3 +64,134 @@ Notes
 
 - can just install with pip, no compilation needed
 - can run "detached" easily. Whatever that means
+
+App size
+~~~~~~~~
+
+- nano_gui/lib/python3.8/site-packages/nanogui -- 4,2M
+
+
+cefpython
+---------
+
+Problems
+~~~~~~~~
+
+- latest version built only for Windows https://github.com/cztomczak/cefpython/issues/609
+- releases don't seem very regular (might not be a problem if it's stable) https://pypi.org/project/cefpython3/66.0/#history
+- have to code in both JS and Python and manage interactions between them - too much cognitive overhead.
+- python3.8 and higher not supported, at least in 66.0
+
+Notes
+~~~~~
+
+- it would be nice to be able to use HTML and CSS to create the UI since they're very good at it, but the price
+  (JS for UI logic, binaries' size) is too high
+- other approaches to embedding Chromium are mentioned here https://medium.com/@abulka/electron-python-4e8c807bfa5e
+
+App size
+~~~~~~~~
+
+- cefpython/lib/python3.8/site-packages/cefpython3 -- 212M
+
+
+pyglet
+---------
+
+Problems
+~~~~~~~~
+
+- default controls look dated and a bit ugly
+- no example of how to create a button without an image, dunno if it's possible
+
+Positives
+~~~~~~~~~
+
+- API seems nicely Pythonic
+
+Notes
+~~~~~
+
+- it's not for building GUIs, I think
+
+App size
+~~~~~~~~
+
+- /home/butla/.virtualenvs/pyglet_/lib/python3.8/site-packages/pyglet -- 8,8M
+
+
+Toga / Briefcase
+----------------
+
+Problems
+~~~~~~~~
+
+- how do I manage external dependencies? Can I use poetry?
+- ``briefcase create`` on Linux is using Python 3.6 even though I'm working with 3.8
+- no clue where it installs all the the packages (like JDK for android development) and python packages
+
+Positives
+~~~~~~~~~
+
+- includes application building that works (at least for Linux) and the sample AppImage is under 30MB, which is
+  acceptable (see how much all the Electron apps are taking)
+
+Notes
+~~~~~
+
+- can I make the test app label be centered
+- Kinda dislike this approach of doing everything through magical commands (like ``briefcase dev/run``)
+- Alpha status and warning about stuff not being fully supported on Windows scares me.
+- do I want the standard top menu for the application? Isn't it better to have separate screens?
+- doesn't reuse system-wide tools like Android SDK
+- I have to run export JAVA_HOME=/home/butla/.briefcase/tools/java before running commands from
+  ~/.briefcase/tools/android_sdk/tools/bin like avdmanager
+
+App size
+~~~~~~~~
+
+- AppImage is around 29 MB
+- /home/butla/.virtualenvs/beeware_toga_test_app/lib/python3.8/site-packages -- 9,4M
+- the minimal app on Android takes 90.57 MB
+
+
+Kivy
+----
+
+Problems
+~~~~~~~~
+
+
+Positives
+~~~~~~~~~
+
+
+Notes
+~~~~~
+
+
+App size
+~~~~~~~~
+
+
+PySide6
+-------
+
+Problems
+~~~~~~~~
+
+- ImportError: ``/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found
+  (required by /home/butla/.virtualenvs/pyside6_app/lib/python3.8/site-packages/PySide6/Qt/lib/libQt6Core.so.6)``
+
+Positives
+~~~~~~~~~
+
+
+Notes
+~~~~~
+
+
+App size
+~~~~~~~~
+
+- 560M    PySide6
