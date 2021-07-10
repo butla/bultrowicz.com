@@ -213,6 +213,7 @@ Problems
   That's not true, ldd shows the .so file is dependent on other libs, and it failes with segfault because of linking.
 - I wanted to compile it myself, but it's complaining that there are no "features" like "python3".
 - no tags, build is failing even without "features"
+- on Manjaro I get ``ImportError: dynamic module does not define module export function (PyInit_azul)``
 - I guess the project is too immature. I'm gonna go with the warnings from
   https://raphlinus.github.io/rust/druid/2020/09/28/rust-2021.html
 
