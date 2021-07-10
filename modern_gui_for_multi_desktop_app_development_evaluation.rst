@@ -22,6 +22,7 @@ To check
 - ile zajmuje apka na windowsie? Czy da się spakować?
 
 
+
 DearPyGui
 ---------
 
@@ -44,6 +45,7 @@ App size
 ~~~~~~~~
 
 - dear_py_gui/lib/python3.8/site-packages/dearpygui -- 152M
+
 
 
 NanoGui
@@ -95,6 +97,7 @@ App size
 - cefpython/lib/python3.8/site-packages/cefpython3 -- 212M
 
 
+
 pyglet
 ---------
 
@@ -118,6 +121,7 @@ App size
 ~~~~~~~~
 
 - /home/butla/.virtualenvs/pyglet_/lib/python3.8/site-packages/pyglet -- 8,8M
+
 
 
 Toga / Briefcase
@@ -153,6 +157,7 @@ App size
 - AppImage is around 29 MB
 - /home/butla/.virtualenvs/beeware_toga_test_app/lib/python3.8/site-packages -- 9,4M
 - the minimal app on Android takes 90.57 MB
+
 
 
 Kivy
@@ -195,3 +200,34 @@ App size
 ~~~~~~~~
 
 - 560M    PySide6
+
+
+
+Azul
+----
+
+Problems
+~~~~~~~~
+
+- from https://azul.rs/guide/nightly/Installation - "the precompiled library is dependency-free".
+  That's not true, ldd shows the .so file is dependent on other libs, and it failes with segfault because of linking.
+- I wanted to compile it myself, but it's complaining that there are no "features" like "python3".
+- no tags, build is failing even without "features"
+- I guess the project is too immature. I'm gonna go with the warnings from
+  https://raphlinus.github.io/rust/druid/2020/09/28/rust-2021.html
+
+Positives
+~~~~~~~~~
+
+- looks to be very minimalistic in setup - no tools, no reliance on frameworks, just a file to use from Python.
+- up to me to package it up the best way possible (WiX? PyInstaller? That Rust compiling solution? Cython + rust?)
+
+Notes
+~~~~~
+
+- zgłoś poprawki do docsów
+
+App size
+~~~~~~~~
+
+- libazul.so -- 11.1 M
