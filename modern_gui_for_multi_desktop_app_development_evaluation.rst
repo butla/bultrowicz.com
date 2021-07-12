@@ -13,13 +13,14 @@ To check
   - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
   - mogę je otworzyć znowu ze wszystkim zaznaczonym
   - drugi ekran z listą pacjentów
+- dodanie pythonowej paczki do zależności
 - polskie znaki
 - przeskakiwanie tabem lub strzałkami po elementach gui?
 - wpinanie się debuggerem
 - reakcja GUI na jakieś asynchroniczne zdarzenie
   - z innego wątku/event loopa
   - z innego elementu GUI
-- ile zajmuje apka na windowsie? Czy da się spakować?
+- ile zajmuje apka na windowsie/MacOS/Linuxie?
 
 
 
@@ -71,6 +72,7 @@ App size
 ~~~~~~~~
 
 - nano_gui/lib/python3.8/site-packages/nanogui -- 4,2M
+
 
 
 cefpython
@@ -127,12 +129,21 @@ App size
 Toga / Briefcase
 ----------------
 
+Questions
+~~~~~~~~~
+
+- can I make the test app label be centered?
+
+
 Problems
 ~~~~~~~~
 
-- how do I manage external dependencies? Can I use poetry?
-- ``briefcase create`` on Linux is using Python 3.6 even though I'm working with 3.8
-- no clue where it installs all the the packages (like JDK for android development) and python packages
+- no clue where it installs all the packages (like JDK for android development) and python packages
+- ``briefcase create`` on Linux gives me a Python 3.6 project, doesn't say how to change the version
+- didn't find info on how to specify the "support package" (Python version)
+  - had to delete ``linux`` folder created with ``briefcase build`` to see the URL it's getting the packages from
+- dependency python modules not available when doing ``briefcase dev``
+- ``briefcase run`` fails with python3.9 support. Docker gets created with 3.6 anyway...
 
 Positives
 ~~~~~~~~~
@@ -143,13 +154,13 @@ Positives
 Notes
 ~~~~~
 
-- can I make the test app label be centered
 - Kinda dislike this approach of doing everything through magical commands (like ``briefcase dev/run``)
 - Alpha status and warning about stuff not being fully supported on Windows scares me.
 - do I want the standard top menu for the application? Isn't it better to have separate screens?
 - doesn't reuse system-wide tools like Android SDK
 - I have to run export JAVA_HOME=/home/butla/.briefcase/tools/java before running commands from
   ~/.briefcase/tools/android_sdk/tools/bin like avdmanager
+- numpy doesn't work. It might work with PyOxidizer
 
 App size
 ~~~~~~~~
@@ -158,25 +169,6 @@ App size
 - /home/butla/.virtualenvs/beeware_toga_test_app/lib/python3.8/site-packages -- 9,4M
 - the minimal app on Android takes 90.57 MB
 
-
-
-Kivy
-----
-
-Problems
-~~~~~~~~
-
-
-Positives
-~~~~~~~~~
-
-
-Notes
-~~~~~
-
-
-App size
-~~~~~~~~
 
 
 PySide6
