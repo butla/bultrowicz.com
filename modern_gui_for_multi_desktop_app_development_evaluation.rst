@@ -11,8 +11,8 @@ To check
 - zadanie:
   - muszę coś kliknąć albo otworzyć plik
   - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
-  - mogę je otworzyć znowu ze wszystkim zaznaczonym
-  - drugi ekran z listą pacjentów
+  - drugi ekran z listą w tabeli (tabela z SQLite)
+  - async HTTP request with httpx
 - dodanie pythonowej paczki do zależności
 - polskie znaki
 - przeskakiwanie tabem lub strzałkami po elementach gui?
@@ -129,11 +129,25 @@ App size
 Toga / Briefcase
 ----------------
 
+TODO
+~~~~
+
+
+- zadanie:
+  - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
+  - drugi ekran z listą w tabeli (lista w SQLite)
+  - async HTTP request with httpx
+- polskie znaki
+- wpinanie się debuggerem
+- reakcja GUI na jakieś asynchroniczne zdarzenie
+  - z innego wątku/event loopa (examples/handler pokazuje jak to zrobić)
+  - z innego elementu GUI
+- ile zajmuje apka na windowsie/MacOS/Linuxie?
+
 Questions
 ~~~~~~~~~
 
 - can I make the test app label be centered?
-
 
 Problems
 ~~~~~~~~
@@ -150,6 +164,9 @@ Positives
 
 - includes application building that works (at least for Linux) and the sample AppImage is under 30MB, which is
   acceptable (see how much all the Electron apps are taking)
+- przeskakiwanie tabem lub strzałkami po elementach gui działa (przynajmniej w GTK)
+- ctrl+f do wyszukiwania w tabeli działa (przynajmniej w GTK)
+
 
 Notes
 ~~~~~
