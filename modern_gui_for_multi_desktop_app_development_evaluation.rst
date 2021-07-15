@@ -36,6 +36,7 @@ Problems
   - mogę wołać po prostu filedialog systemu?
   - można z takim żyć?
 - chyba trochę słabo robieniem rzeczy asynchronicznie https://github.com/hoffstadt/DearPyGui/issues/407
+- faktycznie bardziej dla dodawanie opcji pod skrypty, raczej nie wyświetlę tabelarycznych danych
 
 Positives
 ~~~~~~~~~
@@ -55,8 +56,10 @@ NanoGui
 Problems
 ~~~~~~~~
 
-- przykład 1 nie działa, bo brakuje (przynajmniej) GLShader (https://raw.githubusercontent.com/wjakob/nanogui/master/python/example1.py) nie działają,
-- w przykładzie 2 trzeba było zmienić nazwy na snake case z camel case
+- trochę mają wylane w dokumentację, https://github.com/mitsuba-renderer/nanogui/issues/60. Albo po prostu faktycznie
+  maja zdecydowanie za mało czasu
+- biblioteka bardziej dla dodawanie opcji pod wizualizacje, raczej nie wyświetlę tabelarycznych danych
+- nie widzę opcji, żeby stworzyć nowe okno wyskakujące. Wszystko w obrębie jednego okna.
 
 
 Positives
@@ -67,6 +70,7 @@ Notes
 
 - can just install with pip, no compilation needed
 - can run "detached" easily. Whatever that means
+- prawdziwy przykładowy kod w pythonie jest tu https://github.com/mitsuba-renderer/nanogui/tree/master/src/python
 
 App size
 ~~~~~~~~
@@ -129,21 +133,6 @@ App size
 Toga / Briefcase
 ----------------
 
-TODO
-~~~~
-
-
-- zadanie:
-  - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
-  - drugi ekran z listą w tabeli (lista w SQLite)
-  - async HTTP request with httpx
-- polskie znaki
-- wpinanie się debuggerem
-- reakcja GUI na jakieś asynchroniczne zdarzenie
-  - z innego wątku/event loopa (examples/handler pokazuje jak to zrobić)
-  - z innego elementu GUI
-- ile zajmuje apka na windowsie/MacOS/Linuxie?
-
 Questions
 ~~~~~~~~~
 
@@ -158,6 +147,17 @@ Problems
   - had to delete ``linux`` folder created with ``briefcase build`` to see the URL it's getting the packages from
 - dependency python modules not available when doing ``briefcase dev``
 - ``briefcase run`` fails with python3.9 support. Docker gets created with 3.6 anyway...
+
+- running Pillow from within the AppImage:
+from PIL import Image as PilImage
+  File "/tmp/.mount_BeewarvaKxjQ/usr/app_packages/PIL/Image.py", line 114, in <module>
+    from . import _imaging as core
+ImportError: libtiff-102594ad.so.5.7.0: ELF load command address/offset not properly aligned
+https://github.com/beeware/briefcase/issues/458
+
+- running from a virtualenv could be documented better. There is ``pip install --pre toga-demo``, in the README, but I was
+  too slow to figure out that I need that (well, ``install --pre toga-gtk`` for Linux, really)
+
 
 Positives
 ~~~~~~~~~
@@ -241,3 +241,67 @@ App size
 ~~~~~~~~
 
 - libazul.so -- 11.1 M
+
+
+Kivy
+----
+
+Questions
+~~~~~~~~~
+
+- how much can I style components?
+- can I make scroll bars always visible if something is scrollable?
+  I need people using the app for the first time to know what's happening and what they can do.
+- can I disable the right-click behavior? I think it ads a holding touch right now
+- how hard is it to create tabular data view?
+
+Problems
+~~~~~~~~
+
+- default widgets might not be familiar to people not used to touch interfaces.
+  Hidden scroll bars, for example.
+  I want my UIs to be understandable even to "non-tech" people.
+- no widget for tabular data
+- licensing stuff stresses me out https://kivy.org/doc/stable/guide/licensing.html
+
+Positives
+~~~~~~~~~
+
+- app can be run with asyncio as the event loop, so doing async stuff should be easy
+
+Notes
+~~~~~
+
+
+App size
+~~~~~~~~
+
+- todo
+
+
+
+wxPython
+--------
+
+Questions
+~~~~~~~~~
+
+- wxPython zaciąga GTK. Jak bym dystrybuował binarkę z GTK, to czy nie muszę publikować kodu?
+  Poszukaj na jakiś grupach.
+
+Problems
+~~~~~~~~
+
+- not too much happening in the commits. Is the project inactive, or so much feature-complete?
+- pip install wxPython took /24m-8,1s, 12m-12,7s on my main laptop
+
+Positives
+~~~~~~~~~
+
+Notes
+~~~~~
+
+App size
+~~~~~~~~
+
+- todo
