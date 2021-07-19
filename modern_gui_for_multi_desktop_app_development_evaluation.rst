@@ -246,14 +246,30 @@ App size
 Kivy
 ----
 
+TODO
+~~~~
+
+- zadanie:
+  - muszę coś kliknąć albo otworzyć plik
+  - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
+  - drugi ekran z listą w tabeli (tabela z SQLite) (Grid layout? czy go można przewijać?)
+  - async HTTP request with httpx
+- dodanie pythonowej paczki do zależności
+- przeskakiwanie tabem lub strzałkami po elementach gui?
+- wpinanie się debuggerem
+- reakcja GUI na jakieś asynchroniczne zdarzenie
+  - z innego wątku/event loopa
+  - z innego elementu GUI (jest nawet property binding w kv)
+- ile zajmuje apka na windowsie/MacOS/Linuxie?
+
+
 Questions
 ~~~~~~~~~
 
-- how much can I style components?
+- how much can I style components? https://github.com/kivy/kivy/wiki/Theming-Kivy
 - can I make scroll bars always visible if something is scrollable?
   I need people using the app for the first time to know what's happening and what they can do.
 - can I disable the right-click behavior? I think it ads a holding touch right now
-- how hard is it to create tabular data view?
 
 Problems
 ~~~~~~~~
@@ -268,10 +284,20 @@ Positives
 ~~~~~~~~~
 
 - app can be run with asyncio as the event loop, so doing async stuff should be easy
+- nice documentation
+- lots of examples
+- looks actively maintained (so does Toga), but this is commercially used (at least according to their own
+  docs/propaganda :))
+- polskie znaki działają :)
+- I like that I have options for creating the root widget for the app and loading of the .kv file,
+  there's no holy opinionated way that the framework forces me to use (or keeps to other ways more obscure,
+  like Django does)
 
 Notes
 ~~~~~
 
+- should be straightforward to build for macs starting from Catalina, which should be 75% of them
+  https://www.statista.com/statistics/944559/worldwide-macos-version-market-share/
 
 App size
 ~~~~~~~~
@@ -294,6 +320,9 @@ Problems
 
 - not too much happening in the commits. Is the project inactive, or so much feature-complete?
 - pip install wxPython took /24m-8,1s, 12m-12,7s on my main laptop
+- I think it's very bad that running constructors for widgets adds them to the layout.
+  Same problem as Tkinter. Can't nicely create stuff in functions and then bind it into a UI.
+- non-pythonic API (uppercase)
 
 Positives
 ~~~~~~~~~
