@@ -9,12 +9,11 @@ To check
 --------
 
 - zadanie:
-  - muszę coś kliknąć albo otworzyć plik
-  - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
-  - drugi ekran z listą w tabeli (tabela z SQLite)
-  - async HTTP request with httpx
-- dodanie pythonowej paczki do zależności
+  - tabela użytkowników
+  - kliknięcie, żeby otworzyć zdjęcie
+  - zaznaczanie punktów na zdjęciu, wyświetlanie kątów między nimi
 - polskie znaki
+- async HTTP request with httpx
 - przeskakiwanie tabem lub strzałkami po elementach gui?
 - wpinanie się debuggerem
 - reakcja GUI na jakieś asynchroniczne zdarzenie
@@ -249,19 +248,7 @@ Kivy
 TODO
 ~~~~
 
-- zadanie:
-  - muszę coś kliknąć albo otworzyć plik
-  - pojawia się zdjęcie, zaznaczam coś na nim, wyświetlam kąty, najlepiej na obrazku
-  - drugi ekran z listą w tabeli (tabela z SQLite) (Grid layout? czy go można przewijać?)
-  - async HTTP request with httpx
-- dodanie pythonowej paczki do zależności
-- przeskakiwanie tabem lub strzałkami po elementach gui?
-- wpinanie się debuggerem
-- reakcja GUI na jakieś asynchroniczne zdarzenie
-  - z innego wątku/event loopa
-  - z innego elementu GUI (jest nawet property binding w kv)
-- ile zajmuje apka na windowsie/MacOS/Linuxie?
-
+- recycleview dla tabeli?
 
 Questions
 ~~~~~~~~~
@@ -279,6 +266,9 @@ Problems
   I want my UIs to be understandable even to "non-tech" people.
 - no widget for tabular data
 - licensing stuff stresses me out https://kivy.org/doc/stable/guide/licensing.html
+- kinda hard to figure out how to produce a table of data
+- made with touch interfaces in mind, little support for mouse and keyboard.
+  Double click in file chooser would be nice
 
 Positives
 ~~~~~~~~~
@@ -292,12 +282,15 @@ Positives
 - I like that I have options for creating the root widget for the app and loading of the .kv file,
   there's no holy opinionated way that the framework forces me to use (or keeps to other ways more obscure,
   like Django does)
+- drawing stuff is quite straightforward
 
 Notes
 ~~~~~
 
 - should be straightforward to build for macs starting from Catalina, which should be 75% of them
   https://www.statista.com/statistics/944559/worldwide-macos-version-market-share/
+- implementing tab-switching can be done with the FocusBehavior
+  https://kivy.org/doc/stable/api-kivy.uix.behaviors.focus.html?highlight=focus#module-kivy.uix.behaviors.focus
 
 App size
 ~~~~~~~~
@@ -308,6 +301,20 @@ App size
 
 wxPython
 --------
+
+To check
+--------
+
+- zadanie:
+  - tabela użytkowników
+  - kliknięcie, żeby otworzyć zdjęcie
+  - zaznaczanie punktów na zdjęciu, wyświetlanie kątów między nimi
+- polskie znaki
+- async HTTP request with httpx
+- przeskakiwanie tabem lub strzałkami po elementach gui?
+- jak wygląda na windowsie?
+- wpinanie się debuggerem
+
 
 Questions
 ~~~~~~~~~
@@ -323,6 +330,8 @@ Problems
 - I think it's very bad that running constructors for widgets adds them to the layout.
   Same problem as Tkinter. Can't nicely create stuff in functions and then bind it into a UI.
 - non-pythonic API (uppercase)
+- wiki (https://wiki.wxpython.org/) seems to have a lot of outdated examples, but it looks like there's a more modern
+  tutorial mentioned there (https://zetcode.com/wxpython/)
 
 Positives
 ~~~~~~~~~
