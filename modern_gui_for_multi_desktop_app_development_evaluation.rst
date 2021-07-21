@@ -309,9 +309,7 @@ To check
   - tabela użytkowników
   - kliknięcie, żeby otworzyć zdjęcie
   - zaznaczanie punktów na zdjęciu, wyświetlanie kątów między nimi
-- polskie znaki
 - async HTTP request with httpx
-- przeskakiwanie tabem lub strzałkami po elementach gui?
 - jak wygląda na windowsie?
 - wpinanie się debuggerem
 
@@ -332,12 +330,24 @@ Problems
 - non-pythonic API (uppercase)
 - wiki (https://wiki.wxpython.org/) seems to have a lot of outdated examples, but it looks like there's a more modern
   tutorial mentioned there (https://zetcode.com/wxpython/)
+- why do I have to add widgets both to parent widgets (Panel, Frame) and to Sizers?
+- sizers have a weird mechanic of merging of flags for border width, widget alignment, and space expansion (size hints
+  in Kivy seem nicer)
+- ListCtrl (table):
+    - quite clunky method of adding rows
+    - thing with mixins is a bit awkward
+    - can't put a button in there (controls are nice and full featured, but rigid)
 
 Positives
 ~~~~~~~~~
 
+- polskie znaki działają :)
+- mature and full-featured
+
 Notes
 ~~~~~
+
+- translates to native GUI elements like Toga, it seems
 
 App size
 ~~~~~~~~
