@@ -303,16 +303,11 @@ wxPython
 --------
 
 To check
---------
+~~~~~~~~
 
-- zadanie:
-  - tabela użytkowników
-  - kliknięcie, żeby otworzyć zdjęcie
-  - zaznaczanie punktów na zdjęciu, wyświetlanie kątów między nimi
-- async HTTP request with httpx
+- async HTTP request with httpx (start an event loop in another thread before running wxPython's main loop?)
+  - or maybe https://github.com/sirk390/wxasync ??
 - jak wygląda na windowsie?
-- wpinanie się debuggerem
-
 
 Questions
 ~~~~~~~~~
@@ -337,6 +332,8 @@ Problems
     - quite clunky method of adding rows
     - thing with mixins is a bit awkward
     - can't put a button in there (controls are nice and full featured, but rigid)
+- I can't just register for touch events from a simple image widget and draw on it - it works on Linux,
+  but not on Windows (and somebody on stack overflow says it doesn't work on Mac as well)
 
 Positives
 ~~~~~~~~~
@@ -353,3 +350,14 @@ App size
 ~~~~~~~~
 
 - todo
+
+
+More tools that might be good to look at
+-----------------------------------------
+
+
+https://github.com/ChrisKnott/Eel
+From its README.
+"Eel is not as fully-fledged as Electron or cefpython - it is probably not suitable for making full blown applications like"
+Dunno why is that. What does full Electron give? If you can use HTML, CSS, JS and normal Python that should be good
+enough.
