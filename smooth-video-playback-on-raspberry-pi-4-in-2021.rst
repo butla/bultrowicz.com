@@ -102,6 +102,9 @@ But there were some errors popping out during the restart, which was also a nega
 The system is sluggish during the first boot. I've put in the password, nothing happens. Now I'm looking at a blank
 purple/violet screen for a while now.
 
+VLC and mpv play videos pretty well after installation.
+It's not perfectly smooth, but it's on par with Kodi on libreelec without fixes.
+
 Arch x32
 --------
 
