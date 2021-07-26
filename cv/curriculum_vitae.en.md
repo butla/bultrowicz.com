@@ -37,7 +37,7 @@ so that you aren't dependent on me forever.
 - secondary programming languages: Bash, JavaScript, Java, C++, C#
 - writing understandable and testable code
 - web development with AioHTTP, Falcon, Flask, and Django
-- advanced web application testing (including microservices)
+- advanced web application testing (functional, stress, performance testing; also with microservices)
 - ensuring high availability (HA)
 - good knowledge of optimizing SQL for PostgreSQL (and scaling it out with CitusDB)
 - working with various data stores: Redis, Kafka (and AWS Kinesis), ElasticSearch, S3/MinIO, Amazon Redshift
@@ -131,7 +131,8 @@ My duties included:
 - creating back-end APIs with asynchronous Python (AioHTTP) and stuffing them in Docker containers
 - designing our systems on AWS (ECS, Lambda, Kinesis, S3, CloudWatch)
 - encoding our infrastructure and doing deployments with Terraform
-- creating test strategies and tools for our cloud applications
+- creating test strategies and tools for our cloud applications (including chaos testing)
+- maintaining the quality of our services by doing stress tests and performance testing / monitoring
 - helping in the design of our CitusDB (distributed PostgreSQL) schema
 - setting up logging (CloudWatch, Google Stackdriver), metrics, and alerts (Sentry, PagerDuty)
 - working out our development practices (trunk-based development, zero down-time deployments, etc.)
@@ -225,6 +226,7 @@ I developed a few Spring Boot (Java) microservices and created one in Flask (Pyt
 It was a data set indexing and search service backed by ElasticSearch.
 We used Cloud Foundry PaaS as a base for our applications.
 Sometimes there was a need to fiddle with virtual machines on which Cloud Foundry cluster was based on.
+I dabbled in load testing with Gatling (Scala) and Locust (Python).
 
 #### Maintenance of a secure back-end for remote firmware updates (Intel Upgrade Service)
 We had a mature distributed system, encompassing C# back-end services,
