@@ -60,6 +60,19 @@ Is it a case of compiling against some proprietary blobs for the releases onto t
 Tutaj coś mówią o zrobieniu tego w chromie. Może by też dla vlc albo mpv działało?
 https://lemariva.com/blog/2020/08/raspberry-pi-4-video-acceleration-decode-chromium
 
+Ok, wracam tutaj po sprawdzeniu wszystkich innych systemów poza Ubuntu Mate.
+
+This should be more helpful https://www.raspberrypi.org/documentation/usage/video/
+
+Znalazłem ten wątek
+https://www.raspberrypi.org/forums/viewtopic.php?f=38&t=199775&sid=7a1a2d1d02691ad95ed4e90a825b50a5
+a tam pod koniec jakąś instrukcję:
+https://github.com/spookyfirehorse/compiling-guide-ffmpeg-raspberry
+
+Żeby działało musiałem:
+- sudo apt install autoconf libtool
+- odkomentować deb-src w /etc/apt/sources.list, odpalić apt update
+
 
 Kodi
 ----
@@ -74,7 +87,7 @@ https://forum.libreelec.tv/thread/21963-getting-kodi-libreelec-to-work-smoothly-
 disappointment)
 
 
-This makes cody work!!!
+This makes kodi work!!!
 ~~~~~~~~~~~~~~~~~~~~~~~
 https://forum.libreelec.tv/thread/20345-libreelec-9-2-x-video-judder-and-stuttering-renamed/?postID=138305#post138305
 
@@ -114,6 +127,10 @@ Arch tries to teach you, I see. Well, I do appreciate letting me know what is ha
 Why not make it an ISO, though? With some bootstrap script?
 Just tell me what the script is and how it's starting.
 
+I've tried booting it, but it didn't work.
+Looks like it goes through boot, then it gives me a terminal login screen
+(guess no graphical environment is there by default), some systemd log message pops out and I can't type anything.
+SSH server also doesn't look to be running.
 
 Ubuntu Mate
 -----------
