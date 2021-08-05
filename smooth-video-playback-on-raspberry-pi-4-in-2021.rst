@@ -127,10 +127,18 @@ Arch tries to teach you, I see. Well, I do appreciate letting me know what is ha
 Why not make it an ISO, though? With some bootstrap script?
 Just tell me what the script is and how it's starting.
 
-I've tried booting it, but it didn't work.
-Looks like it goes through boot, then it gives me a terminal login screen
-(guess no graphical environment is there by default), some systemd log message pops out and I can't type anything.
-SSH server also doesn't look to be running.
+There's no graphical environment by default. Also no nmcli, so I need to fiddle a bit to get wifi working.
+
+I see there's even no sudo. Minimalistic.
+
+I couldn't even connect to WiFi using ``iw``...
+Dunno why it doesn't show my 5Ghz network. 2.4 one is visible, but connecting doesn't work right away
+and I'm not in the mood for troubleshooting this.
+
+Went for the cable, but I see that running omxplayer is impossible. Installing a graphical environment is also not as
+simple as installing xfce :) I guess I'd need find drivers and install the X server...
+Yeah, sorry, but I have other things to do that'll be easier (although maybe not as educational about linux internals)
+and also more beneficial for me than turning the Arch on RPI in my media machine :)
 
 Ubuntu Mate
 -----------
@@ -142,3 +150,6 @@ Are these distros the best, really?
 
 There's a guide for getting video to work in a 64 bit release. Although my 4GBs should be covered by 32-bit systems.
 https://www.dedoimedo.com/computers/rpi4-ubuntu-mate-hw-video-acceleration.html
+
+I didn't try the guide. I'd probably have to work as hard on this as on Raspberry OS, and I'm choosing to go with
+the default system.
