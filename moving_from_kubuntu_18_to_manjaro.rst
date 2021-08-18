@@ -45,58 +45,6 @@ code::
     nvme0n1       259:7    0 953,9G  0 disk                   # <- the new M2, will host the new boot partition,
                                                               #    LVM in LUKS for manjaro and maybe QubesOS.
 
-Create a new LUKS key for the data partition::
-
-    export SECOND_DATA_DRIVE_CRYPT_KEY_FILE=/etc/luks_keys/2tb_data_disk_secret_key
-
-    # This trick taken from https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions
-    # Although I use 4096 bytes of random data. It might be a lot of entropy, though.
-    #
-    # It might hang until you get enough network traffic, keyboard and mouse usage.
-    # https://stackoverflow.com/a/4819457/2252728
-    # For me it took 22m-25,8s (22 minutes, 25.8 seconds), according to my ZSH command timer plugin.
-    sudo bash -c "head -c 4096 /dev/random > $SECOND_DATA_DRIVE_CRYPT_KEY_FILE"
-
-    # Only root should be able to see the key.
-    sudo chmod 600 $SECOND_DATA_DRIVE_CRYPT_KEY_FILE
-
-    # The result is the this:
-    # $ ls -la /etc/luks_keys
-    # ...omitted...
-    # -rw-------   1 root root  4096 sie 15 04:45 2tb_data_disk_secret_key
-    # -rw-------   1 root root  4096 lis 12  2017 data_disk_secret_key
-
-Let's create a new LUKS container with a new random key::
-
-   sudo cryptsetup luksFormat /dev/sdb $SECOND_DATA_DRIVE_CRYPT_KEY_FILE
-
-   # open the new partition for writes
-   sudo cryptsetup open /dev/sdb hdd2-crypt --key-file $SECOND_DATA_DRIVE_CRYPT_KEY_FILE
-
-   # prepare an ext4 filesystem on the data drive
-   sudo mkfs.ext4 /dev/mapper/hdd2-crypt  # took 14.6 seconds for me
-
-   # ╭─butla@b3 ~/development/bultrowicz.com ‹master*›
-   # ╰─$ lsblkk                                                                       127 ↵
-   # NAME          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-   # sda             8:0    0 931,5G  0 disk
-   # └─hdd-crypt   253:1    0 931,5G  0 crypt /data
-   # sdb             8:16   0   1,8T  0 disk
-   # └─hdd2-crypt  253:2    0   1,8T  0 crypt /media/butla/733ae178-bb9a-4686-9a66-74233f10fb0b
-
-   sudo umount /dev/mapper/hdd2-crypt
-
-   # ╭─butla@b3 ~/development/bultrowicz.com ‹master*›
-   # ╰─$ lsblkk
-   # NAME          MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-   # sda             8:0    0 931,5G  0 disk
-   # └─hdd-crypt   253:1    0 931,5G  0 crypt /data
-   # sdb             8:16   0   1,8T  0 disk
-   # └─hdd2-crypt  253:2    0   1,8T  0 crypt
-
-   sudo dd if=/dev/mapper/hdd-crypt of=/dev/mapper/hdd2-crypt bs=8M status=progress
-
-   TODO, change the drives GUID? or maybe even not, so it just works when I put it in?
 
 
 
