@@ -12,13 +12,10 @@ Setting up the new data partition::
     export SECOND_DATA_DRIVE_CRYPT_KEY_FILE=/etc/luks_keys/2tb_data_disk_secret_key
 
     # This trick taken from https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions
-    # Although I use 4096 bytes of random data. It might be a lot of entropy, though.
-    #
     # It might hang until you get enough network traffic, keyboard and mouse usage.
     # https://stackoverflow.com/a/4819457/2252728
-    # For me it took 22m-25,8s (22 minutes, 25.8 seconds), according to my ZSH command timer plugin.
-    # maybe the keys are a bit long. for 4096 bits I'd need 512 bytes. Maybe I overdid it.
-    sudo bash -c "head -c 4096 /dev/random > $SECOND_DATA_DRIVE_CRYPT_KEY_FILE"
+    # For me this took 1m-15,8s
+    sudo bash -c "head -c 512 /dev/random > $SECOND_DATA_DRIVE_CRYPT_KEY_FILE"
 
     # Only root should be able to see the key.
     sudo chmod 600 $SECOND_DATA_DRIVE_CRYPT_KEY_FILE
