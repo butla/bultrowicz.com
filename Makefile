@@ -1,4 +1,4 @@
-keep_building:
+build_continuously:
 	fd .rst | entr -c ablog build
 
 run:
