@@ -53,7 +53,7 @@ Preparing the new drive
 With the old partition images on the external drive, you can swap out the old internal drive for the new one.
 
 Next, you should partition it (I used GParted) with the same or bigger partition sizes than you had before.
-The types/filesystems of the partitions you create doesn't matter,
+The types/filesystems of the partitions you create don't matter,
 because they'll be overwritten when copying from the images.
 
 If you didn't start going through this tutorial with a partition for ``/boot``,
