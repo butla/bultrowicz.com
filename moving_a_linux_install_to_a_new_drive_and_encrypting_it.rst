@@ -113,7 +113,7 @@ Now we need to open the newly created LUKS container (you can use any other name
 
     sudo cryptsetup luksOpen $PARTITION_FOR_LUKS crypt
 
-What people usually recommend (e.g. paragraph 2.1.6 from ``cryptsetups`` `FAQ <https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions#2-setup>`_)
+What people usually recommend (e.g. paragraph 2.1.6 from ``cryptsetup``'s `FAQ <https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions#2-setup>`_)
 is to fill the LUKS container with zeroes, so that it looks like random data on the drive,
 but because that `doesn't seem so dangerous <https://security.stackexchange.com/a/134654/152648>`_,
 I'm skipping that step.
@@ -124,8 +124,8 @@ Next, mark the opened LUKS container as a "physical volume" for LVM, and create 
     sudo vgcreate $VG_NAME /dev/mapper/crypt
 
 And finally, create the LVM volume that will host your OS.
-I've chosen a size (853 gigabytes) that will leave me 100 gigs for creating a new volume with another (experimental)
-Linux install in the future::
+I've chosen a size (853 gigabytes) that will leave me 100 gigs for creating a new volume with another
+Linux install in the future for experiments::
 
     sudo lvcreate -L 853G -n $OS_VOLUME_NAME $VG_NAME
 
