@@ -5,6 +5,11 @@ Workstation setup with Ansible, the hu(/a)ssle
    :author: Michal Bultrowicz
    :tags: Linux, system_administration, automation, journal
 
+I was moving from my old Kubuntu 18.04 to Manjaro on my main workstation computer
+(Alienware 15R3, now practically always docked on my desk (like the Mothership after the first Homeworld (TODO link)).
+I decided to finally fully write down and automate that process.
+So that setting up any new system won't be a hassle, because I'll be able to just tweak Ansible scripts.
+
 Long time ago I created an Ansible script for setting up my machine.
 I didn't keep it up to date and I thought it didn't make sense to maintain it, since I
 had multiple OSes (Kubuntu and Manjaro).
@@ -29,9 +34,18 @@ this is also a guide to my setup for people who are looking for guidance or insp
 
 some distilled articles may come from this in the future, but not just yet. Other priorities.
 
+This post is sort of a "journey" through my work/thought process.
 these will be a bit just like stream of consciousness.
 It'll have random stuff, might be hard to comprehent and it'll be hard to get through.
 But hey, maybe it'll benefit somebody :) And it won't take me too long to push this out.
+
+This whole Log thing would work well in a video format...
+Gotta give that a try, finally. Maybe next log will be in video format.
+I hope I won't spend too long editting :)
+Gotta do some gesture or something when I'm putting in secrets or showing keepass, so I'll know to edit out all of those
+instances... Or maybe I should see all the times that I press my keepass shortcut? (Super + 3).
+We'll see :) Probably the simple thing with a (hand)signal on the video will be simple enough.
+Hope I won't miss anything that way and it won't be too tiring.
 
 The Ansible script coming out of it will be a better thing to study, I think.
 
@@ -247,21 +261,181 @@ It wasn't. Ueberzug was crashing because of failing to load ``PIL``.
 Turns out I had an outdated AUR package - ``python-pillow-simd`` - providing Pillow, instead of the usual ``python-pillow``.
 Installed the latter, it replaced the former, everything is dandy.
 
+**2021-09-09**
+
+``$ yay ansible`` -> pick ``1 community/ansible 4.4.0-1``.
+
+Gotta squash the commits in my ``machine_configs`` repo before I make it public.
+There might me some encrypted keys there that I might still be using.
+It's encrypted so it's not like anybody **should** be able to retrieve them.
+But maybe it's better if I don't leave these encrypted blobs on public repos,
+for indexing and use (and maybe exploitation) by some future cypher-craking efforts ¯\_(ツ)_/¯
+Juuuuuust in case :)
+
+Huh, running my ``shrug`` alias to paste in here - the system detected that I don't have ``xclip`` and offered
+to install it. Nice of it to do that :) Oh, but pamac or something can't accept my "acceptation" :)
+No stdin attached?::
+
+     shrug              127 ✘  13s   1 
+    ¯\_(ツ)_/¯ copied to clipboard...
+    The application xclip is not installed. It may be found in the following packages:
+      extra/xclip 0.13-3    /usr/bin/xclip
+    Do you want to Install package xclip? (y/N)  y
+    Executing command: pamac install xclip
+    Preparing...
+    Synchronizing package databases...
+    Resolving dependencies...
+    Checking inter-conflicts...
+    
+    To upgrade (1):
+      thunderbird  91.1.0-0.1  (78.14.0-0.1)  extra  66.5 MB
+    To install (1):
+      xclip        0.13-3                     extra  15.3 kB
+    
+    Total download size: 66.5 MB
+    Total installed size: 21.9 MB
+    
+    Apply transaction ? [y/N]
+    Transaction cancelled.
+
+``$ yay xclip`` -> "1", and then::
+
+    shrug                   ✔  8s   1 
+    ¯\_(ツ)_/¯ copied to clipboard...
+
+You'll see it used above :) I do backtrack a small bit in this "log" :)
+
+Ok, so gotta squash the commits, put the repo up on Github.
+And then, I'll replace most of the old various machine setup scripts with a single new one for the machine
+I'm working on right now (my main workhorse).
+Different "machines" are:
+
+- my main machine
+- my old Raspberry PI
+- some arbitrary in-between ones that might, and might have not, have been used on some cloud instances
+
+If I'll have automation for different machines, it'll be extracted (and refactored)
+from the monolithic script for the setup of my workstation.
+
+**squashing commits / pushing to a new repository**
+
+.. code-block::
+
+    ~/development/machine_configs    master !1  git remote -v      ✔  1 
+   origin  git@bitbucket.org:butla/machine_configs.git (fetch)
+   origin  git@bitbucket.org:butla/machine_configs.git (push)
+
+That's my private repo (now you know it exists, OMG! :) ).
+
+Soft-reset to the first commit of that repo (hell, I'm gonna even leave the message, cause it'll be a nice trace :) )::
+
+    git reset bf8963456ef42a24a0356cfe95ccb9771d724cbe
+
+Stage all the files for the commit::
+
+    git add .
+
+Add everything to the original commit::
+
+    git commit --amend
+
+Now, there's just a single commit::
+
+     ~/dev/machine_configs    master ⇣128⇡1  git log                   ✔  1 
+    commit 9599e326ca16836b8b1b632505fd6f309c033e70 (HEAD -> master)
+    Author: Michal Bultrowicz <michalbultrowicz@gmail.com>
+    Date:   2017-07-02 13:32:12 +0200
+    
+        Initial commit, moved from Bitbucket with squashing of history
+    
+        Before Bitbucket, the stuff was at https://github.com/butla/utils
+
+Now, I have to create an empty repo on Github.
+I'd like to move everything to Gitlab one day and make Github repos into mirrors,
+I don't like Microsoft handling most of the world's open source...
+
+Switch the ``origin`` to the new repo::
+
+       ~/dev/machine_configs    master ⇣128⇡1  git remote set-url origin git@github.com:butla/machine_setups.git
+       ~/dev/machine_configs    master ⇣128⇡1  git remote -v             ✔  1 
+    origin  git@github.com:butla/machine_setups.git (fetch)
+    origin  git@github.com:butla/machine_setups.git (push)
+
+And push it out to GitHub with ``$ git push``.
+
+I also added a note on the Bitbucket repo (in the repo description) pointing to the new repo.
+I'm not removing the repo from Bitbucket, in case I ever need to consult the old git log.
+
+----
+
+Man... there's a lot of old TODOs I left for myself in that repo.
+It's a bit overwhelming. They'll need to get purged.
+I'm either solving the problem or letting it go.
+All of the Kubuntu-specific TODOs can go, fortunately.
+The ones about config files as well (because of ``configs_and_scripts``).
+And a lot of complexity with getting the software (PPAs, downloading and compiling myself),
+goes out of the window because of how rich and up-to date the Manjaro (and Arch) repos are.
+Also, there's AUR.
+
+The repo right now is basically bitrotten old Ansible for systems I'm not using anymore and a bunch of TODOs and notes.
+Well, I gotta change that into Ansible that'll actually run on both Manjaro laptops.
+
+We'll see if it won't be too much of a hassle to keep the laptop's software in-sync with Ansible...
+Hopefully it won't, and I'll have a forever-up-to-date resource that can recreate my workstation with one command.
+And it'll be the perfect documentation of my setup.
+
+Anyway, gotta create the new blank-slate playbook and start putting everything that's useful from around the repo into it.
+Maybe I'll consult the updated Ansible best-practices first...
+Dunno if there's a page like that anymore.
+Ansible's documentation sure got more confusing. Do I look at "community", "core", or which docs?
+There's overlap between them as well...
+Well, I guess "community" is the way to go.
+
+They sure added a lot of stuff in. And made commands more clunky with the namespaces
+(e.g. ``command`` -> ``ansible.builtin.command``).
+
+Should I even bother with Ansible? It looks like it's gotten so big.
+And I probably wouldn't use it in production now (I'd like immutable VMs with Terraform, Docker, Packer).
+But maybe there will still be some utility to it.
+It looks like you create playbooks and roles pretty much the same way as you did it two years ago
+(last time I wrote any Ansible).
+So let's see if can create this script in a relatively painless manner.
+
+If not, my setups will just be maintained with bash scripts :)
+I do think Ansible is nice with the idempotence (and rerunning not breaking stuff), though.
+But maybe the overhead is too big... Dunno.
+
+Ok, starting with a single role - ``main_machine``.
+First, just install all the packages I need (I'll gather them from the repo and notes).
+Gotta look into the docs to see the Ansible module for that on Manjaro (there was a universal one).
+
+Ok, Ansile is too much to handle for me ATM.
+Writing stuff in it requires me to just to the docs too often.
+I don't think I need it in my toolbox anymore. So long, friend...
+Let's see how will the environment setup look as a Bash script.
+I won't be able to just rerun it on both laptops to keep everything in sync, but it probably won't be a big problem
+to run the updates selectively.
+
+Woah, Manjaro automatically found my printer/scanner in the local network, and I can scan/print without setting anything up.
+So civilised :) I've heard that even Debian got some driverless scanning/printing support nowadays.
+Linux is making progress, I guess :)
+
+Ok, I've deleted the old Ansible scripts, pulled their logic into the shell script (almost).
+This is going to be so much simpler, although I'll need to implement small functions for idempotent setups of certain things, like pulling git repos. I don't have to go too overboard with it, though.
+It'll be way easier to maintain thatn Ansible, I think.
+
+
 TODO
 ----
 
-- install Ansible
-  - jakie są teraz best practices?
-  - mieć wiele pliczków, każdy robiący dyskretną rzecz i na końcu ją jakoś testujący?
-  - rób już w Ansiblu wszystko, dodawaj jak robisz (pisz to w logu), odpalaj Ansible na huwaweiu
-- move machine_configs to github and make it public. Rename as machine_setup. Does it have private files in history?
-  - maybe history needs to be dropped because of the private files
+- dokończ skrypt w machine_setups
 - set up ZSH (.zshrc)
   - keep powerline with process times and status
   - co jest potrzebne, żeby zainstalować powerline na huwaweiu?
 - vim/zshrc config - wyświetlanie trybu VIMa działa z powerlinem. Nie spodziewałem się, że Powerline'owe prompty tak ładnie się chowają jeśli trzeba
 - change XFCE theme while looking at what a config window is changing with strace, add those config to ``configs_and_scripts`` (blog post out of that)
   - hide window headings
+- printer / scaner?
 - skrypt datee dający mi datę w formacie jaki lubię (i wrzucający do schowka), do zapisków
 - alacritty doesn't render to the side - some XFCE scrollbars? To samo ma huawei
 - xfce favourites menu
@@ -280,3 +454,5 @@ TODO
     - sprawdź ``man gthumb``, może tam jest o pliku konfiguracyjnym
   - use gwenview but fix video playback to start immediately. How to skip to next if there's a video?
 - przejrzyj log i zobacz co ijak było instalowane
+- remove https://github.com/butla/utils. Move stuff from it around
+- spellcheck this post
