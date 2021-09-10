@@ -410,7 +410,7 @@ First, just install all the packages I need (I'll gather them from the repo and 
 Gotta look into the docs to see the Ansible module for that on Manjaro (there was a universal one).
 
 Ok, Ansile is too much to handle for me ATM.
-Writing stuff in it requires me to just to the docs too often.
+Writing stuff in it requires me to just go the docs too often.
 I don't think I need it in my toolbox anymore. So long, friend...
 Let's see how will the environment setup look as a Bash script.
 I won't be able to just rerun it on both laptops to keep everything in sync, but it probably won't be a big problem
@@ -422,7 +422,19 @@ Linux is making progress, I guess :)
 
 Ok, I've deleted the old Ansible scripts, pulled their logic into the shell script (almost).
 This is going to be so much simpler, although I'll need to implement small functions for idempotent setups of certain things, like pulling git repos. I don't have to go too overboard with it, though.
-It'll be way easier to maintain thatn Ansible, I think.
+It'll be way easier to maintain than Ansible, I think.
+
+**2021-09-10**
+
+Working on the script.
+All of the python tools that I used to install with `pip install --user` I now have taken either from Manjaro repos
+(with ``pacman``) or from AUR (with ``yay``).
+We'll see if this works well for me. If not, I'll try to use ``pipx`` for maintaining them.
+
+Too bad that ``yay`` `doesn't have an option to skip what it's already installed <https://github.com/Jguer/yay/issues/1552>`_.
+I'm working on a workaround for that, though.
+My initial idea isn't working for some reason, so I'll leave it for when I have the full setup done.
+It looks like I'm only missing NeoVim and ZSH configs, and plugins for NeoVim, ZSH and ranger.
 
 
 TODO
