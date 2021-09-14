@@ -436,6 +436,25 @@ I'm working on a workaround for that, though.
 My initial idea isn't working for some reason, so I'll leave it for when I have the full setup done.
 It looks like I'm only missing NeoVim and ZSH configs, and plugins for NeoVim, ZSH and ranger.
 
+Huh, I don't need to maintain a virtualenv for ``pynvim`` - the Python package providing Python intergration for
+Neovim. I used to have this line in ``~/.config/nvim/init.vim``::
+
+    let g:python3_host_prog = '/home/butla/.virtualenvs/neovim/bin/python3'
+
+I got rid of it.
+Looks like I can just install ``pynvim`` as a system package::
+
+    sudo pacman -S python-pynvim
+
+I love how much software is available as packages on Manjaro (and Arch, most probably) and how recent they are.
+Finally, a distro that doesn't lag behind the software I use.
+Ubuntu did that. And something would always break for me when upgrading the whole OS, so I just stayed with the LTSes.
+
+Rewritten the setup script to Python from Bash because
+I've come across something that was problematic in Bash (picking AUR packages that weren't installed already).
+That usually happens when you get slightly more complicated logic in scripts.
+If it starts looking ugly and/or confusing in Bash, it might be time to switch your script.
+
 
 TODO
 ----
