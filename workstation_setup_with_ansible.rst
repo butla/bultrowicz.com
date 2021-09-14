@@ -450,6 +450,8 @@ I love how much software is available as packages on Manjaro (and Arch, most pro
 Finally, a distro that doesn't lag behind the software I use.
 Ubuntu did that. And something would always break for me when upgrading the whole OS, so I just stayed with the LTSes.
 
+**2021-09-14**
+
 Rewritten the setup script to Python from Bash because
 I've come across something that was problematic in Bash (picking AUR packages that weren't installed already).
 That usually happens when you get slightly more complicated logic in scripts.
