@@ -49,6 +49,8 @@ Hope I won't miss anything that way and it won't be too tiring.
 
 The Ansible script coming out of it will be a better thing to study, I think.
 
+Rename to something like "a script for keeping the software and configs of two laptops in sync".
+
 Log / journal
 -------------
 
@@ -474,6 +476,31 @@ Writing the necessary code is more natural and faster for me than dealing with A
 Does it do some things less reliably than Ansible? (Like making sure that the repos I'm pulling are up to date?)
 Yup. But it's enough for my use. And I can tweak it however I want without hurdles, browsing the docs, or writing
 my own Ansible modules (I am writing my own "module" from the start).
+
+I'm not putting in any tests (and I'm a testing fanatic),
+but it won't be a problem to diagnose and fix the code when I'm using it.
+Also, I'm the only user.
+I am preparing myself for running this on a fresh Manjaro install, though.
+I'm running all the code that I'm adding, and most of the changes I make are done with the code.
+Sometimes I install/setup stuff manually, then tear it down and let the script do it.
+
+Alacritty (or another terminal emulator) defines what colors like "blue", "light blue", etc. mean, most programs
+say they want "blue", "light blue", etc. That's how you can tweak terminal colors in most programs
+(ranger, ls, ZSH). You can also choose different colors in those programs.
+
+I finally enabled KeepassXC to be a Secrets Service. That will prevent Brave (or Chromium) and pip from asking
+me to put in my password for Gnome keyring every time I use them.
+Dunno how to make Brave pull the passwords from KeePass, though, but that's not important now.
+
+Magically, the KeePass on stopped putting temporary local configuration options (window size/position, last opened DB)
+into ``~/.config/keepassxc/keepassxc.ini`` and started putting them into ``~/.cache/keepassxc/keepassxc.ini``.
+Finally, I won't get any random changes in ``configs_and_scripts`` files.
+`More info on the separation of configs <https://github.com/keepassxreboot/keepassxc/issues/2666>`_.
+
+Different autostart programs for two of my laptops made me introduce host-specific configurations
+into ``configs_and_scripts``. It was `quite simple to do <https://github.com/butla/configs_and_scripts/commit/9bbfe2a4ab87c0b9d3047a26e3d1992a0b93d89c#diff-cd9a14fe620c616e617225f9d9d6fee11f35f05950de741f88bfcc2dde2b6689>`_
+with the way my code was set up.
+
 
 TODO
 ----
