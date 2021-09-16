@@ -35,13 +35,13 @@ this is also a guide to my setup for people who are looking for guidance or insp
 some distilled articles may come from this in the future, but not just yet. Other priorities.
 
 This post is sort of a "journey" through my work/thought process.
-these will be a bit just like stream of consciousness.
-It'll have random stuff, might be hard to comprehent and it'll be hard to get through.
+These will be a bit just like stream of consciousness.
+It'll have random stuff, might be hard to comprehend and it'll be hard to get through.
 But hey, maybe it'll benefit somebody :) And it won't take me too long to push this out.
 
 This whole Log thing would work well in a video format...
 Gotta give that a try, finally. Maybe next log will be in video format.
-I hope I won't spend too long editting :)
+I hope I won't spend too long editing :)
 Gotta do some gesture or something when I'm putting in secrets or showing keepass, so I'll know to edit out all of those
 instances... Or maybe I should see all the times that I press my keepass shortcut? (Super + 3).
 We'll see :) Probably the simple thing with a (hand)signal on the video will be simple enough.
@@ -54,7 +54,7 @@ Log / journal
 
 (Log powinien mieć kawałek specjalnego HTMLa tłumaczący, czym jest, że to zapiski tego co robię, z których powstaje post.
 Jak robi te swoje kropki Hynek?)
-Funny, that these were kept by travellers (journal, journey)
+Funny, that these were kept by travelers (journal, journey)
 or sailors (logs, wonder if they were written on logs first xD).
 
 
@@ -196,7 +196,7 @@ So I'm gonna run some make commands in additional ``tmux`` panes:
 
 .. image:: /_static/workstation_setup_with_ansible/tmux_panes_with_rebuilding.png
 
-Oh shit, I need ``entr``... Neverending story xD I need that Ansible to never go through this again :)
+Oh shit, I need ``entr``... Never-ending story xD I need that Ansible to never go through this again :)
 Well, maybe for a few years, at least. And I'll have a better base for the new automation :)
 Or maybe, I'll really keep updating it throughout the years.
 Or I'll just never leave Manjaro :D Just keep expanding the script to more OSes
@@ -409,7 +409,7 @@ Ok, starting with a single role - ``main_machine``.
 First, just install all the packages I need (I'll gather them from the repo and notes).
 Gotta look into the docs to see the Ansible module for that on Manjaro (there was a universal one).
 
-Ok, Ansile is too much to handle for me ATM.
+Ok, Ansible is too much to handle for me ATM.
 Writing stuff in it requires me to just go the docs too often.
 I don't think I need it in my toolbox anymore. So long, friend...
 Let's see how will the environment setup look as a Bash script.
@@ -417,10 +417,10 @@ I won't be able to just rerun it on both laptops to keep everything in sync, but
 to run the updates selectively.
 
 Woah, Manjaro automatically found my printer/scanner in the local network, and I can scan/print without setting anything up.
-So civilised :) I've heard that even Debian got some driverless scanning/printing support nowadays.
+So civilized :) I've heard that even Debian got some driverless scanning/printing support nowadays.
 Linux is making progress, I guess :)
 
-Ok, I've deleted the old Ansible scripts, pulled their logic into the shell script (almost).
+OK, I've deleted the old Ansible scripts, pulled their logic into the shell script (almost).
 This is going to be so much simpler, although I'll need to implement small functions for idempotent setups of certain things, like pulling git repos. I don't have to go too overboard with it, though.
 It'll be way easier to maintain than Ansible, I think.
 
@@ -436,16 +436,6 @@ I'm working on a workaround for that, though.
 My initial idea isn't working for some reason, so I'll leave it for when I have the full setup done.
 It looks like I'm only missing NeoVim and ZSH configs, and plugins for NeoVim, ZSH and ranger.
 
-Huh, I don't need to maintain a virtualenv for ``pynvim`` - the Python package providing Python intergration for
-Neovim. I used to have this line in ``~/.config/nvim/init.vim``::
-
-    let g:python3_host_prog = '/home/butla/.virtualenvs/neovim/bin/python3'
-
-I got rid of it.
-Looks like I can just install ``pynvim`` as a system package::
-
-    sudo pacman -S python-pynvim
-
 I love how much software is available as packages on Manjaro (and Arch, most probably) and how recent they are.
 Finally, a distro that doesn't lag behind the software I use.
 Ubuntu did that. And something would always break for me when upgrading the whole OS, so I just stayed with the LTSes.
@@ -457,35 +447,35 @@ I've come across something that was problematic in Bash (picking AUR packages th
 That usually happens when you get slightly more complicated logic in scripts.
 If it starts looking ugly and/or confusing in Bash, it might be time to switch your script.
 
+**2021-09-15**
+
+I was praising the great number of software packages available and how recent they are on Manjaro.
+That's not always the case.
+``oh-my-zsh``, for example, has last been updated in January (I know that from ``pacman -Si oh-my-zsh``).
+I know that the manual install I have under ``~/.oh-my-zsh`` has updated itself many times since then.
+So I guess I'll stick with it. Shame, I'd like to manage as much software as possible with just the package manager.
+
+I'm merging my ``.zshrc`` with the one that was created for me by Manjaro Architect, when I chose ZSH.
+I got some ZSH options out of it, and I will get that "powerlevel10k" theme, because it's just awesome - functional
+and looking good. I'm discarding everything else.
+
+Weird how I have the powerline fonts and icons on the machine setup with Manjaro Architect without having the packages
+(``powerline-fonts``, ``awesome-terminal-fonts``)that provide them on the second laptop.
+Looks like Architect has set me up with something non-standard?
+It definitely adds ``manjaro-zsh-config`` package, but I don't see any fonts in it.
+I should probably compare the installed packages to solve this.
+
+I let powerlevel's config script (``p10k configure``) modify my ``.zshrc``.
+I still needed to add sourcing of ``powerlevel10k.zsh-theme`` above sourcing of ``p10k.zsh``.
+
+**2021-09-16**
+My Python setup script is taking care of the idempotency on it's own.
+Writing the necessary code is more natural and faster for me than dealing with Ansible.
+Does it do some things less reliably than Ansible? (Like making sure that the repos I'm pulling are up to date?)
+Yup. But it's enough for my use. And I can tweak it however I want without hurdles, browsing the docs, or writing
+my own Ansible modules (I am writing my own "module" from the start).
 
 TODO
 ----
 
-- dokończ skrypt w machine_setups
-- set up ZSH (.zshrc)
-  - keep powerline with process times and status
-  - co jest potrzebne, żeby zainstalować powerline na huwaweiu?
-- vim/zshrc config - wyświetlanie trybu VIMa działa z powerlinem. Nie spodziewałem się, że Powerline'owe prompty tak ładnie się chowają jeśli trzeba
-- change XFCE theme while looking at what a config window is changing with strace, add those config to ``configs_and_scripts`` (blog post out of that)
-  - hide window headings
-- printer / scaner?
-- skrypt datee dający mi datę w formacie jaki lubię (i wrzucający do schowka), do zapisków
-- alacritty doesn't render to the side - some XFCE scrollbars? To samo ma huawei
-- xfce favourites menu
-- clock style
-- autostart signal, (maybe slack, and discord?)
-- xfce panel - get rid of workplace switcher?
-- go through TODOs in machine_configs
-- signal settings
-- mention manual steps if the respective packages has been installed
-  - Brave - enable sync for everything
-  - Signal - sync with the phone
-  - Dropbox - log into it
-- keepassxc roaming config file kept in git https://github.com/keepassxreboot/keepassxc/issues/2666
-- image viewer solution:
-  - gthumb - solve zoom in problem (https://gitlab.gnome.org/GNOME/gthumb/-/issues/103)
-    - sprawdź ``man gthumb``, może tam jest o pliku konfiguracyjnym
-  - use gwenview but fix video playback to start immediately. How to skip to next if there's a video?
-- przejrzyj log i zobacz co ijak było instalowane
-- remove https://github.com/butla/utils. Move stuff from it around
 - spellcheck this post
