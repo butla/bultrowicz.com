@@ -6,6 +6,8 @@
     repo_name: bultrowicz.com
     repo_dir: "{{ ansible_env.HOME }}/{{ repo_name }}"
     virtualenv_dir: "{{ ansible_env.HOME }}/blog_venv"
+    # virtualenv was failing without that on Ubuntu 20.04
+    ansible_python_interpreter: /usr/bin/python3
 
   tasks:
     - name: update the server
@@ -15,12 +17,6 @@
     - name: clone the blog
       git: repo=https://github.com/butla/{{ repo_name }}
            dest={{ repo_dir }}
-
-    - name: prepare virtualenv for the blog
-      pip:
-        requirements: "{{ repo_dir }}/requirements.txt"
-        virtualenv: "{{ virtualenv_dir }}"
-        virtualenv_python: "python3.6"
 
     - name: build the blog
       command: "{{ virtualenv_dir }}/bin/ablog build"
