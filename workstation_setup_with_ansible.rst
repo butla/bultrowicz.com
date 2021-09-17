@@ -501,6 +501,109 @@ Different autostart programs for two of my laptops made me introduce host-specif
 into ``configs_and_scripts``. It was `quite simple to do <https://github.com/butla/configs_and_scripts/commit/9bbfe2a4ab87c0b9d3047a26e3d1992a0b93d89c#diff-cd9a14fe620c616e617225f9d9d6fee11f35f05950de741f88bfcc2dde2b6689>`_
 with the way my code was set up.
 
+**2021-09-17**
+
+Now, I need to change some system settings (like desktop theme) and store that in ``configs_and_scripts``.
+I want to get to the config files without having to dig through documentations of programs.
+I can check what files the programs are modifying myself with ``strace``.
+
+Getting a process ID related to a window you click: ``xprop _NET_WM_PID``.
+Starting a trace of all the files being opened and closed by a process with a given PID:
+``sudo strace -e open,close -p <PID>``.
+Putting it together::
+
+    sudo strace -e open,close -p $(xprop _NET_WM_PID | cut -d ' ' -f 3)
+
+Huh... some config files are already opened by the time I attach, so I don't see their paths
+(they only appear in "open" calls), but I can use ``lsof`` to see the files that the process has opened already.
+
+Of course my plans are foiled again by software that just can't maintain its configuration in git-friendly text files...
+Manjaro theme is being saved into ``~/.config/dconf/user``, which isn't a text file...
+I guess I need to use ``dconf`` to be setting that correctly in an automated fashion.
+So it'll go into ``machine_setups`` as a command I run, and not in ``configs_and_scripts`` as just, well, a config file.
+
+Now, how to use ``dconf`` to set this... I didn't want to search for stuff, but they forced me again...
+I could just leave setting the dekstop theme as a manual step in ``machine_setups`` (at least it'll be documented),
+but now I'm interested in seeing how much XFCE can be configured between different machines without GUIs.
+`With KDE it seemed to be impossible.<https://unix.stackexchange.com/questions/438596/robust-command-line-cli-configuration-of-plasma-kde-applets>`_
+
+I've searched for the theme name in ``~/.config``, turns out it's also saved in
+``~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml``.
+Let's see what's modifying this file::
+
+    sudo systemctl start auditd
+    sudo auditctl -w ~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml -p wa -k my_key
+    # now modify the setting
+    sudo ausearch -k my_key
+
+Looks like the file is being modified by ``/usr/lib/xfce4/xfconf/xfconfd``. Of course it couldn't be that easy.
+
+And that ``~/.config/dconf/user`` was being modified by ``/usr/lib/dconf-service``.
+Jesus. A GUI program is talking to a daemon or two to save a config file.
+Maybe they couldn't just use locks to synchronize saving the file?
+
+But I see that my approach with following ``strace`` might not be universal.
+
+Ok, so maybe a series of commands using ``xfconf`` will be the way to go.
+Maybe that'll work better than ``dconf``? Who knows...
+But now, how to figure out the option paths to use for ``xfconf``?
+
+I'm looking at this file ``~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml``...
+Looks like the "channel" is ``xsettings``. Running ``xfconf-query -c xsettings -l`` gives me all properties,
+and there's ``/Net/ThemeName``. Based on that I figure out::
+
+    xfconf-query -c xsettings -p /Net/ThemeName -s Adapta-Nokto-Eta-Maia
+
+It takes a moment for the setting to propagate to the file, but the theme change is visible immediately.
+Ok, so setting of any XFCE config properties will have to be done like this in ``machine_setups``.
+
+Actually, I'm already maintaining ``xfce4-keyboard-shortcuts.xml`` in ``configs_and_scripts``,
+so maybe other configs will be good for that as well. They might require a restart to kick in, though.
+Let's see. I'll compare the configs I have on my heavy/main laptop (new Manjaro) to the ones I have on the
+light/secondary (old Manjaro) one.
+
+Mounting the lighter one's filesystem over SSH will be handy (using hostnames from Avahi)::
+
+    sshfs bl.local:/home/butla ~/bl_home
+
+After looking at the files in ``~/.config/xfce4/xfconf/xfce-perchannel-xml/``
+I've realised that ``xfwm4.xml`` and ``xsettings.xml`` both contain configuration options that I want, and don't
+look to be polluted with often changing values.
+
+Let's see if I can apply them, restart the session and see the changes take place.
+
+It worked. The only other thing I want is the clock style.
+
+And the QT apps (qBittorrent, kolourpaint, KeePassXC) styling... that'll be worse...
+Ok, had to install one package (``kvantum-manjaro``), added one simple file to my configs, and added replacing of
+one line (with regex) in another config to ``machine_setups``.
+
+qBittorent won't be a good candidate for ``configs_and_scripts`` as it pollutes the configuration file with things
+like "most recently used path" and last window position.
+
+Ok, last config to set and find - the clock widget :)
+Let's see if ``auditd`` will come in handy.
+Running a broad search of all the configs::
+
+    sudo auditctl -w ~/.config -p wa -k my_key
+
+I hope the browser won't mess up the output too much. Let's see what I found::
+
+    sudo ausearch -k my_key
+
+Slack, Spotify, and Brave produced a lot of spam... I wonder when more developers will learn that ``~/.config``
+is for config and ``~/.cache`` is for temporary data...
+
+These can be filtered out::
+
+    sudo ausearch -k my_key | grep name | grep -v spotify | grep -v Slack | grep -v Brave
+
+So it's probably this file ``/home/butla/.config/xfce4/xfconf/xfce-perchannel-xml//xfce4-panel.xml``.
+And of course, this config isn't reliably addressable with ``xfconf-query``, because it's just ``/plugins/plugin-1``,
+``/plugins/plugin-2``, etc., and one of them happens to be the clock. I guess I could do that reliably by finding
+the one with ``digital-format`` parameter, but at this point I want to be done with this whole setup.
+It's going into "manual actions".
+
 
 TODO
 ----
