@@ -604,6 +604,21 @@ And of course, this config isn't reliably addressable with ``xfconf-query``, bec
 the one with ``digital-format`` parameter, but at this point I want to be done with this whole setup.
 It's going into "manual actions".
 
+**2021-09-18**
+A day off today, but I was annoyed by the login prompt style.
+Turns out it's governed by LightDM (``$ lightdm-gtk-greeter-settings``).
+And that has config stored globally, controlled by root under ``/etc/lightdm/lightdm-gtk-greeter.conf``.
+
+So my revised config change search looks like this::
+
+    sudo systemctl start auditd.service
+    sudo auditctl -w ~/.config -p wa -k my_key
+    sudo auditctl -w ~/.local -p wa -k my_key
+    sudo auditctl -w /etc -p wa -k my_key
+    sudo ausearch -k my_key | grep name | grep -v spotify | grep -v Slack | grep -v Brave
+
+This config is going under ``manually_linked`` in my configs - I'd need to add something for setting root's configs,
+like SSHD. Should be host-dependent.
 
 TODO
 ----
