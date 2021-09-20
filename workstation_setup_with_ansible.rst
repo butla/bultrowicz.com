@@ -8,6 +8,9 @@ Synchronizing software and configuration on two laptops
 I've created a script that prepares almost all of a system (Manjaro) to my liking.
 I have two machines that behave the same, have the same software. Something I wanted for a long time.
 
+It's partially automation, partially documentation. Everything's written down, most of the stuff is automated.
+I could automate everything, but I've already spent enough time on this, I think.
+
 I was moving from my old Kubuntu 18.04 to Manjaro on my main workstation computer
 (Alienware 15R3, now practically always docked on my desk (like the Mothership after the first Homeworld (TODO link)).
 I decided to finally fully write down and automate that process.
