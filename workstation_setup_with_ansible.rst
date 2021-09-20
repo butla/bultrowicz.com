@@ -1,9 +1,12 @@
-Workstation setup with Ansible, the hu(/a)ssle
-==============================================
+Synchronizing software and configuration on two laptops
+=======================================================
 
 .. post::
    :author: Michal Bultrowicz
    :tags: Linux, system_administration, automation, journal
+
+I've created a script that prepares almost all of a system (Manjaro) to my liking.
+I have two machines that behave the same, have the same software. Something I wanted for a long time.
 
 I was moving from my old Kubuntu 18.04 to Manjaro on my main workstation computer
 (Alienware 15R3, now practically always docked on my desk (like the Mothership after the first Homeworld (TODO link)).
@@ -48,8 +51,6 @@ We'll see :) Probably the simple thing with a (hand)signal on the video will be 
 Hope I won't miss anything that way and it won't be too tiring.
 
 The Ansible script coming out of it will be a better thing to study, I think.
-
-Rename to something like "a script for keeping the software and configs of two laptops in sync".
 
 Log / journal
 -------------
