@@ -11,6 +11,38 @@ I have two machines that behave the same, have the same software. Something I wa
 It's partially automation, partially documentation. Everything's written down, most of the stuff is automated.
 I could automate everything, but I've already spent enough time on this, I think.
 
+There are still a few mildly annoying differences:
+- something being off with fonts on the heavy laptop (maybe some font package conflict?)
+- light laptop not showing my wallpaper on login screen, even though LightDM config is the same
+- probably some others
+
+But I can live with them. And maybe I'll solve them accidentally, while doing other things in the future :)
+And I do have a solid base, which won't be so time-expensive to maintain, that I won't do it
+(which was the fate of the Ansible script)
+
+# TODO add alt text to the images?
+
+TODO Have a section for more context before the log:
+
+I have two laptops (TODO explain my setup, explain what the scripts are doing):
+- heavy, main one, Alienware 15 R3; bought in 2017; Had Kubuntu 18.04 till recently, now on Manjaro.
+- light, secondary one, Huawei Matebook 14 D (had really good price to value rate in Poland, light MacBook knockoff)
+  (bought in 2019), was my first Manjaro machine
+
+My procedures:
+- config changes - I see them in Git, I can abort or commit them
+- if I add a package, or it's something more complicated than just editing a config file - goes into machine_setups
+
+Not all config files are Git friendly, but some software it's getting better
+(ranger has option to not store the bookmark on disc, keypass sensibly separated window sizes from other config params)
+
+Issues with using Ansible for my machine setup:
+- would require me to write some modules (or scripts for change detection) to get it 100% accurate with showing what's
+  changed
+- way slower than my script in running locally
+- requires me to look in docs, and think about what's the "Ansible way" of doing things.
+  For me it's just way easier to think about what's needed, and then coding that in Python.
+
 I was moving from my old Kubuntu 18.04 to Manjaro on my main workstation computer
 (Alienware 15R3, now practically always docked on my desk (like the Mothership after the first Homeworld (TODO link)).
 I decided to finally fully write down and automate that process.
@@ -623,6 +655,36 @@ So my revised config change search looks like this::
 
 This config is going under ``manually_linked`` in my configs - I'd need to add something for setting root's configs,
 like SSHD. Should be host-dependent.
+
+**2021-09-21**
+
+I was supposed to just finish up the summary on this post and push it out today, but there's this issue with lines
+in the right powerline prompt, that I only have on the heavy laptop:
+
+.. image:: /_static/workstation_setup_with_ansible/powerlevel_font_issue.png
+
+Maybe it's because of some font package conflict that's not present in the light laptop?
+I'll dump the installed package lists (``$ pacman -Q``) and compare them.
+
+Potential candidates (packages having something to do with ZSH or fonts, that are on the heavy, not the light laptop):
+
+- ``nerd-fonts-noto-sans-mono``
+- ``manjaro-zsh-config``
+- ``oh-my-zsh (from AUR)``
+- ``zsh-completions``
+- ``zsh-history-substring-search``
+- ``zsh-syntax-highlighting``
+
+That wasn't it. Uninstalled, restarted, still have the issue.
+I'm gonna add ``zsh-completions`` to my packages, though.
+
+After I Googled harder (I needed a bit more intelligence in the search than DuckDuckGo offers...) I've found that the
+`issue is with my "right segment separator" characters<https://github.com/Powerlevel9k/powerlevel9k/issues/1313>`_.
+See them with ``$ get_icon_names``.
+The problem is there in my terminal emulator - Alacritty - and ``xfce4-terminal``,
+but it isn't there in ``terminator``.
+
+I'm just gonna live with it for the time being and I won't investigate further, as I have other things to do.
 
 TODO
 ----
