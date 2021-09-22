@@ -1,5 +1,5 @@
-Synchronizing software and configuration on two laptops
-=======================================================
+Setting up and syncing config on two laptops
+============================================
 
 .. post::
    :author: Michal Bultrowicz
@@ -25,6 +25,7 @@ And I do have a solid base, which won't be so time-expensive to maintain, that I
 TODO Have a section for more context before the log:
 
 I have two laptops (TODO explain my setup, explain what the scripts are doing):
+
 - heavy, main one, Alienware 15 R3; bought in 2017; Had Kubuntu 18.04 till recently, now on Manjaro.
 - light, secondary one, Huawei Matebook 14 D (had really good price to value rate in Poland, light MacBook knockoff)
   (bought in 2019), was my first Manjaro machine
@@ -37,6 +38,7 @@ Not all config files are Git friendly, but some software it's getting better
 (ranger has option to not store the bookmark on disc, keypass sensibly separated window sizes from other config params)
 
 Issues with using Ansible for my machine setup:
+
 - would require me to write some modules (or scripts for change detection) to get it 100% accurate with showing what's
   changed
 - way slower than my script in running locally
@@ -261,9 +263,9 @@ Oh! Vim indicator is working in this Powerline setup! This is so nice :) I gotta
 Now that I'm in an activated virtual env (and I have ``fd`` and ``entr``), my ``make`` commands should run!
 ...Yeah, I need to install the python dependencies first :)::
 
-       ~/dev/bultrowicz.com    master +2 !2 ?5  which pip
+    $ which pip
     /home/butla/.virtualenvs/bultrowicz.com/bin/pip
-       ~/dev/bultrowicz.com    master +2 !2 ?5  pip install -r requirements.txt
+    $ pip install -r requirements.txt
     Collecting ablog==0.10.17
       Downloading ablog-0.10.17-py3-none-any.whl (55 kB)
          |████████████████████████████████| 55 kB 1.3 MB/s
@@ -314,7 +316,7 @@ Huh, running my ``shrug`` alias to paste in here - the system detected that I do
 to install it. Nice of it to do that :) Oh, but pamac or something can't accept my "acceptation" :)
 No stdin attached?::
 
-     shrug              127 ✘  13s   1 
+    $ shrug
     ¯\_(ツ)_/¯ copied to clipboard...
     The application xclip is not installed. It may be found in the following packages:
       extra/xclip 0.13-3    /usr/bin/xclip
@@ -338,7 +340,7 @@ No stdin attached?::
 
 ``$ yay xclip`` -> "1", and then::
 
-    shrug                   ✔  8s   1 
+    shrug
     ¯\_(ツ)_/¯ copied to clipboard...
 
 You'll see it used above :) I do backtrack a small bit in this "log" :)
@@ -357,11 +359,11 @@ from the monolithic script for the setup of my workstation.
 
 **squashing commits / pushing to a new repository**
 
-.. code-block::
+.. code-block:: bash
 
-    ~/development/machine_configs    master !1  git remote -v      ✔  1 
-   origin  git@bitbucket.org:butla/machine_configs.git (fetch)
-   origin  git@bitbucket.org:butla/machine_configs.git (push)
+    $ git remote -v
+    origin  git@bitbucket.org:butla/machine_configs.git (fetch)
+    origin  git@bitbucket.org:butla/machine_configs.git (push)
 
 That's my private repo (now you know it exists, OMG! :) ).
 
@@ -379,13 +381,13 @@ Add everything to the original commit::
 
 Now, there's just a single commit::
 
-     ~/dev/machine_configs    master ⇣128⇡1  git log                   ✔  1 
+    $ git log
     commit 9599e326ca16836b8b1b632505fd6f309c033e70 (HEAD -> master)
     Author: Michal Bultrowicz <michalbultrowicz@gmail.com>
     Date:   2017-07-02 13:32:12 +0200
-    
+
         Initial commit, moved from Bitbucket with squashing of history
-    
+
         Before Bitbucket, the stuff was at https://github.com/butla/utils
 
 Now, I have to create an empty repo on Github.
@@ -394,8 +396,8 @@ I don't like Microsoft handling most of the world's open source...
 
 Switch the ``origin`` to the new repo::
 
-       ~/dev/machine_configs    master ⇣128⇡1  git remote set-url origin git@github.com:butla/machine_setups.git
-       ~/dev/machine_configs    master ⇣128⇡1  git remote -v             ✔  1 
+    $ git remote set-url origin git@github.com:butla/machine_setups.git
+    $ git remote -v
     origin  git@github.com:butla/machine_setups.git (fetch)
     origin  git@github.com:butla/machine_setups.git (push)
 
@@ -561,7 +563,7 @@ So it'll go into ``machine_setups`` as a command I run, and not in ``configs_and
 Now, how to use ``dconf`` to set this... I didn't want to search for stuff, but they forced me again...
 I could just leave setting the dekstop theme as a manual step in ``machine_setups`` (at least it'll be documented),
 but now I'm interested in seeing how much XFCE can be configured between different machines without GUIs.
-`With KDE it seemed to be impossible.<https://unix.stackexchange.com/questions/438596/robust-command-line-cli-configuration-of-plasma-kde-applets>`_
+`With KDE it seemed to be impossible. <https://unix.stackexchange.com/questions/438596/robust-command-line-cli-configuration-of-plasma-kde-applets>`_
 
 I've searched for the theme name in ``~/.config``, turns out it's also saved in
 ``~/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml``.
@@ -679,7 +681,7 @@ That wasn't it. Uninstalled, restarted, still have the issue.
 I'm gonna add ``zsh-completions`` to my packages, though.
 
 After I Googled harder (I needed a bit more intelligence in the search than DuckDuckGo offers...) I've found that the
-`issue is with my "right segment separator" characters<https://github.com/Powerlevel9k/powerlevel9k/issues/1313>`_.
+`issue is with my "right segment separator" characters <https://github.com/Powerlevel9k/powerlevel9k/issues/1313>`_.
 See them with ``$ get_icon_names``.
 The problem is there in my terminal emulator - Alacritty - and ``xfce4-terminal``,
 but it isn't there in ``terminator``.
@@ -723,6 +725,46 @@ Wait, the powerline characters look slightly different on both laptops... Argh!
 Ok, I will seriously not bother with this. Maybe the future will give me an answer :)
 
 .. image:: /_static/workstation_setup_with_ansible/bh_vs_bl_powerline.png
+
+Hmm... I should probably merge ``machine_setups`` and ``configs_and_scripts`` repos.
+I seem to update both of them when I'm working on my setup, and one is calling the other.
+
+Back to the default system monospace font.
+For some reason the font configuration is awfully distributed and done in cryptic XML files.
+Where's the ``man`` for them? Why isn't it mentioned in the system files to make customization easy?
+I've found this bit in ``man fc-cache``::
+
+    The fontconfig user's guide, in HTML format: /usr/share/doc/fontconfig/fontconfig-user.html.
+
+But that file doesn't exist...
+Oh well, I'm gonna try `some bits <https://wiki.archlinux.org/title/Font_configuration/Examples>`_
+from the Arch Wiki (love it as a resource), and if that doesn't work, I'm just gonna set the fonts for Alacritty
+and be done with this.
+
+Ok, I'm giving up with the fontconfig.
+I've made ``~/.config/fontconfig/fonts.conf`` look like this::
+
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+    <fontconfig>
+      <!-- Default monospace font -->
+      <alias binding="strong">
+        <family>monospace</family>
+        <prefer>
+          <family>Noto Sans Mono</family>
+        </prefer>
+      </alias>
+    </fontconfig>
+
+With that, I get the correct font (I think) with ``fc-match monospace``:
+``NotoSansMono-Regular.ttf: "Noto Sans Mono" "Regular"``.
+And the glyphs look OK. But the right powerline prompts get the missing dashes that aren't there if I set the
+font with Alacritty :D
+So I'll skip ``fonts.conf`` and just set the font in Alacritty.
+
+.. image:: /_static/workstation_setup_with_ansible/noto_sans_-_fontconfig_vs_alacritty.png
+
+Ok... for the sake of closure and tidiness I've merged ``configs_and_scripts`` into ``machine_setups``.
 
 TODO
 ----
