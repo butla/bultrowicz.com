@@ -684,7 +684,45 @@ See them with ``$ get_icon_names``.
 The problem is there in my terminal emulator - Alacritty - and ``xfce4-terminal``,
 but it isn't there in ``terminator``.
 
+Turns out it was the font that had the issue ("DejaVu Sans Mono"), on all terminals.
+
 I'm just gonna live with it for the time being and I won't investigate further, as I have other things to do.
+
+**2021-09-22**
+After wrapping up my main work yesterday I had to get back to those fonts.
+Alacritty on both laptops was defaulting to different fonts. Some fonts have that "dash problem", some don't.
+I need to check what font Alacritty chooses by default on the light laptop, where both the right powerline prompts
+and the vertical Tmux separator look OK. Right, you might have not noticed before that there are these gaps in
+vertical separators in Tmux, but only on the heavy laptop.
+
+.. image:: /_static/workstation_setup_with_ansible/tmux_separator_gaps.png
+
+``$ fc-match`` should show the default font, as I understand it. It shows ``"DejaVu Sans" "Book"`` on the heavy,
+and ``Nimbus Sans" "Regular"`` on the light.
+But setting "Nimbus Sans" as the font in Alacritty screws up the look, hard.
+
+.. image:: /_static/workstation_setup_with_ansible/alacritty_with_nimbus_sans.png
+
+So I'm thinking Alacritty is picking a different font on the light one. Now, to figure out what it is.
+
+It might be worth noting, that Terminator doesn't have the gaps in vertical separators, even with the same font set
+as Alacritty.
+
+Oh... right, I wasn't getting the default **monospace** fonts with ``fc-match``.
+I should've called ``$ fc-match monospace``. That gives me ``DejaVuSansMono.ttf: "DejaVu Sans Mono" "Book"``
+for the heavy, and ``Inconsolata-Regular.ttf: "Inconsolata" "Regular"`` for the light.
+
+Switching to Inconsolata in Alacritty does make the Powerline prompts lose the dashes and gets rid of the gaps in
+the Tmux separatars. Although the separators have small "bumps" :) Well, I guess I prefer that to gaps.
+
+Ok, now to enforce the same default font on both computers - I won't just keep that setting in Alacritty.
+Hmm... I'll go with "Noto Sans Mono". The characters look nicer than with Inconsolata.
+I get the gaps in vertical lines in Tmux, though. Oh well.
+
+Wait, the powerline characters look slightly different on both laptops... Argh!
+Ok, I will seriously not bother with this. Maybe the future will give me an answer :)
+
+.. image:: /_static/workstation_setup_with_ansible/bh_vs_bl_powerline.png
 
 TODO
 ----
