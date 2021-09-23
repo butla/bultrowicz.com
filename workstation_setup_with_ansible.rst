@@ -3,102 +3,125 @@ Setting up and syncing config on two laptops
 
 .. post::
    :author: Michal Bultrowicz
-   :tags: Linux, system_administration, automation, journal
+   :tags: Linux, system_administration, Python, journal
 
-I've created a script that prepares almost all of a system (Manjaro) to my liking.
-I have two machines that behave the same, have the same software. Something I wanted for a long time.
+I've created `a script <https://github.com/butla/machine_setups>`_ that should [#1]_ set up a fresh Manjaro
+with all the software and configuration that I want in a workstation.
+It can also update the setup on being rerun.
+Now I have two laptops that behave and look the same [#2]_, and it's easy for me to maintain that state.
+Oh I wanted that for a long time :)
 
-It's partially automation, partially documentation. Everything's written down, most of the stuff is automated.
-I could automate everything, but I've already spent enough time on this, I think.
+Using the script
+~~~~~~~~~~~~~~~~
+
+I can just clone the repo and run ``make setup_workstation``.
+
+If I want to update the setup on one laptop after tweaking it on the other one (and writing it down in this repo, of
+course), I just run the same ``make`` command.
+Well, actually I have an ``upgrade`` shell function for that.
+
+I'm also rerunning it from time to time to make sure everything (including Tmux and NeoVim plugins) is up to date.
+
+About this post
+~~~~~~~~~~~~~~~
+
+From here on this post might get a bit (a lot?) ranty.
+Also, it includes something like a journal from working on the script.
+I did very little editing in that part.
+It'll be a bit like a stream of consciousness and will illustrate my thinking
+during work.
+It'll have random stuff, might be hard to comprehend and it'll be hard to get through.
+Also it might show you some tools and tricks I employ, so maybe it'll benefit somebody :)
+Read at your own risk :)
+
+More context
+~~~~~~~~~~~~
+
+I know many people have written tools for maintaining their dotfiles, configs, etc.
+Well, I'm adding one that fits with my development style ¯\\_(ツ)_/¯
+You might find it also fits with you, especially if you're comfortable with Python.
+
+Some small bits still require manual intervention, but at least they're documented in the text that gets printed
+at the end of the script run.
+So I should never again forget how I set something up, to then waste time on Googling some years later :)
+
+It'll also allow me to adapt to other Linux distros way faster.
+In the future, I'll modify the script to set up my Raspberry PI (now it just handles Desktop Manjaro),
+and maybe also to configure servers on which I want to have coding tools.
 
 There are still a few mildly annoying differences:
+
 - something being off with fonts on the heavy laptop (maybe some font package conflict?)
 - light laptop not showing my wallpaper on login screen, even though LightDM config is the same
 - probably some others
 
 But I can live with them. And maybe I'll solve them accidentally, while doing other things in the future :)
-And I do have a solid base, which won't be so time-expensive to maintain, that I won't do it
-(which was the fate of the Ansible script)
+And I do have a solid base, which won't be so time-expensive to maintain, that I won't do it,
+which was the case before, when I had an Ansible script that had the same purpose.
 
-# TODO add alt text to the images?
+You might wonder **why I didn't go with Ansible**, and wrote a custom script instead.
+Here's some reasons:
 
-TODO Have a section for more context before the log:
-
-I have two laptops (TODO explain my setup, explain what the scripts are doing):
-
-- heavy, main one, Alienware 15 R3; bought in 2017; Had Kubuntu 18.04 till recently, now on Manjaro.
-- light, secondary one, Huawei Matebook 14 D (had really good price to value rate in Poland, light MacBook knockoff)
-  (bought in 2019), was my first Manjaro machine
-
-My procedures:
-- config changes - I see them in Git, I can abort or commit them
-- if I add a package, or it's something more complicated than just editing a config file - goes into machine_setups
-
-Not all config files are Git friendly, but some software it's getting better
-(ranger has option to not store the bookmark on disc, keypass sensibly separated window sizes from other config params)
-
-Issues with using Ansible for my machine setup:
-
-- would require me to write some modules (or scripts for change detection) to get it 100% accurate with showing what's
-  changed
-- way slower than my script in running locally
-- requires me to look in docs, and think about what's the "Ansible way" of doing things.
+- it would require me to write some modules (and scripts for change detection) to get it 100% accurate with showing
+  what's changed; interplay between that code and playbooks would be more awkward than just writing all of it down
+  in Python (in my estimate)
+- way slower than my script (it just takes so long to run any Ansible step locally)
+- it would require me to look in docs a lot, and think about what's the "Ansible way" of doing things.
   For me it's just way easier to think about what's needed, and then coding that in Python.
 
-I was moving from my old Kubuntu 18.04 to Manjaro on my main workstation computer
-(Alienware 15R3, now practically always docked on my desk (like the Mothership after the first Homeworld (TODO link)).
-I decided to finally fully write down and automate that process.
-So that setting up any new system won't be a hassle, because I'll be able to just tweak Ansible scripts.
+I think it's time for me to forget about Ansible.
+I used to use it in some of my previous jobs, I wrote some scripts for myself, but I don't think I need it in
+my toolbox anymore.
+Unless I'm gonna work with a fleet of non-virtual servers, which hasn't happened to this date.
+If I were to spawn infrastructure I'd use Terraform (you can use Ansible as instance setup scripts, but that just
+needlessly more complicated than using shell scripts).
+If I was deploying applications I'd use containers and Helm or Docker Swarm
+(that would run on infrastructure set up with Terraform).
 
-Long time ago I created an Ansible script for setting up my machine.
-I didn't keep it up to date and I thought it didn't make sense to maintain it, since I
-had multiple OSes (Kubuntu and Manjaro).
-But now that both my computers are on Manjaro I decided to try this trick once more to create
-something that will allow me to just turn any Manjaro install into my workstation.
+Up to this point I haven't mentioned what computers I have:
 
-Before I had dreams of making that script support multiple OSes, that dream is still holding on.
-Though I won't implement that just yet :)
+- Alienware 15 R3; bought in 2017 (can still perform well); the heavy / the main one;
+  had Kubuntu 18.04 on it till recently, now's on Manjaro
+- Huawei Matebook D 14; bought in 2019; the light one / the secondary one; contains my first Manjaro install;
+  I bought it because of the very good price to value ratio in Poland; has some quality issues (like overheating and
+  crashing when under load and charging)
 
-Ansible has changed and I have changed, so I'm giving this another try.
+Some loose thoughts
+~~~~~~~~~~~~~~~~~~~
 
-Na tym Europythonie kiedyś już miałem pomysł configów w ansiblu.
-Powiedziałem to jako komentarz po prezentacji, łysy koleś z brodą z Londynu mi przytaknął.
+Not all config files are Git-friendly.
+Programs use config files and directories for caching data, which they shouldn't do.
+If you'd try to put those files in Git you'd have constant changes.
+It's getting better with some software, though.
+Ranger has option to not store the "most recent" bookmark on disc (it was changing while you were using ranger),
+KeyPassXC sensibly separated stuff like current window sizes from other config params in a config that goes under
+``~/.cache``.
 
-NixOS służy do tego samego co mój Ansible (utrzymywanie konfiguracji systemu w kodzie), i może robi to lepiej,
-ale nie jestem gotowy przerzucać wszystko na NixOS.
-Ansible jest jednak troszkę bardziej uniwersalny. Mogę używać go do wielu systemów.
-Chociaż oczywiście byłoby super, gdyby producenci dystrybucji i programów szli w stronę configów,
-które łatwo trzymać w gicie, i ogólnie prostej konfiguracji wszystkiego przez pliki, idempotencja też by była przydatna.
+NixOS seems to have a solution for maintaining all of your system's configuration in text files,
+and I applaud it.
+But I'm just not ready to drop all the niceties (a lot of packages, on-line resources)
+of a well-maintained and popular distro like Manjaro.
+Also, I can adapt and use my script on multiple devices with multiple OSes.
+From what I see NixOS isn't yet supported on Raspberry Pi 4, and I can't just spawn a NixOS VM on Digital Ocean.
+Of course it would be great if other Linux distributions went the way of NixOS with package installation.
 
-this is also a guide to my setup for people who are looking for guidance or inspiration.
+Some distilled articles may come from this post in the future, but not just yet. Other priorities.
 
-some distilled articles may come from this in the future, but not just yet. Other priorities.
 
-This post is sort of a "journey" through my work/thought process.
-These will be a bit just like stream of consciousness.
-It'll have random stuff, might be hard to comprehend and it'll be hard to get through.
-But hey, maybe it'll benefit somebody :) And it won't take me too long to push this out.
+Log / journal
+-------------
 
-This whole Log thing would work well in a video format...
+This whole Log thing would probably work better (also for me) in a video format...
 Gotta give that a try, finally. Maybe next log will be in video format.
 I hope I won't spend too long editing :)
 Gotta do some gesture or something when I'm putting in secrets or showing keepass, so I'll know to edit out all of those
 instances... Or maybe I should see all the times that I press my keepass shortcut? (Super + 3).
 We'll see :) Probably the simple thing with a (hand)signal on the video will be simple enough.
 Hope I won't miss anything that way and it won't be too tiring.
-
-The Ansible script coming out of it will be a better thing to study, I think.
-
-Log / journal
--------------
-
-(Log powinien mieć kawałek specjalnego HTMLa tłumaczący, czym jest, że to zapiski tego co robię, z których powstaje post.
-Jak robi te swoje kropki Hynek?)
-Funny, that these were kept by travelers (journal, journey)
-or sailors (logs, wonder if they were written on logs first xD).
-
+Anyway, that's something for the future.
 
 **2021-09-07**
+
 What I've installed:
 
 - mpv
@@ -119,6 +142,7 @@ What I've installed:
 - keepassxc
 
 **2021-09-08**
+
 Carrying on with ranger config updates - created default configs,
 comparing them to mine with ``meld``.
 
@@ -154,7 +178,7 @@ Keeping a log (with exact bits of scripts) should be a good way to backtrack dur
 Can't do that if you're in an emergency that requires urgency, though.
 Guess you can look at your shell history if you need to backtrack in those situations.
 
-Anyway, back to the ``**meld**``.
+Anyway, back to the ``meld``.
 I'm getting everything from my config that will be useful, but will not break.
 So probably that'll be everything like basic settings, and scripts and aliases from my
 `configs_and_scripts <https://github.com/butla/configs_and_scripts>`_ repo.
@@ -202,7 +226,7 @@ Huh, I noticed that my old config has this note in it::
     # Needed to make apps start in the foreground
     unset DESKTOP_STARTUP_ID
 
-Shitf+clicked the link above with Alacritty :)
+Shift+clicked the link above with Alacritty :)
 
 Looks like `it got fixed <https://github.com/alacritty/alacritty/pull/2525>`_, merged into master on Jun 16, 2019,
 so I bet I have that installed :)
@@ -213,7 +237,6 @@ Saved both the files (both got updated) and closed ``meld``.
 
 Installed ``xsel`` so I can copy file names from my ``ranger`` in my "development view", while writing this post.
 Need the copy, so I can paste image file paths into ``workstation_setup_with_ansible.rst`` with ``nvim``.
-installed_xsel.png
 
 .. image:: /_static/workstation_setup_with_ansible/installed_xsel.png
 
@@ -309,7 +332,7 @@ Gotta squash the commits in my ``machine_configs`` repo before I make it public.
 There might me some encrypted keys there that I might still be using.
 It's encrypted so it's not like anybody **should** be able to retrieve them.
 But maybe it's better if I don't leave these encrypted blobs on public repos,
-for indexing and use (and maybe exploitation) by some future cypher-craking efforts ¯\_(ツ)_/¯
+for indexing and use (and maybe exploitation) by some future cypher-craking efforts ¯\\_(ツ)_/¯
 Juuuuuust in case :)
 
 Huh, running my ``shrug`` alias to paste in here - the system detected that I don't have ``xclip`` and offered
@@ -509,6 +532,7 @@ I let powerlevel's config script (``p10k configure``) modify my ``.zshrc``.
 I still needed to add sourcing of ``powerlevel10k.zsh-theme`` above sourcing of ``p10k.zsh``.
 
 **2021-09-16**
+
 My Python setup script is taking care of the idempotency on it's own.
 Writing the necessary code is more natural and faster for me than dealing with Ansible.
 Does it do some things less reliably than Ansible? (Like making sure that the repos I'm pulling are up to date?)
@@ -643,6 +667,7 @@ the one with ``digital-format`` parameter, but at this point I want to be done w
 It's going into "manual actions".
 
 **2021-09-18**
+
 A day off today, but I was annoyed by the login prompt style.
 Turns out it's governed by LightDM (``$ lightdm-gtk-greeter-settings``).
 And that has config stored globally, controlled by root under ``/etc/lightdm/lightdm-gtk-greeter.conf``.
@@ -691,6 +716,7 @@ Turns out it was the font that had the issue ("DejaVu Sans Mono"), on all termin
 I'm just gonna live with it for the time being and I won't investigate further, as I have other things to do.
 
 **2021-09-22**
+
 After wrapping up my main work yesterday I had to get back to those fonts.
 Alacritty on both laptops was defaulting to different fonts. Some fonts have that "dash problem", some don't.
 I need to check what font Alacritty chooses by default on the light laptop, where both the right powerline prompts
@@ -766,7 +792,18 @@ So I'll skip ``fonts.conf`` and just set the font in Alacritty.
 
 Ok... for the sake of closure and tidiness I've merged ``configs_and_scripts`` into ``machine_setups``.
 
-TODO
-----
+**2021-09-23**
 
-- spellcheck this post
+I was trying to wrap up this post and to write a good but short README for ``machine_setups`` and it hit me
+that it's hard to explain when to use my ``upgrade`` function and when to run the main setup from ``machine_setups``,
+since their competence sort of overlaps.
+So I made the setup script also update everything. Now ``upgrade`` just calls the main setup.
+There's one command to keep everything in sync. Nice, tidy, and simple.
+
+I hope I'll be done with this post today, but it keeps dragging on into eternity.
+
+.. rubric:: Footnotes
+
+.. [#] I haven't actually ran a fresh Manjaro install to test that case,
+       but I'm sure I'll iron the script out once I need to setup another system or when I'll boot a live install.
+.. [#] There are some host-specific configs, but that's also handled by the code.
