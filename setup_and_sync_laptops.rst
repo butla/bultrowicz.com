@@ -1,7 +1,7 @@
 Setting up and syncing config on two laptops
 ============================================
 
-.. post::
+.. post:: 2021-09-23
    :author: Michal Bultrowicz
    :tags: Linux, system_administration, Python, journal
 
@@ -12,7 +12,7 @@ Now I have two laptops that behave and look the same [#2]_, and it's easy for me
 Oh I wanted that for a long time :)
 
 Using the script
-~~~~~~~~~~~~~~~~
+----------------
 
 I can just clone the repo and run ``make setup_workstation``.
 
@@ -23,7 +23,7 @@ Well, actually I have an ``upgrade`` shell function for that.
 I'm also rerunning it from time to time to make sure everything (including Tmux and NeoVim plugins) is up to date.
 
 About this post
-~~~~~~~~~~~~~~~
+---------------
 
 From here on this post might get a bit (a lot?) ranty.
 Also, it includes something like a journal from working on the script.
@@ -31,11 +31,11 @@ I did very little editing in that part.
 It'll be a bit like a stream of consciousness and will illustrate my thinking
 during work.
 It'll have random stuff, might be hard to comprehend and it'll be hard to get through.
-Also it might show you some tools and tricks I employ, so maybe it'll benefit somebody :)
+But it might show you some tools and tricks I employ, so maybe it'll benefit somebody :)
 Read at your own risk :)
 
 More context
-~~~~~~~~~~~~
+------------
 
 I know many people have written tools for maintaining their dotfiles, configs, etc.
 Well, I'm adding one that fits with my development style ¯\\_(ツ)_/¯
@@ -87,7 +87,7 @@ Up to this point I haven't mentioned what computers I have:
   crashing when under load and charging)
 
 Some loose thoughts
-~~~~~~~~~~~~~~~~~~~
+-------------------
 
 Not all config files are Git-friendly.
 Programs use config files and directories for caching data, which they shouldn't do.
@@ -107,13 +107,13 @@ Of course it would be great if other Linux distributions went the way of NixOS w
 
 Some distilled articles may come from this post in the future, but not just yet. Other priorities.
 
-
 Log / journal
 -------------
 
 This whole Log thing would probably work better (also for me) in a video format...
-Gotta give that a try, finally. Maybe next log will be in video format.
+Gotta give that a try some day. Maybe next log will be in video format.
 I hope I won't spend too long editing :)
+
 Gotta do some gesture or something when I'm putting in secrets or showing keepass, so I'll know to edit out all of those
 instances... Or maybe I should see all the times that I press my keepass shortcut? (Super + 3).
 We'll see :) Probably the simple thing with a (hand)signal on the video will be simple enough.
