@@ -80,9 +80,10 @@ If I was deploying applications I'd use containers and Helm or Docker Swarm
 
 Up to this point I haven't mentioned what computers I have:
 
-- Alienware 15 R3; bought in 2017 (can still perform well); the heavy / the main one;
+- Alienware 15 R3; bought in 2017 (can still perform well); the heavy / the main one; hostname "bh";
   had Kubuntu 18.04 on it till recently, now's on Manjaro
-- Huawei Matebook D 14; bought in 2019; the light one / the secondary one; contains my first Manjaro install;
+- Huawei Matebook D 14; bought in 2019; the light one / the secondary one; hostname "bl";
+  contains my first Manjaro install;
   I bought it because of the very good price to value ratio in Poland; has some quality issues (like overheating and
   crashing when under load and charging)
 
@@ -254,7 +255,7 @@ My work setup is slowly coming back to life :) Better than ever. Such a great fe
 
 I had to find (remind myself how to) input images into `.rst` files :) With `ag` ("the silver searcher"), BTW :)
 
-Ok, and now I wanna keep looking at my post, see how the images I've look.
+Ok, and now I wanna keep looking at my post, see how the images I've added look.
 So I'm gonna run some make commands in additional ``tmux`` panes:
 
 .. image:: /_static/workstation_setup_with_ansible/tmux_panes_with_rebuilding.png
