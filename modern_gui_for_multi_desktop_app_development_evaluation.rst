@@ -1,9 +1,67 @@
-Evaluation: using modern Python GUI libraries for multi-platform app development
-================================================================================
+Search for a Python-friendly multi-platform GUI toolkit
+=======================================================
 
 .. post::
    :author: Michal Bultrowicz
    :tags: Python, GUI, Windows, Linux, MacOS
+
+I'm building a for-profit multi-platform [#1]_ GUI application.
+Because I like making informed decisions I had to look around the ecosystem to see what's available.
+In the end I went with Kivy, but before that I evaluated a few tools (some more obscure).
+Here are the notes from that endevour.
+
+I didn't spend equal time on all the tools. I had to pick the ones more promising for me.
+
+Looking for GUIs
+----------------
+
+There's a lot of articles that regurgitate similar lists (just search for "python gui list")
+without any real insight. Looks like people writing the articles don't even try to use the tools.
+They just skim the documentation (which sometimes can be propaganda,
+or omits that the author had a very narrow use case).
+
+Common themes in GUIs
+---------------------
+
+Projects that wanna look native, so they delegate to platform specific toolkits:
+- complexity
+- different problems on different platforms
+- wxPython, Toga, something else?
+
+GUIs that don't look native, but look the same everywhere.
+
+JS/electron
+
+My development background
+-------------------------
+
+The last couple of years in my career was about the web (with emphasis on the backends),
+but I was maintaining some GUIs (desktop and mobile) at the beginning of my career.
+
+My long-term goals
+------------------
+
+I want:
+
+- less centralization
+- for people to own their data
+- companies to not have access to their customers' data (it's even safer for them, cause they can't leak it)
+- to be able to put software in people's hands no matter what platform they're on
+
+Why not JS
+----------
+
+It seems that JS is dominating the GUI scene. It's really easy on the app distribution as well.
+You just go to an URL and there's your app!
+No need to download or install, or do any other time consuming things.
+Also, they're relatively safe.
+
+I could've chosen Javascript, but I knew I would miss a lot of the freedom I have with Python.
+I'm very good with Python and I know it. JS - not so much
+(bits here and there, read a book, some work on a React app during the previous contract).
+
+If I went with something that requires JS, I wouldn't want to mix it with Python and I would've went with JS
+all the way. I probably won't need typically Python tools like numpy.
 
 To check
 --------
@@ -147,12 +205,13 @@ Problems
 - dependency python modules not available when doing ``briefcase dev``
 - ``briefcase run`` fails with python3.9 support. Docker gets created with 3.6 anyway...
 
-- running Pillow from within the AppImage:
-from PIL import Image as PilImage
-  File "/tmp/.mount_BeewarvaKxjQ/usr/app_packages/PIL/Image.py", line 114, in <module>
-    from . import _imaging as core
-ImportError: libtiff-102594ad.so.5.7.0: ELF load command address/offset not properly aligned
-https://github.com/beeware/briefcase/issues/458
+- running Pillow from within the AppImage::
+
+    from PIL import Image as PilImage
+      File "/tmp/.mount_BeewarvaKxjQ/usr/app_packages/PIL/Image.py", line 114, in <module>
+        from . import _imaging as core
+    ImportError: libtiff-102594ad.so.5.7.0: ELF load command address/offset not properly aligned
+    https://github.com/beeware/briefcase/issues/458
 
 - running from a virtualenv could be documented better. There is ``pip install --pre toga-demo``, in the README, but I was
   too slow to figure out that I need that (well, ``install --pre toga-gtk`` for Linux, really)
@@ -335,6 +394,8 @@ Problems
 - I can't just register for touch events from a simple image widget and draw on it - it works on Linux,
   but not on Windows (and somebody on stack overflow says it doesn't work on Mac as well)
 
+- delegates to
+
 Positives
 ~~~~~~~~~
 
@@ -361,3 +422,10 @@ From its README.
 "Eel is not as fully-fledged as Electron or cefpython - it is probably not suitable for making full blown applications like"
 Dunno why is that. What does full Electron give? If you can use HTML, CSS, JS and normal Python that should be good
 enough.
+
+.. rubric:: Footnotes
+
+.. [#] Windows and MacOS is a must (most customers there), but I want to normalize releasing on Linux as well.
+       Also, if you have a truly multi-platform solution, it should just work anywhere.
+       Even on Android and iOS.
+       but I'm sure I'll iron the script out once I need to setup another system or when I'll boot a live install.
