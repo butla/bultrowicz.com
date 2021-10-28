@@ -61,6 +61,13 @@ so that you aren't dependent on me forever.
 
 ## Experience
 
+### 2021.01 -- onward
+Working on my own software, cryptocurrency trading
+
+I'm trading cryptocurrencies to get income while I work on my own software.
+That includes a multi-platform desktop Kivy app that I intend to productize in the future,
+scripts for setting up my OS and keeping it updated (https://github.com/butla/machine_setups), and more.
+
 ### 2018.11 -- 2021.01
 Senior DevOps Engineer at British Telecom (BT)
 Remote, with occasional meetings in London, Ipswich, and Brentwood
