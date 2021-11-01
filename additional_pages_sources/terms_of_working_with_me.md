@@ -1,10 +1,28 @@
-You're thinking of using my services? Great :)
+You're thinking of using my services? That's great :)
 Just be aware I have some terms:
 
-1. You won't have 100% of my attention, I might not be available to you every workday. I will be working on other projects. You'll probably still be amazed at the results, though.
+1. We can have different modes of working together:
+- time allocation
+    - daily rate (550 GBP), possible full-time (might not be on the market for long for this)
+    - hourly rate (100 GBP/h). Flexible hours.
+
+- monthly support fee.
+  A monthly fee of 4000 GBP + VAT, or the equivalent in EUR, USD, or PLN (you should add " + VAT, or the equivalent in EUR, USD, or PLN" to all the prices below).
+  You won't have 100% of my attention, I might not be available to you every workday.
+  I will be working on other projects.
+  You'll probably still be amazed at the results, though.
+
+- task-oriented
+  You won't have 100% of my attention, I might not be available to you every workday.
+  I will be working on other projects.
+  You'll probably still be amazed at the results, though.
+
+
+# TODO
+We can work, either by daily terms - 550
+
 
 2. Possible modes of working together:
-    1. A monthly fee of 4000 GBP + VAT, or the equivalent in EUR, USD, or PLN (you should add " + VAT, or the equivalent in EUR, USD, or PLN" to all the prices below).
     2. Consultations paid by the hour (100 GBP/h).
     3. 600 GBP/day, max two days a week.
     4. Milestone-based.

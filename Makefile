@@ -16,3 +16,6 @@ install_into_venv:
 build_additional_page:
 	mkdir -p additional_pages/terms_of_working_with_me
 	pandoc -t html -o additional_pages/terms_of_working_with_me/index.html additional_pages_sources/terms_of_working_with_me.md
+
+# TODO translate GBP rates to USD, and EUR (i take all of them), round up to closest 10.
+# - don't replaced if not replaced already
