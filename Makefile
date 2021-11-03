@@ -11,6 +11,8 @@ deploy:
 install_into_venv:
 	pip install -r requirements.txt
 
+# TODO ' and " get replaced with other characters, display incorrectly. Fix
+# https://stackoverflow.com/questions/53678363/stopping-pandoc-from-escaping-single-quotes-when-converting-from-html-to-markdow
 # TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
 # No time for that right now, though.
 build_additional_page:
