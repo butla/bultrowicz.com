@@ -27,6 +27,7 @@ Just be aware I have some terms:
 
 2. Contract type
     - B2B only. I'm not interested in regular employment.
+    - Remote only, with occasional face-to-face meetings.
 
 3. Rates and currency
     - All rates will have VAT included.
