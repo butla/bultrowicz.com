@@ -3,8 +3,8 @@ Just be aware I have some terms:
 
 1. We can have different modes of working together:
     - time allocation
-        - daily rate: 550 GBP/day; full-time possible
-        - hourly rate: 100 GBP/h; flexible hours
+        - daily rate: 500 GBP/day; full-time possible
+        - hourly rate: 90 GBP/h; flexible hours
     - milestone-based
         - We set up milestones for the project together
             - This meeting is free if it's online and doesn't take more than 2 hours.
@@ -30,8 +30,8 @@ Just be aware I have some terms:
     - Remote only, with occasional face-to-face meetings.
 
 3. Rates and currency
-    - All rates will have VAT included.
-    - Instead of paying me with GBP, you can pay the equivalent in EUR or USD.
+    - VAT needs to be added to all the rates.
+    - Instead of paying me with GBP, you can pay the equivalent in EUR, USD, or PLN.
 
 4. Invoicing
     - I can issue invoices as a UK or EU (Polish) limited company.
