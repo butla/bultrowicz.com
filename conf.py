@@ -244,7 +244,10 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'extra_nav_links': {'my Github': 'https://github.com/butla'},
+    'extra_nav_links': {
+        'my Github': 'https://github.com/butla',
+        'tip/donate': 'https://ko-fi.com/butla',
+    },
     'logo': 'butla_2.png',
     'logo_name': True,
     #'font_family': 'Times New Roman, Times, Liberation Serif, serif',
