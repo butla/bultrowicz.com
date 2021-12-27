@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
-import sys
 import ablog
 import alabaster
 
@@ -246,7 +244,7 @@ html_theme = 'alabaster'
 html_theme_options = {
     'extra_nav_links': {
         'my Github': 'https://github.com/butla',
-        'tip/donate': 'https://ko-fi.com/butla',
+        'tip / donate': 'https://ko-fi.com/butla',
     },
     'logo': 'butla_2.png',
     'logo_name': True,
