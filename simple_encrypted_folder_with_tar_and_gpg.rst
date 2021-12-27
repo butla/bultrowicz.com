@@ -2,6 +2,7 @@ Simple encrypted Linux folders with TAR and GPG
 ===============================================
 
 .. post:: 2021-12-27
+   :author: Michal Bultrowicz
    :tags: Linux, CLI, security
 
 What's the simplest way of encrypting a folder in Linux?
