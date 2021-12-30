@@ -3,7 +3,7 @@ Continuous delivery of a Python library with AngularJS commit convention
 
 .. post:: 2016-10-10
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, CI/CD
 
 I got tired of having to manually build and upload my library (`Mountepy`_) to PyPI,
 so I decided to do what any sane programmer would do - set up automation [#1]_.
@@ -12,6 +12,21 @@ assemble and push a new version of the library?
 Thanks to the `AngularJS commit convention`_!
 Oh, and `Snap CI`_ will run the whole thing.
 Why Snap, you ask? See my previous article - :ref:`choosing-a-ci`.
+
+----------
+
+EDIT (2021-12-30)
+
+I haven't used the technique described here for a few years now.
+I or other team members would forget to prefix the commit messages correctly at times,
+which then required fixing the commits on origin (by force push).
+And that causes pull issues for other people.
+
+I do think automatic version inference based on some commit classification is a good idea,
+but the source data should be kept in the repo.
+Maybe in release note files from `towncrier <https://pypi.org/project/towncrier/>`_.
+
+----------
 
 Motivation
 ----------

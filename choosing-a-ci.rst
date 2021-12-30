@@ -3,7 +3,7 @@ Choosing a CI service for your open-source project
 
 .. post:: 2016-09-18
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, CI/CD
 
 I host my code on GitHub, as probably many or you do [#1]_.
 The easiest way to have it automatically tested in a clean environment (what everyone should do)
