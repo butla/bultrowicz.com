@@ -45,3 +45,11 @@ In your app you can have a "services" module, or "ioc", or whatever, and that ca
 change. External connectors.
 
 Aiohttp też jest spoko z przekazywaniem obiektu. Obiekt można przekazać do contextvarsa.
+
+When not to use ContextVars?
+----------------------------
+
+When you need to update the configuration of live components.
+But gracefully recreating them with new configs is just simpler, easier, and less error-prone.
+And it's more functional (in the functional programming sense) to just fire a function with some initial data
+that can't be mutated.
