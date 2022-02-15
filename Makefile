@@ -1,15 +1,13 @@
+# TODO how to run this through poetry?
+# It'd be amazing if I didn't need to think about activating a venv for this.
 build_continuously:
 	fd .rst | entr -c ablog build
 
 run:
-	ablog serve
+	poetry run ablog serve
 
 deploy:
 	cd deployment; bash deploy.sh
-
-# requirements created with "pip install ablog; pip freeze > requirements.txt"
-install_into_venv:
-	pip install -r requirements.txt
 
 # TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
 # No time for that right now, though.
