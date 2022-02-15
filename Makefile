@@ -7,7 +7,7 @@ run:
 	poetry run ablog serve
 
 deploy:
-	cd deployment; bash deploy.sh
+	cd deployment; ANSIBLE_NOCOWS=1 poetry run ansible-playbook playbook.yml -i inventory.yml --ask-become-pass
 
 # TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
 # No time for that right now, though.
