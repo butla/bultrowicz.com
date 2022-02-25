@@ -22,5 +22,13 @@ Whether I want to see how something simple works, or maybe when I want to check 
 I also want to play with libs in virtualenvs, and maybe run parts of my projects interactively,
 so I often add `ptpython` to my "dev" dependencies.
 
+Repl is still snappier with suggestions and autocompletes. How can I make my NeoVim setup faster, people?
+
+I start with `from pprint import pprint as p` (there should be a way to fill it in the Vim pane),
+though it'd be nicer to have the print expression here.
+
+My alternative to Python Notebooks that need JS and Web and are bad for Git.
+
+And you can have your autoformatters (isort, black - if you're into it) in Vim is well.
 
  `entr <https://github.com/eradman/entr>`_
