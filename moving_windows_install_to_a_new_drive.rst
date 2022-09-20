@@ -29,14 +29,14 @@ procedura:
 # włóż pendrive i podłącz dysk usb z kopią /imagem
 # odpal kompa i zbootuj z pendrive (powinien się wybrać automatycznie, bo nie ma żadnego innego botowalnego; jak nie, to
 wybierz boot option, albo pogrzeb w uefi (kiedyś bios))
-# Rozwiąż problemy (zdjęcia), potem next, next next
+# Rozwiąż problemy (zdjęcia z 20210607), potem next, next next
 # zostawiam komputer. Wracam po jakimś czasie i jest już zrebootowany. Jest git
 
 
 Trochę o dyskach
 ----------------
 
-just bought 7 GB more storage for my laptops xD Whelp, at least all my hoarding takes little physical space :)
+just bought 7 TB more storage for my laptops xD Whelp, at least all my hoarding takes little physical space :)
 - 2 x 1 TB M2
 - 1 x 5TB 2.5''
 
@@ -50,12 +50,3 @@ New tools are comming! Excited for the upgrade of Matebook's drive upgrade and e
 
 On Ubuntu/Alienware I have enc, but I need to move to Manjaro. So Manjaro will have to finally pass the LUKS in a fake
 partition test. ...Or I'll just set it up normally, and then put it in a container.
-
-.. code-block:: bash
-
-    alias tv_sony_bravia_overscan_fix='xrandr --output HDMI-A-0 --set underscan on --set "underscan vborder" 50 --set "underscan hborder" 94'
-
-So the command alone is::
-
-    xrandr --output HDMI-A-0 --set underscan on --set "underscan vborder" 50 --set "underscan hborder" 94
-
