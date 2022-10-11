@@ -5,48 +5,52 @@ Moving a Windows install to a new drive
    :author: Michal Bultrowicz
    :tags: computer_maintenance, Windows
 
-TODO podwójny apostrof w tytule?
 
-TODO na razie tylko upgrade windowsa. bez drastycznych kroków. Linux będzie następnym razem
+How to move an existing Windows install to a new drive / how to switch out the drive in a Windows
+computer without needing a reinstall.
 
-U ojca jako todo posortowanie tych partycji (zrobić screena).
+1. Prepare a Windows recovery pendrive
+https://support.microsoft.com/pl-pl/windows/tworzenie-dysku-odzyskiwania-abb4691b-5324-6d4a-8766-73fab304c246#WindowsVersion=Windows_10
 
-też pokaż pomiary jak robiłem, żeby zobaczyć co jest problemem
+Doesn't need to have a copy of the system files (there's an option for that).
 
-jeśli czujecie się pewnie i macie narzędzia, to możecie też wymienić pastę na wentylatorze.
-Czasem jest to prostsze (jak na huwaweiu), czasem jest to trudniejsze (Dell Vostro 3560 ojca
-wymagał praktycznie kompletnego demontażu i wyciągnięcia płyty głównej...)
+2. Create a System Image Backup onto a external (USB) hard drive
 
-pokaż narzędzia
+https://www.howtogeek.com/howto/4241/how-to-create-a-system-image-in-windows-7/
 
-procedura:
+3. Put in the new drive into the computer. You might need to take the old one out if you don't have multiple drive slots.
 
-#. zrób pendrive'a
-#. kopia na dysk zewnętrzny duży; w stylu win7
-   - może dd by zadziałało, ale był problem u mnie jakiś
-#. Tworzenie dysku odzyskiwania przez Windows na pendrivie (bez kopii danych)
-# włóż nowy dysk
-# włóż pendrive i podłącz dysk usb z kopią /imagem
-# odpal kompa i zbootuj z pendrive (powinien się wybrać automatycznie, bo nie ma żadnego innego botowalnego; jak nie, to
-wybierz boot option, albo pogrzeb w uefi (kiedyś bios))
-# Rozwiąż problemy (zdjęcia z 20210607), potem next, next next
-# zostawiam komputer. Wracam po jakimś czasie i jest już zrebootowany. Jest git
+4. Attach the Windows recovery pendrive and the USB drive with the system image.
 
+5. Boot the computer from the pendrive.
+It if you reboot the computer with the pendrive in it, it might boot automatically.
+If not, you'll need to enter the "boot menu" in your computer, or adjust the boot order in UEFI (used to be BIOS) so
+that the pendrive is first.
 
-Trochę o dyskach
-----------------
+6. Restore the system image to the new drive
 
-just bought 7 TB more storage for my laptops xD Whelp, at least all my hoarding takes little physical space :)
-- 2 x 1 TB M2
-- 1 x 5TB 2.5''
+Screenshots are from the Polish version of Windows, so my English names for options will be approximate.
+But You can see what to pick based on the screenshots.
 
-I have a crusade of upgrading drives now :) My dad's Win10 was barely running. 15 minutes to get it usable from cold start, through the boot, up until it finishes all the goddamn "antivirus scans"/"integrity checks"/whatever Microsoft bullshit. I just couldn't let that stand. It was an HDD, of course.
+- choose "solve problems"
 
-Have to say, as much as I'm shitting on my Huawei's quality, it's way easier to do maintenance on it than on all the Dell laptopts I did recentl. My Alienware 15R3 (need to disassemble the bottom to take the keyboard out), Monika's... ugh, some model (take bottom and the keyboard out to get to the cpu), and my dad's Vostro 3560 (have to do a full disassembly, take the motherboard out to get to the cpu).
+.. image:: /_static/moving_windows_install_to_a_new_drive/1_solve_problems.jpg
 
-Teams at Microsoft sure don't care about people on HDDs... Anybody knows if there's a way to permanently decrease the disk IO priority of those after-boot scanning processes/services?
+- choose "recovery from system image"
 
-New tools are comming! Excited for the upgrade of Matebook's drive upgrade and encryption.
+.. image:: /_static/moving_windows_install_to_a_new_drive/2_system_image_recovery.jpg
 
-On Ubuntu/Alienware I have enc, but I need to move to Manjaro. So Manjaro will have to finally pass the LUKS in a fake
-partition test. ...Or I'll just set it up normally, and then put it in a container.
+- pick the image to recover / put on the drive (the one you created previously on the external drive)
+
+.. image:: /_static/moving_windows_install_to_a_new_drive/3_picking_the_image.jpg
+
+- click through the next couple of menus
+
+.. image:: /_static/moving_windows_install_to_a_new_drive/4_additional_recovery_options.jpg
+.. image:: /_static/moving_windows_install_to_a_new_drive/5_final_confirmation.jpg
+
+- when the recovery starts you should see something like this:
+
+.. image:: /_static/moving_windows_install_to_a_new_drive/6_system_recovery_in_progress.jpg
+
+Now wait a while. After that your system will be running from the new drive.

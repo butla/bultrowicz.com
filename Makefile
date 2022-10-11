@@ -1,7 +1,7 @@
 # TODO how to run this through poetry?
 # It'd be amazing if I didn't need to think about activating a venv for this.
 build_continuously:
-	fd .rst | entr -c ablog build
+	fd .rst | entr -c poetry run ablog build
 
 run:
 	poetry run ablog serve
