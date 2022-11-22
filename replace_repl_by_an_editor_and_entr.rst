@@ -31,4 +31,21 @@ My alternative to Python Notebooks that need JS and Web and are bad for Git.
 
 And you can have your autoformatters (isort, black - if you're into it) in Vim is well.
 
+Show `new_python_script`
+
+
+Add this to the default Python script created with new_python_script:
+---------------------------
+    from pathlib import Path
+
+
+    def main():
+        home_path = Path('~').expanduser()
+        print('The $HOME is', home_path)
+        print('Now get shit done...')
+
+
+    if __name__ == '__main__':
+        main()
+
  `entr <https://github.com/eradman/entr>`_
