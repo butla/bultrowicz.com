@@ -30,7 +30,6 @@ I can design, implement, and consult the creation of IT solutions, especially:
 I can also train your IT staff in maintenance and further development of the systems I create,
 so that you aren't dependent on me forever.
 
-
 ## Computer skills
 
 - expert in Python programming
@@ -56,16 +55,59 @@ so that you aren't dependent on me forever.
 - coordinating a Scrum or Kanban team
 - teaching developers through meticulous code reviews
 - knowledge of software legal compliance and licensing issues
-- analyzing tensions between teams within a project (are the incentives set up correctly?)
-
+- analyzing incentives and tensions between teams within a project
 
 ## Experience
 
-### 2021.01 -- onward
+### 2023.01 -- onward
+Primary Software Wizard at WitchSoft
+
+Developing a personal finance management app for mobile (Android, IOS) and desktop (Linux, MacOS, Windows).
+
+### 2022.01 -- 2022.12
+Senior Back-end Engineer at [Nira](https://nira.com)
+Remote
+
+Nira is a real-time access-control system.
+It analyzes who has access to what documents in an organization's cloud, and allows to perform automated bulk changes
+to the access permissions.
+It integrated with Google Cloud, but we were working on adding support for more systems (e.g. Microsoft).
+
+The team was 100% remote and globally-distributed, favoring asynchronous forms of communication,
+and promoting a high degree of autonomy. There were up to 25 engineers on it.
+Safety and confidentiality of users' data was paramount - we were HIPAA-compliant.
+
+My main role was the development, maintenance, and ensuring reliability of back-end microservices
+acting as our asynchronous task queue - the "Actions" service.
+The service allowed to execute policy-driven and on-demand changes to document permissions via Google Workspace APIs.
+
+My role included:
+- technical leadership of the "Actions" service code and cloud infrastructure
+- analyzing and improving back-end performance
+- operational support of "Actions"
+- Analysis and solution design for a variety of new feature bundles, which had "Actions"
+  dependencies; working from product requirements to produce engineering plans and
+  effort/complexity estimates, which flowed through into implementation projects
+- Review of other engineer’s code as a part of quality assurance and release processes, both for
+  "Actions" and the wider back-end ecosystem
+- Revising and extending CI/CD pipelines based on GitHub Actions
+
+Notable achievements:
+- taking over the "Actions" codebase in 9 days,
+  as the previous maintainer was leaving the company shortly after I joined
+- introducing test harnesses, and performing a gradual redesign of the "Actions" codebase that improved both reliability
+  and performance, all the while delivering new features
+- "Actions" was capable of conducting bulk change operations for around 10 million documents
+- switched out the old implementation based on AWS SQS and synchronous Python to one based on AWS MSK (Kafka)
+  and asynchronous Python (with aiokafka)
+- made it so that "Actions" microservices could be brought up locally (on the developers computer) with
+  a single "make" command after git-cloning the repository
+
+### 2021.01 -- 2022.01
 Working on my own software, cryptocurrency trading
 
-I'm trading cryptocurrencies to get income while I work on my own software.
-The latter includes (but is not limited to):
+I was trading cryptocurrencies to get income while I was working on my own software.
+The latter included (but was not limited to):
 - a multi-platform desktop Kivy app that I intend to productize in the future
 - an app to keep track of and plan my finances and investments
 - [scripts](https://github.com/butla/machine_setups) for setting up my OS, and keeping it updated and synced across
@@ -337,6 +379,6 @@ A C++ application using OpenCV that could learn and recognize faces using the ei
 
 - technology and engineering in general
 - evolutionary psychology
-- mythology (mainly Slavic, Nordic and Greek)
+- mythology (mainly Slavic, Nordic, and Greek)
 - history
 - martial arts
