@@ -62,7 +62,7 @@ so that you aren't dependent on me forever.
 ### 2023.01 -- onward
 Primary Software Wizard at WitchSoft
 
-Developing a personal finance management app for mobile (Android, IOS) and desktop (Linux, MacOS, Windows).
+Developing a personal finance management app.
 
 ### 2022.01 -- 2022.12
 Senior Back-end Engineer at [Nira](https://nira.com)
