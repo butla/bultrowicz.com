@@ -5,11 +5,22 @@ What's a good test? / What's the purpose of testing
    :author: Michal Bultrowicz
    :tags: Python, quality_assurance
 
-What's the purpose of tests? How do good tests look?
+What's the purpose of tests? / How do good tests look? / What makes a good test.
 
 Testy mają znaleźć nieprawidłowości w kodzie, który piszesz zanim kod trafi do użytku. Według mnie.
 
-Jeśli test znajduje błędy to dobrze. Nawet jeśli nie jest dość "narrowly scoped". Jeśli twoje testy są chaotyczne i niestabilne, to znaczy, że twój kod jest chaotyczny i niestabilny i trzeba go ogarnąć. Niepisanie / nieutrzymywanie testów to jak zamiatanie rzeczy pod dywan. Fakt, możesz nie dawać sobie rady z problemami w kodzie / nie ogarniasz jak napisać dobrze testy. W takim razie - ucz się. Czytaj. Ćwicz. Aż będziesz umiał. Podobał mi się mój tekst z przezentacji o TDD - TDD trzeba żyć. Jak mnich. Czasem można naginać reguły. Ale pokrycie sensownymi testami zawsze pomaga. Oczywiście mogą też być szkodliwe testy (np. te wypełnione mockami albo mirror tests - o nich osobny post - kinds of bad tests)
+Jeśli test znajduje błędy to dobrze. Nawet jeśli nie jest dość "narrowly scoped".
+
+Według mnie testy nie muszą być w pełni "repeatable" (full setup and teardown all the time).
+Jeśli twoje testy są chaotyczne i niestabilne, to znaczy, że twój kod jest chaotyczny i niestabilny i trzeba go ogarnąć.
+Niepisanie / nieutrzymywanie testów to jak zamiatanie rzeczy pod dywan.
+Fakt, możesz nie dawać sobie rady z problemami w kodzie / nie ogarniasz jak napisać dobrze testy.
+W takim razie - ucz się. Czytaj. Ćwicz. Aż będziesz umiał.
+Podobał mi się mój tekst z przezentacji o TDD - TDD trzeba żyć. Jak mnich.
+Czasem można naginać reguły.
+Ale pokrycie sensownymi testami zawsze pomaga.
+
+Oczywiście mogą też być szkodliwe testy (np. te wypełnione mockami albo mirror tests - o nich osobny post - kinds of bad tests)
 
 Tests should prove that the code is doing what you want it to do (functional testing). And that it performs at expected levels, or has some required characteristics (non-functional tests). More or less. That's the ideal, at least.
 
