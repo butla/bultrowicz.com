@@ -1,5 +1,3 @@
-# TODO how to run this through poetry?
-# It'd be amazing if I didn't need to think about activating a venv for this.
 build_continuously:
 	fd .rst | entr -c poetry run ablog build
 
@@ -15,6 +13,3 @@ build_additional_page:
 	mkdir -p additional_pages/terms_of_working_with_me
 	# markdown_strict used so that ' and " don't get rendered to characters that can not render on the page
 	pandoc -t html -o additional_pages/terms_of_working_with_me/index.html -f markdown_strict additional_pages_sources/terms_of_working_with_me.md
-
-# TODO translate GBP rates to USD, and EUR (i take all of them), round up to closest 10.
-# - don't replaced if not replaced already
