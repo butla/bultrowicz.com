@@ -3,7 +3,7 @@ Linting your tests
 
 .. post::
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, quality_assurance
 
 Tests **are** a part of the codebase. So the should also meet some quality standards.
 Here, we're gonna show how to lint them with Pylint or flake8.

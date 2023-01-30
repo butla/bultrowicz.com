@@ -1,10 +1,9 @@
-
 Getting coverage info from containerized code
 =============================================
 
 .. post::
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, quality_assurance
 
 Do aplikacji muszą przychodzić sygnały, żeby były odpalone atexity (opisane tu
 http://coverage.readthedocs.io/en/coverage-4.4.1/subprocess.html#signal-handlers-and-atexit).

@@ -3,7 +3,7 @@ New app feature? Spike and test first.
 
 .. post::
    :author: Michal Bultrowicz
-   :tags: Python
+   :tags: Python, quality_assurance
 
 
 Z TRELLO
