@@ -24,3 +24,5 @@ grep -rni kvantum-dark ~/.config``
 ```
 
 I found ``/home/butla/.config/qt6ct/qt6ct.conf``.
+
+For Gnome and GTK-based programs, they're in a central DB editable with ``gsettings``.
