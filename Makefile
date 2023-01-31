@@ -2,7 +2,7 @@ build:
 	poetry run ablog build
 
 build_continuously:
-	fd .rst | entr -c make build
+	fd '.rst|.md' | entr -c make build
 
 setup_dev_env:
 	poetry install
