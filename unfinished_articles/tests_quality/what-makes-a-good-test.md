@@ -106,8 +106,33 @@ then it might make sense to have lots of integrated tests.
 
 ## Bad tests
 
+Leave that for other articles. Publish this one first.
+
 Oczywiście mogą też być szkodliwe testy (np. te wypełnione mockami albo mirror tests - o nich osobny post - kinds of bad tests)
 
-Nie, mirror-tests (sprawdzam, że odpaliły się linijki kodu) nie mają dużej wartości według mnie. Utrudniają zmiany w kodzie, to jest ich "feature". Więc dają Ci może chociaż to, że nad każdą zmianą musisz się zastanowić dwa razy, bo robisz ją dwa razy. Tą samą zmianę. Przykład mirror testu - zawołałem funkcję subprocess run z takimi parametrami. Przykład testu sprawdzającego, że coś się stało - odpal proces i zobacz output. O, ale to zabiera dużo czasu! Unit testy nie powinny odpalać innych procesów! Nie wszystkie testy muszą być unit testami. Testy powinny mieć ten poziom (unit/integrated/external) jaki jest dla nich odpowiedni.
+Nie, mirror-tests (sprawdzam, że odpaliły się linijki kodu) nie mają wartości według mnie.
+Utrudniają zmiany w kodzie, to jest ich "feature".
+Więc dają Ci może chociaż to, że nad każdą zmianą musisz się zastanowić dwa razy, bo robisz ją dwa razy.
+Tą samą zmianę.
+
+Mirror test doesn't check that the code works as expected. It just checks whether code contains specific lines,
+that may or may not be good. You still need to run the code yourself to see if it behaves correctly.
+
+Przykład mirror testu - zawołałem funkcję subprocess run z takimi parametrami.
+Przykład testu sprawdzającego, że coś się stało - odpal proces i zobacz output.
+O, ale to zabiera dużo czasu!
+Unit testy nie powinny odpalać innych procesów!
+Nie wszystkie testy muszą być unit testami.
+Testy powinny mieć ten poziom (unit/integrated/external) jaki jest dla nich odpowiedni.
+
 Trello - stop writing "mirror tests".
 Mention them, but redirect to the separate article.
+
+### Drawbacks of a clunky test setup
+Decreases the pace of progress.
+
+Lets bugs slip in, if things aren't tested in CI or after deployment.
+
+Makes onboarding new people harder.
+It should be that you point people to the tests, and if they pass, then it's working.
+Are you comfortable checking the first change that a new person makes only by running tests?
