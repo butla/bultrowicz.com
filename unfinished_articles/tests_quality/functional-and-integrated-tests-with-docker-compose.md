@@ -1,9 +1,12 @@
+---
+blogpost: true
+author: Michał Bultrowicz
+language: English
+tags: Python, quality_assurance
+---
+
 Functional and integrated tests with Docker Compose
 ===================================================
-
-.. post::
-   :author: Michal Bultrowicz
-   :tags: Python, quality_assurance
 
 Using containers (docker-compose with Docker, to be specific; it's not only docker) in tests revolutionizes not only QA, but also the way you develop (and even design) software.
 
@@ -17,6 +20,6 @@ Follow up do moich rzeczy z 2016. Widzę, że nadal się nie zestarzały bardzo.
 
 Testy z composem powinny używać tylko zewnętrznych interfejsów. No, czasem trzeba się trochę namęczyć, żeby strzyknąć faile. Ale często można to wykombinować. Np przez wstrzykiwanie złych rzeczy do DB, kolejki, mountebanka.
 
-Kod wrzuć gdzieś w experiments. Folder testing__qa.
+Kod wrzuć gdzieś w experiments. Folder `testing__qa`.
 
 O testach w CI też napisz.
