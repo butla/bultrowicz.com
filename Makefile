@@ -1,5 +1,8 @@
+build:
+	poetry run ablog build
+
 build_continuously:
-	fd .rst | entr -c poetry run ablog build
+	fd .rst | entr -c make build
 
 run:
 	poetry run ablog serve
