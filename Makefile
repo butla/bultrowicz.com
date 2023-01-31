@@ -4,6 +4,9 @@ build:
 build_continuously:
 	fd .rst | entr -c make build
 
+setup_dev_env:
+	poetry install
+
 run:
 	poetry run ablog serve
 

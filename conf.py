@@ -159,11 +159,15 @@ extensions = [
     'sphinx.ext.todo',
     'alabaster',
     'ablog',
+    'myst_parser',
 ]
+
+myst_update_mathjax = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates', ablog.get_html_templates_path()]
 
+# TODO update?
 # The suffix(es) of source filenames.
 source_suffix = '.rst'
 
@@ -202,7 +206,12 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = []
+exclude_patterns = [
+    'README.md',
+    '.venv/*',
+    'cv/*',
+    'additional_pages_sources/*',
+]
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
