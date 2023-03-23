@@ -252,7 +252,11 @@ html_theme = 'alabaster'
 # documentation.
 html_theme_options = {
     'extra_nav_links': {
-        'my Github': 'https://github.com/butla',
+        'my company': 'https://witchsoft.com',
+        'my Github': 'https://github.com/butla/',
+        'my LinkedIn': 'https://www.linkedin.com/in/michal-bultrowicz/',
+        'my Twitter': 'https://twitter.com/mmmbultrowicz/',
+        'my Instagram': 'https://www.instagram.com/mmmbultrowicz/',
         'tip / donate': 'https://ko-fi.com/butla',
     },
     'logo': 'butla_2.png',
