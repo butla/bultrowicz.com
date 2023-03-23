@@ -10,6 +10,7 @@ setup_dev_env:
 run:
 	poetry run ablog serve
 
+# TODO looks like this has bit-rotten... Gotta change the deployment method.
 deploy:
 	cd deployment; ANSIBLE_NOCOWS=1 poetry run ansible-playbook playbook.yml -i inventory.yml --ask-become-pass
 
