@@ -10,9 +10,23 @@ setup_dev_env:
 run:
 	poetry run ablog serve
 
-# TODO looks like this has bit-rotten... Gotta change the deployment method.
-deploy:
-	cd deployment; ANSIBLE_NOCOWS=1 poetry run ansible-playbook playbook.yml -i inventory.yml --ask-become-pass
+WEBSITE_PACKAGE:=bultrowicz_com_dist.tar.gz
+WEBSITE_DIST_FOLDER:=_website/
+
+deploy: build build_additional_page
+	@echo === Building done, preparing package... ===
+	cp -r additional_pages/terms_of_working_with_me _website/
+	tar caf $(WEBSITE_PACKAGE) $(WEBSITE_DIST_FOLDER)
+	@echo === Package prepared, uploading... ===
+	scp $(WEBSITE_PACKAGE) bultrowicz.com:~
+	@echo === Extracting package... ===
+	ssh bultrowicz.com "tar xaf $(WEBSITE_PACKAGE)"
+	@echo === Swapping old website files for the new... ===
+	ssh bultrowicz.com -t "sudo rsync -av --del $(WEBSITE_DIST_FOLDER) /var/www/html/"
+	@echo === Cleaning up... ===
+	ssh bultrowicz.com "rm -rf $(WEBSITE_DIST_FOLDER) $(WEBSITE_PACKAGE)"
+	rm $(WEBSITE_PACKAGE)
+
 
 # TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
 # No time for that right now, though.

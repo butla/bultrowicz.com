@@ -1,3 +1,4 @@
+# THIS FILE ISN'T USED ANYMORE!
 ---
 - name: deploy blog
   hosts: web
