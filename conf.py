@@ -254,8 +254,10 @@ html_theme_options = {
     'extra_nav_links': {
         'my company': 'https://witchsoft.com',
         'my Github': 'https://github.com/butla/',
-        'my LinkedIn': 'https://www.linkedin.com/in/michal-bultrowicz/',
         'my Twitter': 'https://twitter.com/mmmbultrowicz/',
+        'my LinkedIn': 'https://www.linkedin.com/in/michal-bultrowicz/',
+        'my Odysee': 'https://odysee.com/@michal.bultrowicz:c',
+        'my YouTube': 'https://www.youtube.com/@butla/videos',
         'my Instagram': 'https://www.instagram.com/mmmbultrowicz/',
         'tip / donate': 'https://ko-fi.com/butla',
     },
