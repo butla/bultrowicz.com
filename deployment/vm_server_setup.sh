@@ -1,3 +1,5 @@
+# This are my old notes about server setup. It's not an actual script you can run.
+
 # as root
 adduser butla
 usermod -a -G sudo butla
