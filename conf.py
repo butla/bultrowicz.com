@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+"""
+Ablog's configuration.
+"""
 
 import ablog
 import alabaster
@@ -10,11 +11,11 @@ import alabaster
 #blog_path = 'blog'
 
 # The “title” for the blog, used in acthive pages.  Default is ``'Blog'``.
-blog_title = u"Butlablog"
+blog_title = "Butlablog"
 
 # Base URL for the website, required for generating feeds.
 # e.g. blog_baseurl = "http://example.com/"
-blog_baseurl = u'https://bultrowicz.com'
+blog_baseurl = 'https://bultrowicz.com'
 
 # Choose to archive only post titles. Archiving only titles can speed
 # up project building.
@@ -160,6 +161,7 @@ extensions = [
     'alabaster',
     'ablog',
     'myst_parser',
+    "sphinx_rtd_dark_mode",
 ]
 
 myst_update_mathjax = False
@@ -242,6 +244,8 @@ todo_include_todos = False
 
 
 # -- Options for HTML output ----------------------------------------------
+
+default_dark_mode = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
