@@ -9,7 +9,6 @@ license = "MIT"
 python = "~3.10"
 ablog = "^0.10.23"
 myst-parser = "^0.18.1"
-sphinx-rtd-dark-mode = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
 ansible-base = "^2.10.17"
