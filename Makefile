@@ -4,7 +4,7 @@ build:
 build_continuously:
 	fd '.rst|.md' | entr -c make build
 
-setup_dev_env:
+setup_development:
 	poetry install
 
 run:
