@@ -35,14 +35,14 @@ so that you aren't dependent on me forever.
 - expert in Python programming
 - secondary programming languages: Bash, JavaScript, Java, C++, C#
 - writing understandable and testable code
-- web development with AioHTTP, Falcon, Flask, and Django
+- web development with FastAPI, AioHTTP, Falcon, Flask, and Django
 - advanced web application testing (functional, stress, performance testing; also with microservices)
 - ensuring high availability (HA)
 - good knowledge of optimizing SQL for PostgreSQL (and scaling it out with CitusDB)
 - working with various data stores: Redis, Kafka (and AWS Kinesis), ElasticSearch, S3/MinIO, Amazon Redshift
 - using containers for deployments and testing (Docker, Kubernetes, Helm)
 - implementing web security (X.509, mTLS, JWT, OAuth2)
-- automated infrastructure management with Terraform and Ansible
+- automated infrastructure management with Terraform
 - data engineering (building data pipelines and ETL systems)
 - working with AWS, GCP, and DigitalOcean clouds
 - implementing Continuous Delivery with the help of Gitlab CD (Jenkins in the past)
@@ -60,9 +60,19 @@ so that you aren't dependent on me forever.
 ## Experience
 
 ### 2023.01 -- onward
-Primary Software Wizard at WitchSoft
+Primary Software Wizard at [WitchSoft](https://witchsoft.com)
+Remote
 
-Developing a personal finance management app.
+Created [PITowalut.pl](https://pitowalut.pl), a website that helps with calculations for Polish PIT-38 tax from transactions on foreign exchanges.
+
+The entire transaction with the customer takes place on a single page with only a single redirect for the payment.
+The payment processor used is Przelewy24.
+The front-end's made with VanillaJS and PicoCSS, served from CloudFlare Pages.
+It has passwordless authentication with a code sent to e-mail.
+E-mails are sent with automation using a Google Workspace service account.
+The back-end is hosted on Digital Ocean.
+PostgreSQL serves as the data layer.
+The web API is built with async Python and FastAPI.
 
 ### 2022.01 -- 2022.12
 Senior Back-end Engineer at [Nira](https://nira.com)
@@ -325,7 +335,18 @@ Solving some problems required knowledge of obscure inner workings of .NET, Java
 (e.g. discrepancies in implementations of TCP sockets on both programming platforms).
 
 
-## Noteable conference talks
+## Notable talks
+
+### Developer workflow with local tests using Docker Compose
+Pykonik Tech Talks #62, 2023-03-30, https://youtu.be/hjve48cYj_U
+
+This talk features:
+- Docker Compose setup with the sample HTTP/REST app (written in Python) and a SQL database.
+- High-level tests using containers.
+- Reloading the app container on code file changes.
+- Running tests on code file changes.
+- Makefiles to describe common development tasks.
+- CI setup based on local tests.
 
 ### TDD of Python microservices
 EuroPython 2016 talk. https://youtu.be/d-ka10jngQQ
@@ -337,7 +358,7 @@ Told from the perspective of a maintainer of a single service.
 ### Python microservices on PaaS done right
 EuroPython 2015 talk. https://youtu.be/WYXkpiaGBms
 
-A a collection of tips and practices that allow to have a successful microservices-based project.
+A collection of tips and practices that allow to have a successful microservices-based project.
 Concerns development, testing and work organization.
 
 ## Education
