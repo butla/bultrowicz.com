@@ -13,57 +13,83 @@ https://github.com/butla
 
 ## Summary
 
-I'm a passionate software developer who's used to creating business-critical applications
+I see myself as a holistic software engineer - I can negotiate requirements, design, plan the delivery, implement,
+ensure quality, and monitor IT solutions.
+I'm used to creating business-critical applications
 and handling the challenges and pressure that come with that.
+
+I have a strong belief in gradual change, continuous testing, and data-driven decision-making.
 I love Python, Linux, and all software that's both elegant and resilient.
-I have a strong belief in gradual change and continuous testing.
 I like staying close to the state of the art in my areas of expertise,
-but I've noticed that inspiration can come from pretty much anywhere.
-
-I can design, implement, and consult the creation of IT solutions, especially:
-- business process automation and measurement (dashboards, statistics, alerting)
-- data pipelines
-- highly available web applications
-- automated test suites (back-end, front-end, load, chaos)
-- Python-based software
-
-I can also train your IT staff in maintenance and further development of the systems I create,
-so that you aren't dependent on me forever.
+but I've noticed that inspiration can come from pretty much anywhere, hence I have broad technical interests.
 
 ## Computer skills
 
 - expert in Python programming
-- secondary programming languages: Bash, JavaScript, Java, C++, C#
 - writing understandable and testable code
-- web development with FastAPI, AioHTTP, Falcon, Flask, and Django
-- advanced web application testing (functional, stress, performance testing; also with microservices)
-- ensuring high availability (HA)
-- good knowledge of optimizing SQL for PostgreSQL (and scaling it out with CitusDB)
-- working with various data stores: Redis, Kafka (and AWS Kinesis), ElasticSearch, S3/MinIO, Amazon Redshift
-- using containers for deployments and testing (Docker, Kubernetes, Helm)
-- implementing web security (X.509, mTLS, JWT, OAuth2)
-- automated infrastructure management with Terraform
-- data engineering (building data pipelines and ETL systems)
-- working with AWS, GCP, and DigitalOcean clouds
-- implementing Continuous Delivery with the help of Gitlab CD (Jenkins in the past)
-- exposure to building front-end with ReactJS
-- proficiency in GIT
+- building highly available (HA) and fault-tolerant back-ends
+- advanced web application testing (unit, functional, stress, load, performance)
+- site reliability engineering - ensuring observability, gathering metrics, setting up alerting, optimizing performance
+- cloud infrastructure automation
+- Linux server management
+- implementing web security (X.509 certificates, mTLS, JWT/JWK, OAuth2)
+- creating data pipelines / setting up ETL
+- implementing Continuous Delivery pipelines
+- optimizing team's development workflows
+- exposure to building front-ends with ReactJS and plain HTML+JS
 - able to work with just the terminal, without a graphical environment
+- driving "spikes" (in the eXtreme Programming sense) through the entire tech stack, hardware-to-frontend
+
+## Tools (with years of experience)
+
+- languages: Python (10: od 2013), Bash (11: od 2012), JavaScript (1.5: BT, personal), Java (5: intel), C++ (1: intel), C# (4: intel)
+- clouds: AWS (3: iterio, BT ciut, Nira), GCP (1: Iterio), Digital Ocean (2: personal)
+- web APIs / REST: FastAPI (0.5: swoje), AioHTTP (1.5: iterio), Falcon (0.5: swoje), Flask (2: Intel), Django (3: BT, Nira), Spring Boot (1.5: intel)
+- testing: pytest (7: od 2016), Python's unittest (2: 2014-2016), selenium (1.5 BT), Mountebank / mountepy (3.5: Iterio, BT), Playwright (some experiments)
+- SQL: PostgreSQL (6: Iterio, BT, Nira, Witchsoft), Citus (1: Iterio), AWS Aurora PostgreSQL (1: Nira), AWS Redshift (0.5: Iterio)
+- data stores: Redis(3.5: Iterio, BT), Elasticsearch(2.5: 1.5 z Intela, Nira), S3/MinIO (3.5: Iterio, BT)
+- Kafka (4.5 total):
+  - Confluent Kafka (2: 1 intel, 1 BT)
+  - AWS Kinesis (1.5: iterio)
+  - AWS MSK (1: Nira)
+  - Faust (1)
+  - aiokafka (1)
+- containers: Docker (7, od 2016), Kubernetes (2: BT, ciut Intel), Helm (1.5: BT), AWS ECS (2.5: Iterio, Nira)
+- infrastructure management: Terraform (3: Iterio, BT), Ansible (2: scylla, Iterio, personal)
+- version control: Git (10: od 2013)
+- logging/monitoring: AWS CloudWatch (1.5: Iterio), DataDog (1: Nira), Prometheus (1.5: BT), ELK stack(2.5: BT, Nira)
+- CI/CD: Gitlab CD (2: BT), Github Actions (1: Nira), Jenkins (4: Iterio, Intel, BT trochę), TeamCity (2: Intel)
+- error tracking: Sentry (4.5: Iterio, BT, Nira)
+- serverless: AWS lambda (1.5: Iterio)
+- operating systems: Linux(12: od 2011), Windows (5: 2011-2016)
+- front-end: HTML/CSS (1.5: BT, personal), JS (1.5: BT, personal), ReactJS (1: BT)
+- data analysis: Pandas (0.5: personal, Nira), Seaborn (0.5: personal, Nira)
+- GUI app development: Android (3), WPF(2), Java Swing (2)
+- miscellaneous:
+  - Celery (2: BT)
+  - nginx (3: BT, personal)
+  - Hadoop MapReduce (0.5: Intel)
+  - OpenSSL (1: intel)
 
 ## Soft skills
 
-- coordinating a Scrum or Kanban team
+- negotiating and defining system requirements
+- leading a Scrum or Kanban team
+- self-organization
+- cross-team communication
 - teaching developers through meticulous code reviews
 - knowledge of software legal compliance and licensing issues
-- analyzing incentives and tensions between teams within a project
+- analyzing teams' incentives and the tensions arising from them
 
 ## Experience
 
-### 2023.01 -- onward
+### 2023.04 -- 2023.05
 Primary Software Wizard at [WitchSoft](https://witchsoft.com)
 Remote
 
-Created [PITowalut.pl](https://pitowalut.pl), a website that helps with calculations for Polish PIT-38 tax from transactions on foreign exchanges.
+WitchSoft is my own one-man company.
+
+I created [PITowalut.pl](https://pitowalut.pl), a website that helps with calculations for Polish PIT-38 tax from transactions on foreign exchanges.
 
 The entire transaction with the customer takes place on a single page with only a single redirect for the payment.
 The payment processor used is Przelewy24.
@@ -72,7 +98,7 @@ It has passwordless authentication with a code sent to e-mail.
 E-mails are sent with automation using a Google Workspace service account.
 The back-end is hosted on Digital Ocean.
 PostgreSQL serves as the data layer.
-The web API is built with async Python and FastAPI.
+The web API is built with async Python, FastAPI, and SQLAlchemy.
 
 ### 2022.01 -- 2022.12
 Senior Back-end Engineer at [Nira](https://nira.com)
@@ -87,7 +113,7 @@ The team was 100% remote and globally-distributed, favoring asynchronous forms o
 and promoting a high degree of autonomy. There were up to 25 engineers on it.
 Safety and confidentiality of users' data was paramount - we were HIPAA-compliant.
 
-My main role was the development, maintenance, and ensuring reliability of back-end microservices
+My main role was the development, maintenance, and ensuring reliability of Python back-end microservices
 acting as our asynchronous task queue - the "Actions" service.
 The service allowed to execute policy-driven and on-demand changes to document permissions via Google Workspace APIs.
 
@@ -338,7 +364,7 @@ Solving some problems required knowledge of obscure inner workings of .NET, Java
 ## Notable talks
 
 ### Developer workflow with local tests using Docker Compose
-Pykonik Tech Talks #62, 2023-03-30, https://youtu.be/hjve48cYj_U
+Pykonik Tech Talks #62, 2023-03-30. https://youtu.be/hjve48cYj_U
 
 This talk features:
 - Docker Compose setup with the sample HTTP/REST app (written in Python) and a SQL database.
@@ -399,7 +425,7 @@ A C++ application using OpenCV that could learn and recognize faces using the ei
 ## Interests
 
 - technology and engineering in general
-- evolutionary psychology
+- psychology
 - mythology (mainly Slavic, Nordic, and Greek)
 - history
 - martial arts
