@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 35px;
+    /* Set so that the CV looks similar when viewed as PDF and as HTML. */
+    max-width: 700px;
+}
+
+.cv-header {
+    margin-bottom: 30px;
+}
+
+.cv-header h1 {
+    font-size: 2.5em;
+    margin: 0px;
+}
+
+.cv-header h2 {
+    font-weight: normal;
+    margin: 0px;
+}
+
+.contact-info p {
+    margin: 0 0 5px 0;
+}
+
+p {
+    text-align: justify;
+}
+
+li {
+    margin-bottom: 3px;
+}
+
+section:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+article {
+    margin-bottom: 20px
+}
+
+article header p {
+    margin: 0 0 2px 0;
+}
+
+.date-range {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.role, .talk-title, .course {
+    font-weight: bold;
+}
+
+.location, .talk-origin {
+    font-style: italic;
+}
+
+@media print
+{
+    /* don't let printing break up headers into multiple pages */
+    header {
+        page-break-inside:avoid;
+    }
+}

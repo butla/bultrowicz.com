@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <title>CV: Michał Bultrowicz</title>
-  <link rel="stylesheet" href="invoice.css">
+  <link rel="stylesheet" href="cv.css">
 </head>
 
 <body>
 <section>
-  <header>
+  <header class="cv-header">
     <h1>Michał Bultrowicz</h1>
-    <h3>Curriculum Vitae</h3>
+    <h2>Curriculum Vitae</h3>
   </header>
 
-  <div>
+  <div class="contact-info">
     <h1>Contact</h1>
     <p>michal.bultrowicz@gmail.com</p>
     <p>(+48) 790 467 660</p>
@@ -42,15 +42,15 @@
 <section>
   <h1>Computer skills</h1>
   <ul>
-    <li>expert in Python programming</li>
+    <li>expert in Python programming (including async)</li>
     <li>writing understandable and testable code</li>
     <li>building highly available (HA) and fault-tolerant back-ends</li>
-    <li>advanced web application testing (unit, functional, stress, load, performance)</li>
+    <li>advanced web application testing</li>
     <li>site reliability engineering - ensuring observability, gathering metrics, setting up alerting, optimizing performance</li>
     <li>cloud infrastructure automation</li>
     <li>Linux server management</li>
+    <li>creating data pipelines</li>
     <li>implementing web security (X.509 certificates, mTLS, JWT/JWK, OAuth2)</li>
-    <li>creating data pipelines / setting up ETL</li>
     <li>implementing Continuous Delivery pipelines</li>
     <li>optimizing team's development workflows</li>
     <li>exposure to building front-ends with ReactJS and plain HTML+JS</li>
@@ -122,7 +122,7 @@
       The entire transaction with the customer takes place on a single page with only a single redirect for the payment.
       The payment processor used is Przelewy24.
       The front-end's made with VanillaJS and PicoCSS, served from CloudFlare Pages.
-      It has passwordless authentication with a code sent to e-mail.
+      It has passwordless authentication with a code sent over e-mail.
       E-mails are sent with automation using a Google Workspace service account.
       The back-end is hosted on Digital Ocean.
       PostgreSQL serves as the data layer.
@@ -401,9 +401,9 @@
       Examples of assignments on this position, from the latest:
     </p>
 
-    <h3>
+    <h4>
       Leading a development team
-    </h3>
+    </h4>
     <p>
       I lead one of the teams that worked on Trusted Analytics Platform (TAP) project.
       TAP is a PaaS platform with main focus on data analytics.
@@ -421,9 +421,9 @@
       </ul>
     </p>
 
-    <h3>
+    <h4>
       Back-end microservices' development for TAP
-    </h3>
+    </h4>
     <p>
       I developed a few Spring Boot (Java) microservices and created one in Flask (Python).
       It was a data set indexing and search service backed by ElasticSearch.
@@ -432,9 +432,9 @@
       I dabbled in load testing with Gatling (Scala) and Locust (Python).
     </p>
 
-    <h3>
+    <h4>
       Maintenance of a secure back-end for remote firmware updates (Intel Upgrade Service)
-    </h3>
+    </h4>
     <p>
       We had a mature distributed system, encompassing C# back-end services,
       ASP.NET front-end, a C++ server and a C++ client.
@@ -448,9 +448,9 @@
       and ending at server HSMs (Hardware Security Modules).
     </p>
 
-    <h3>
+    <h4>
       Implementing hardware-backed secure tunnels for certificate exchange
-    </h3>
+    </h4>
     <p>
       I needed to create a C++11 application for embedded Linux that could create,
       manage and transfer X.509 certificates.
@@ -459,9 +459,9 @@
       OpenSSL and TrouSerS were used for setup of MTLS (TLS with authentication of both parties) connections.
     </p>
 
-    <h3>
+    <h4>
       Researching using SIM cards as secure elements (SE)
-    </h3>
+    </h4>
     <p>
       Did that alone as my first task on the team.
       Had to look into Java Micro Edition and smart cards.
@@ -504,15 +504,17 @@
 
   <article>
     <header>
-      <h2>Developer workflow with local tests using Docker Compose</h2>
+      <p class="talk-title">Developer workflow with local tests using Docker Compose</p>
       <p class="talk-origin">Pykonik Tech Talks #62, 2023-03-30. <a href="https://youtu.be/hjve48cYj_U">link</a></p>
     </header>
 
     <p>
       This talk features:
       <ul>
-        <li>Docker Compose setup with the sample HTTP/REST app (written in Python) and a SQL database.</li>
-        <li>High-level tests using containers.</li>
+        <li>Instructions on how to create
+          <a href="https://bultrowicz.com/separating_kinds_of_tests/#external-tests">functional</a> and
+          <a href="https://bultrowicz.com/separating_kinds_of_tests/#integrated-tests">integrated</a> tests using containers.</li>
+        <li>A Docker Compose setup with the sample HTTP/REST app (written in Python) and a SQL database.</li>
         <li>Reloading the app container on code file changes.</li>
         <li>Running tests on code file changes.</li>
         <li>Makefiles to describe common development tasks.</li>
@@ -523,7 +525,7 @@
 
   <article>
     <header>
-      <h2>TDD of Python microservices</h2>
+      <p class="talk-title">TDD of Python microservices</p>
       <p class="talk-origin">EuroPython 2016 talk. <a href="https://youtu.be/d-ka10jngQQ">link</a></p>
     </header>
 
@@ -536,7 +538,7 @@
 
   <article>
     <header>
-      <h2>Python microservices on PaaS done right</h2>
+      <p class="talk-title">Python microservices on PaaS done right</p>
       <p class="talk-origin">EuroPython 2015 talk. <a href="https://youtu.be/WYXkpiaGBms">link</a></p>
     </header>
 
@@ -568,7 +570,7 @@
     <p>Overall score: good plus</p>
     <p>Specialized in Intelligent Interactive Systems (AI, computer vision, graphics)</p>
 
-    <h3>Master thesis</h3>
+    <h4>Master thesis</h4>
     <em>Calling remote Java methods in Android system from .NET platform</em>
     <p>Supervisor: Jacek Lebiedź, PhD MEng</p>
     <p>
@@ -588,7 +590,7 @@
 
     <p>Overall score: good plus</p>
 
-    <h3>Final project</h3>
+    <h4>Final project</h4>
     <p>A C++ application using OpenCV that could learn and recognize faces using the eigenvectors method.</p>
   </article>
 </section>
