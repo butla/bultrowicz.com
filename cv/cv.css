@@ -1,8 +1,9 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 35px;
+    padding: 70px;
     /* Set so that the CV looks similar when viewed as PDF and as HTML. */
-    max-width: 700px;
+    max-width: 650px;
+    margin: 0
 }
 
 .cv-header {
@@ -62,4 +63,8 @@ article header p {
     header {
         page-break-inside:avoid;
     }
+}
+
+@page {
+  margin: 60px 0;
 }
