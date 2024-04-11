@@ -8,7 +8,7 @@ build_continuously:
 
 .PHONY: setup_development
 setup_development:
-	poetry install
+	poetry install --no-root
 
 .PHONY: run
 run:
