@@ -10,7 +10,7 @@ imagesize==1.2.0
 invoke==1.5.0
 Jinja2==2.11.3
 lxml==4.6.3
-MarkupSafe==1.1.1
+MarkupSafe==3.0.2
 packaging==20.9
 Pygments==2.8.1
 pyparsing==2.4.7
