@@ -6,8 +6,8 @@ tags: Python, quality_assurance, Docker
 date: 2023-04-08
 ---
 
-Developer workflow with local tests using Docker Compose
-========================================================
+Rapid development workflow - tests with Docker Compose
+======================================================
 
 Recently, I did a presentation about my development workflow for back-end applications.
 
