@@ -26,7 +26,7 @@ allowfullscreen></iframe>
 [YouTube link.](https://youtu.be/Ob-3YNgXYZc)
 
 Slides are [here](https://github.com/butla/presentations/tree/master/2023-03_developer_workflow_with_local_tests_using_docker-compose).
-The sample code is [here](https://github.com/butla/experiments/tree/master/testing__quality_assurance/sample_backend_app).
+The sample code is [here](https://github.com/butla/portfolio/tree/master/demo-projects/sample_backend_app).
 
 ## Contents summary
 
