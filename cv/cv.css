@@ -44,6 +44,11 @@ article header p {
     margin: 0 0 2px 0;
 }
 
+footer {
+    font-style: italic;
+    font-size: 0.8em;
+}
+
 .date-range {
     font-weight: bold;
     font-size: 1.3em;
