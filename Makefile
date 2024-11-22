@@ -40,7 +40,7 @@ cv:
 .PHONY: cv-rebuilding
 # watch CV HTML and keep rebuilding the PDF
 cv-rebuilding:
-	ls cv/cv_Michał_Bultrowicz.html | entr poetry run python cv/build_cv_pdf.py
+	fd '(.*\.html$$)|(.*\.css$$)' cv | entr poetry run python cv/build_cv_pdf.py
 
 
 # TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
