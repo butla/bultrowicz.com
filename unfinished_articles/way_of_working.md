@@ -41,11 +41,13 @@ This document is my proposal for how software developers can work together effic
 Code style
 ==========
 
-For many elements of style we rely on the Ruff linter rules. But there's a lot more that a linter can't enforce.
+Ground rules
+------------
 
-General comments
-----------------
+For many elements of style we rely on the Ruff linter and formatter rules. But there's a lot more that a linter can't enforce.
 
+All code introduces maintenance costs. You could say all code is tech debt.
+Minimize the amount of code to comprehend. Optimize for code readability (ease of comprehension)first, performance second (or like fourth).
 
 Namespacing
 -----------
@@ -180,6 +182,9 @@ Test isolation isn't that important. If a test fail, You know you have issues to
 There can be tests that use the production code for test setup.
 That's acceptable, as long as You make false positives in all tests highly unlikely.
 
+Testability is a feature of the code. Make the code easy to validate. If the code is hard to test - change it.
+Some inspiration: [refactoring Falcon API apps for testability](https://falcon.readthedocs.io/en/stable/user/tutorial.html#refactoring-for-testability)
+
 
 Code reviews (way of working)
 ============
@@ -309,6 +314,8 @@ Poczytaj swoje ostatnie komentarze.
 
 Daj przykłady dobrych review.
 
+
+
 Tricks
 ------
 
@@ -334,6 +341,8 @@ usecases -> entity
 orm?
 all import core
 
+Clean code will make db consistency easy. E.g. a usecase modifies as many DB tables as necessary, in a single transaction.
+The usecase doesn't do that directly, though - it delegates to repository-type connectors.
 
 
 Philosophy
