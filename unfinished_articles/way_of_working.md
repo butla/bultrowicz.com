@@ -356,3 +356,7 @@ No ad-hominem attacks.
 At least say why You don't like something. 
 
 Be egoless.
+
+Beware of the 7 logical fallacies (TODO link). Scan Your arguments for them before posting things.
+It will make Your arguments better, stronger, more to the point.
+Knowledgeable people will respond better to these.
