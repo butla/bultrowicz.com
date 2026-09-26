@@ -6,7 +6,7 @@ The code for my blog. Built with [Lektor](https://www.getlektor.com/) and [Tailw
 Development
 -----------
 
-- `make setup_development` - install the Python (Poetry) and JS (npm) dependencies.
+- `make setup_development` - install the Python (uv) and JS (npm) dependencies.
 - `make run` - development server at http://localhost:5000 that rebuilds the pages and styles on changes.
   The admin UI for editing the content is at http://localhost:5000/admin.
 - `make build` - build the site into `_website/`.

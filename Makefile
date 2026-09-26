@@ -3,18 +3,18 @@ WEBSITE_PACKAGE:=bultrowicz_com_dist.tar.gz
 
 TAILWIND:=npx @tailwindcss/cli --input frontend/main.css --output assets/static/main.css
 PYGMENTS_CSS:=frontend/generated/pygments.css
-# Syntax highlighting color schemes. See the list with `poetry run pygmentize -L styles`.
+# Syntax highlighting color schemes. See the list with `uv run pygmentize -L styles`.
 PYGMENTS_LIGHT_STYLE:=xcode
 PYGMENTS_DARK_STYLE:=github-dark
 
 .PHONY: setup_development
 setup_development:
-	poetry install --no-root
+	uv sync --locked
 	npm ci
 
 .PHONY: build
 build: css
-	poetry run lektor build --output-path $(WEBSITE_DIST_FOLDER)
+	uv run lektor build --output-path $(WEBSITE_DIST_FOLDER)
 
 # Development server with live reloading of both the content and the styles.
 # Lektor's admin UI (for editing the pages, including the main page's blocks) is at http://localhost:5000/admin
@@ -24,7 +24,7 @@ run: $(PYGMENTS_CSS)
 
 .PHONY: serve
 serve:
-	poetry run lektor server --port 5000
+	uv run lektor server --port 5000
 
 .PHONY: css
 css: $(PYGMENTS_CSS)
@@ -36,13 +36,13 @@ css_continuously:
 
 $(PYGMENTS_CSS): Makefile
 	mkdir -p $(dir $@)
-	poetry run pygmentize -S $(PYGMENTS_LIGHT_STYLE) -f html -a .highlight > $@
-	poetry run pygmentize -S $(PYGMENTS_DARK_STYLE) -f html -a '.dark .highlight' >> $@
+	uv run pygmentize -S $(PYGMENTS_LIGHT_STYLE) -f html -a .highlight > $@
+	uv run pygmentize -S $(PYGMENTS_DARK_STYLE) -f html -a '.dark .highlight' >> $@
 
 .PHONY: clean
 clean:
 	rm -rf $(WEBSITE_DIST_FOLDER) assets/static/main.css frontend/generated
-	poetry run lektor clean --yes
+	uv run lektor clean --yes
 
 .PHONY: deploy
 deploy: build
@@ -61,9 +61,9 @@ deploy: build
 
 .PHONY: cv
 cv:
-	poetry run python cv/build_cv_pdf.py
+	uv run python cv/build_cv_pdf.py
 
 .PHONY: cv-rebuilding
 # watch CV HTML and keep rebuilding the PDF
 cv-rebuilding:
-	fd '(.*\.html$$)|(.*\.css$$)' cv | entr poetry run python cv/build_cv_pdf.py
+	fd '(.*\.html$$)|(.*\.css$$)' cv | entr uv run python cv/build_cv_pdf.py

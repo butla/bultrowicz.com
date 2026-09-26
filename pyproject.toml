@@ -1,17 +1,14 @@
-[tool.poetry]
-name = "bultrowicz.com"
+[project]
+name = "bultrowicz-com"
 version = "0.1.0"
 description = "The personal website of Michał Bultrowicz"
-authors = ["Michal Bultrowicz <michal.bultrowicz@gmail.com>"]
+authors = [{ name = "Michal Bultrowicz", email = "michal.bultrowicz@gmail.com" }]
 license = "MIT"
-
-[tool.poetry.dependencies]
-python = "~3.11"
-playwright = "^1.35.0"
-lektor = "3.3.14"
-pygments = "^2.21.0"
-setuptools = "<81"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires-python = "~=3.11.0"
+dependencies = [
+    "lektor>=3.3.14",
+    # used by the Lektor plugin in packages/ and to generate the syntax highlighting CSS
+    "pygments>=2.21.0",
+    # for building the CV PDF
+    "playwright>=1.35.0",
+]
