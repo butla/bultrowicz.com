@@ -3,7 +3,7 @@ blogpost: true
 author: Michał Bultrowicz
 language: English
 tags: Python, workflow, quality_assurance
-date: 2025-04-xx
+date: 2025-09-26
 ---
 
 Notki
