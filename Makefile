@@ -32,7 +32,7 @@ css: $(PYGMENTS_CSS)
 
 .PHONY: css_continuously
 css_continuously:
-	$(TAILWIND) --watch
+	$(TAILWIND) --watch=always
 
 $(PYGMENTS_CSS): Makefile
 	mkdir -p $(dir $@)
