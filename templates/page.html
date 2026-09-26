@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% from "macros/posts.html" import page_title %}
+{% block body %}
+  {{ page_title(this.title) }}
+  <div class="prose prose-zinc mt-10 max-w-none dark:prose-invert">{{ this.body }}</div>
+{% endblock %}

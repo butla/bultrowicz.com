@@ -1,0 +1,7 @@
+{
+  "items": [
+    {"label": "Blog", "url": "/blog/"},
+    {"label": "Archive", "url": "/blog/archive/"},
+    {"label": "Tags", "url": "/blog/tag/"}
+  ]
+}

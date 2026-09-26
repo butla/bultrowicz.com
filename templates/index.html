@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% from "macros/posts.html" import page_title %}
+{% block title %}{% endblock %}
+{% block body %}
+  {{ page_title(this.title) }}
+  <div class="mt-10 space-y-16">
+    {% for block in this.blocks.blocks %}
+      <section>{{ block }}</section>
+    {% endfor %}
+  </div>
+{% endblock %}

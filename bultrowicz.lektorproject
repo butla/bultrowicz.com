@@ -1,0 +1,6 @@
+[project]
+name = Butlablog
+url = https://bultrowicz.com/
+url_style = absolute
+# Legacy Sphinx asset folders; underscore-prefixed files are excluded by default.
+included_assets = _static, _images

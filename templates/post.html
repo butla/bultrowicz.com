@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% from "macros/posts.html" import page_title, post_meta %}
+{% block body %}
+  <article>
+    <header class="mb-10">
+      {{ page_title(this.title) }}
+      <div class="mt-4">{{ post_meta(this) }}</div>
+    </header>
+    <div class="prose prose-zinc max-w-none dark:prose-invert">{{ this.body }}</div>
+  </article>
+
+  {% if this.pub_date %}
+    <nav class="mt-16 grid gap-4 border-t border-zinc-200 pt-8 text-sm sm:grid-cols-2 dark:border-zinc-900">
+      {% for post in blog_posts() if post.path == this.path %}
+        {# the list is sorted from the newest #}
+        {% for neighbour, label, align in [(loop.nextitem, '← Older', ''), (loop.previtem, 'Newer →', 'sm:text-right sm:col-start-2')] if neighbour %}
+          <a href="{{ neighbour|url }}" class="group {{ align }}">
+            <span class="block text-zinc-500">{{ label }}</span>
+            <span class="font-medium text-zinc-900 transition group-hover:text-teal-700 dark:text-zinc-200 dark:group-hover:text-teal-400">{{ neighbour.title }}</span>
+          </a>
+        {% endfor %}
+      {% endfor %}
+    </nav>
+    {% include "comments.html" %}
+  {% endif %}
+{% endblock %}

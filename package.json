@@ -1,0 +1,10 @@
+{
+  "name": "bultrowicz.com",
+  "private": true,
+  "description": "Styles for bultrowicz.com. Built by the Makefile.",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.3"
+  }
+}

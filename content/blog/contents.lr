@@ -1,0 +1,7 @@
+_model: collection
+---
+title: All posts
+---
+group_pages: year
+---
+feed: yes

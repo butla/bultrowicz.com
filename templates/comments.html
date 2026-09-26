@@ -1,0 +1,27 @@
+{# Disqus. The identifier and URL have the same format as on the old ABlog site, so the old threads stay attached. #}
+{% set disqus_shortname = bag('site', 'disqus_shortname') %}
+{% if disqus_shortname %}
+<section id="comments" class="mt-16 border-t border-zinc-200 pt-10 dark:border-zinc-900">
+  <h2 class="mb-6 text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.identifier = {{ this.url_path|tojson }};
+      this.page.url = {{ (this|url(external=true)).rstrip('/')|tojson }};
+      this.page.title = {{ this.title|tojson }};
+    };
+    (function () {
+      var script = document.createElement("script");
+      script.src = "https://{{ disqus_shortname }}.disqus.com/embed.js";
+      script.setAttribute("data-timestamp", +new Date());
+      script.async = true;
+      document.head.appendChild(script);
+    })();
+    // Disqus picks its colors when loaded, so it needs a reload after the theme changes.
+    document.addEventListener("themechange", function () {
+      if (window.DISQUS) { window.DISQUS.reset({ reload: true, config: disqus_config }); }
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+{% endif %}

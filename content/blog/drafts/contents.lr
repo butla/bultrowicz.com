@@ -1,0 +1,7 @@
+_model: collection
+---
+title: Drafts
+---
+posts: drafts
+---
+intro: Unfinished articles. They might be incomplete, messy, or wrong.

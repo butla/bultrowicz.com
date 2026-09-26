@@ -1,0 +1,22 @@
+_model: post
+---
+title: Windows to Linux file transfer with SSHD
+---
+pub_date: 
+---
+author: 
+---
+tags:
+
+Linux
+Windows
+system_administration
+---
+language: 
+---
+body:
+
+<https://www.illuminiastudios.com/dev-diaries/ssh-on-windows-subsystem-for-linux/>
+
+Windows and linux are slowly merging, I hope. Interoperability is great. I think Linux's philosophy will dominate, I hope.
+

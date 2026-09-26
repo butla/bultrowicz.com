@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% from "macros/posts.html" import page_title %}
+{% block body %}
+  {{ page_title(this.title) }}
+  <form class="mt-10" role="search" onsubmit="return false">
+    <input id="search-input" type="search" name="q" autofocus placeholder="Search the posts…" autocomplete="off"
+      class="w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-teal-400">
+  </form>
+  <p id="search-status" class="mt-4 text-sm text-zinc-500"></p>
+  <ul id="search-results" class="mt-6 space-y-8"></ul>
+  <noscript><p class="mt-4">Please enable JavaScript to use the search.</p></noscript>
+{% endblock %}
+{% block scripts %}
+  <script src="{{ '/searchindex.js'|url }}"></script>
+  <script>
+    (function () {
+      var input = document.getElementById("search-input");
+      var results = document.getElementById("search-results");
+      var status = document.getElementById("search-status");
+
+      function escapeHtml(text) {
+        var element = document.createElement("div");
+        element.textContent = text;
+        return element.innerHTML;
+      }
+
+      function snippet(text, word) {
+        var index = text.toLowerCase().indexOf(word);
+        var start = Math.max(0, index - 80);
+        return (start > 0 ? "…" : "") + text.slice(start, start + 220) + "…";
+      }
+
+      function search(query) {
+        var words = query.toLowerCase().split(/\s+/).filter(Boolean);
+        results.innerHTML = "";
+        if (!words.length) { status.textContent = ""; return; }
+        var found = window.SEARCH_INDEX.map(function (post) {
+          var title = post.title.toLowerCase();
+          var haystack = [title, post.tags.join(" ").toLowerCase(), post.text.toLowerCase()].join(" ");
+          if (!words.every(function (word) { return haystack.indexOf(word) !== -1; })) { return null; }
+          var score = words.filter(function (word) { return title.indexOf(word) !== -1; }).length;
+          return { post: post, score: score };
+        }).filter(Boolean).sort(function (a, b) { return b.score - a.score; });
+
+        status.textContent = found.length + (found.length === 1 ? " post" : " posts") + " found.";
+        found.forEach(function (match) {
+          var post = match.post;
+          var item = document.createElement("li");
+          item.innerHTML =
+            '<a class="text-lg font-semibold text-zinc-900 hover:text-teal-700 dark:text-zinc-100 dark:hover:text-teal-400" href="' + post.url + '">' + escapeHtml(post.title) + "</a>" +
+            '<div class="mt-1 text-sm text-zinc-500">' + post.date + "</div>" +
+            '<p class="mt-2 text-sm">' + escapeHtml(snippet(post.text, words[0])) + "</p>";
+          results.appendChild(item);
+        });
+      }
+
+      // Same query parameter as the old Sphinx search page.
+      input.value = new URLSearchParams(location.search).get("q") || "";
+      search(input.value);
+      input.addEventListener("input", function () {
+        var url = new URL(location.href);
+        url.searchParams.set("q", input.value);
+        history.replaceState(null, "", url);
+        search(input.value);
+      });
+    })();
+  </script>
+{% endblock %}

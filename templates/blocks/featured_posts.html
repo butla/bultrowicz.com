@@ -1,0 +1,5 @@
+{% from "macros/posts.html" import post_list %}
+{% include "blocks/heading.html" %}
+{% set posts = [] %}
+{% for path in this.posts %}{% do posts.append(site.get(path)) if site.get(path) %}{% endfor %}
+{{ post_list(posts, excerpts=this.excerpts) }}

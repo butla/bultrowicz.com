@@ -1,0 +1,7 @@
+_model: collection
+---
+title: Tags
+---
+group_by: tag
+---
+group_pages: tag

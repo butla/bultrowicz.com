@@ -1,0 +1,5 @@
+_model: collection
+---
+title: Archive
+---
+group_by: year

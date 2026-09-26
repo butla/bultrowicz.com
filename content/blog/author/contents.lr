@@ -1,0 +1,7 @@
+_model: collection
+---
+title: Authors
+---
+group_by: author
+---
+group_pages: author

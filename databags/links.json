@@ -1,0 +1,14 @@
+{
+  "items": [
+    {"label": "CV", "url": "https://github.com/butla/bultrowicz.com/raw/master/cv/cv_Micha%C5%82_Bultrowicz.pdf"},
+    {"label": "Portfolio", "url": "https://github.com/butla/portfolio"},
+    {"label": "My company", "url": "https://witchsoft.com"},
+    {"label": "GitHub", "url": "https://github.com/butla/"},
+    {"label": "Twitter", "url": "https://twitter.com/mmmbultrowicz/"},
+    {"label": "LinkedIn", "url": "https://www.linkedin.com/in/michal-bultrowicz/"},
+    {"label": "Odysee", "url": "https://odysee.com/@michal.bultrowicz:c"},
+    {"label": "YouTube", "url": "https://www.youtube.com/@butla/videos"},
+    {"label": "Instagram", "url": "https://www.instagram.com/mmmbultrowicz/"},
+    {"label": "Tip / donate", "url": "https://ko-fi.com/butla"}
+  ]
+}

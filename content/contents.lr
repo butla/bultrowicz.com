@@ -1,0 +1,20 @@
+_model: index
+---
+title: A blog by Michał "Butla" Bultrowicz
+---
+blocks:
+
+#### text ####
+text:
+
+It's yet another Python / development / technical blog.
+
+There are many like it, but this one's mine!
+#### posts ####
+heading: Recent posts
+----
+limit: 5
+----
+excerpts: yes
+#### tags ####
+heading: Topics

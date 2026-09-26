@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% from "macros/posts.html" import page_title, post_list, compact_list %}
+{% set list = listing(this) %}
+{% block title %}{{ list.title }} — {% endblock %}
+{% block head %}
+  {% if list.feed_url %}<link rel="alternate" type="application/atom+xml" title="{{ list.title }}" href="{{ list.feed_url|url(external=true) }}">{% endif %}
+{% endblock %}
+{% block body %}
+  <div class="mb-10 flex items-baseline justify-between gap-4">
+    {{ page_title(list.title) }}
+    {% if list.feed_url %}<a href="{{ list.feed_url|url }}" class="shrink-0 text-sm text-zinc-500 transition hover:text-teal-700 dark:hover:text-teal-400">Atom feed</a>{% endif %}
+  </div>
+  {% if list.intro %}<div class="prose prose-zinc -mt-4 mb-10 max-w-none dark:prose-invert">{{ list.intro }}</div>{% endif %}
+
+  {% if list.group_by %}
+    {% set groups = list.groups %}
+    <nav class="mb-12 flex flex-wrap gap-2">
+      {% for group in groups %}
+        <a href="#{{ group.slug }}" class="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700 transition hover:bg-teal-50 hover:text-teal-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-teal-950 dark:hover:text-teal-300">{{ group.key }} <span class="text-zinc-400 dark:text-zinc-500">{{ group.posts|length }}</span></a>
+      {% endfor %}
+    </nav>
+    <div class="space-y-12">
+      {% for group in groups %}
+        {% set url = group_url(list.group_by, group.key) %}
+        <section id="{{ group.slug }}" class="scroll-mt-8">
+          <h2 class="mb-4 text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+            {% if url %}<a href="{{ url|url }}" class="transition hover:text-teal-700 dark:hover:text-teal-400">{{ group.key }}</a>{% else %}{{ group.key }}{% endif %}
+          </h2>
+          {{ compact_list(group.posts) }}
+        </section>
+      {% endfor %}
+    </div>
+  {% else %}
+    {{ post_list(list.posts) }}
+  {% endif %}
+{% endblock %}

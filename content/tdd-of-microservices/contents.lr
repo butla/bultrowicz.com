@@ -1,0 +1,25 @@
+_model: post
+---
+title: My talk about TDD of microservices
+---
+pub_date: 2016-12-10
+---
+author: Michal Bultrowicz
+---
+tags:
+
+Python
+quality_assurance
+---
+language: 
+---
+body:
+
+This year at EuroPython (and not only there), I gave a
+[talk about Test Driven Development of Python microservices](https://youtu.be/d-ka10jngQQ).
+I guess you can check it out, if you're into that kind of stuff.
+It's also available [in Polish](https://youtu.be/A2-sKyq5IRs).
+
+I also wrote an [article based on the talk](https://github.com/PyConPL/Book/blob/master/2016/presentations/tdd_of_python_microservices/text.md) for PyConPL and I will be chopping
+and adjusting it into a series of (hopefully) small blog posts, so stay tuned.
+

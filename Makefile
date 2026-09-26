@@ -1,27 +1,54 @@
-.PHONY: build
-build:
-	poetry run ablog build
+WEBSITE_DIST_FOLDER:=_website/
+WEBSITE_PACKAGE:=bultrowicz_com_dist.tar.gz
 
-.PHONY: build_continuously
-build_continuously:
-	fd '.rst|.md' | entr -c make build
+TAILWIND:=npx @tailwindcss/cli --input frontend/main.css --output assets/static/main.css
+PYGMENTS_CSS:=frontend/generated/pygments.css
+# Syntax highlighting color schemes. See the list with `poetry run pygmentize -L styles`.
+PYGMENTS_LIGHT_STYLE:=xcode
+PYGMENTS_DARK_STYLE:=github-dark
 
 .PHONY: setup_development
 setup_development:
 	poetry install --no-root
+	npm ci
 
+.PHONY: build
+build: css
+	poetry run lektor build --output-path $(WEBSITE_DIST_FOLDER)
+
+# Development server with live reloading of both the content and the styles.
+# Lektor's admin UI (for editing the pages, including the main page's blocks) is at http://localhost:5000/admin
 .PHONY: run
-run:
-	poetry run ablog serve
+run: $(PYGMENTS_CSS)
+	$(MAKE) --jobs=2 css_continuously serve
 
-WEBSITE_PACKAGE:=bultrowicz_com_dist.tar.gz
-WEBSITE_DIST_FOLDER:=_website/
+.PHONY: serve
+serve:
+	poetry run lektor server --port 5000
+
+.PHONY: css
+css: $(PYGMENTS_CSS)
+	$(TAILWIND) --minify
+
+.PHONY: css_continuously
+css_continuously:
+	$(TAILWIND) --watch
+
+$(PYGMENTS_CSS): Makefile
+	mkdir -p $(dir $@)
+	poetry run pygmentize -S $(PYGMENTS_LIGHT_STYLE) -f html -a .highlight > $@
+	poetry run pygmentize -S $(PYGMENTS_DARK_STYLE) -f html -a '.dark .highlight' >> $@
+
+.PHONY: clean
+clean:
+	rm -rf $(WEBSITE_DIST_FOLDER) assets/static/main.css frontend/generated
+	poetry run lektor clean --yes
 
 .PHONY: deploy
-deploy: build build_additional_page
+deploy: build
 	@echo === Building done, preparing package... ===
-	cp -r additional_pages/terms_of_working_with_me _website/
-	tar caf $(WEBSITE_PACKAGE) $(WEBSITE_DIST_FOLDER)
+	# .lektor holds the build state, not a part of the website
+	tar caf $(WEBSITE_PACKAGE) --exclude=.lektor $(WEBSITE_DIST_FOLDER)
 	@echo === Package prepared, uploading... ===
 	scp $(WEBSITE_PACKAGE) bultrowicz.com:~
 	@echo === Extracting package... ===
@@ -36,17 +63,7 @@ deploy: build build_additional_page
 cv:
 	poetry run python cv/build_cv_pdf.py
 
-
 .PHONY: cv-rebuilding
 # watch CV HTML and keep rebuilding the PDF
 cv-rebuilding:
 	fd '(.*\.html$$)|(.*\.css$$)' cv | entr poetry run python cv/build_cv_pdf.py
-
-
-# TODO I know, I should integrate it with ablog, or just redo the site with some static site tool.
-# No time for that right now, though.
-.PHONY: build_additional_page
-build_additional_page:
-	mkdir -p additional_pages/terms_of_working_with_me
-	# markdown_strict used so that ' and " don't get rendered to characters that can not render on the page
-	pandoc -t html -o additional_pages/terms_of_working_with_me/index.html -f markdown_strict additional_pages_sources/terms_of_working_with_me.md

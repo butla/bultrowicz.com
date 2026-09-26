@@ -1,0 +1,4 @@
+{% from "macros/posts.html" import post_list %}
+{% include "blocks/heading.html" %}
+{{ post_list(blog_posts(tag=this.tag)[:this.limit or 5], excerpts=this.excerpts) }}
+<a href="{{ '/blog/'|url }}" class="mt-8 inline-block text-sm font-medium text-teal-700 hover:underline dark:text-teal-400">All posts →</a>

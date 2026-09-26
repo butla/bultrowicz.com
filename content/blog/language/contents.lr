@@ -1,0 +1,7 @@
+_model: collection
+---
+title: Languages
+---
+group_by: language
+---
+group_pages: language

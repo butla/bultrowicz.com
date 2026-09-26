@@ -1,7 +1,12 @@
 __pycache__
+*.egg-info
 _website
-.doctrees
 *.swp
+
+# generated styles
+assets/static/main.css
+frontend/generated/
+node_modules/
 
 # Ansible retry files
 *.retry
